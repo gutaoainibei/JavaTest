@@ -7,7 +7,10 @@
         development :开发模式
         work： 工作模式
         -->
-   
+        <!-- 配置别名，对model包进行配置,这里默认是类名 -->
+    <typeAliases>
+      <package name="MybatisTest2.model"/>
+    </typeAliases>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC" />
@@ -20,7 +23,7 @@
         </environment>
     </environments>
     <mappers>
-       <mapper resource="mybatisTest/xml/userMapper.xml"/>
-       <mapper class="mybatisTest.mapper.UserMapper"/>
+       <mapper resource="MybatisTest2/xml/StudentMapper.xml"/>
+      <!--   <mapper class="mybatisTest.mapper.UserMapper"/>-->
     </mappers>
 </configuration>
