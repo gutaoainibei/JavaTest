@@ -3,32 +3,25 @@ package MybatisTest2.model;
 import java.util.List;
 
 public class Student {
-	private int id;
-	private String name;
-	private List<Classes> classes;
-
-	public int getId() {
-		return id;
+	private int sid;
+	private String sname;
+	public int getSid() {
+		return sid;
 	}
-
-	public void setId(int id) {
-		this.id = id;
+	public void setSid(int sid) {
+		this.sid = sid;
 	}
-
-	public String getName() {
-		return name;
+	public String getSname() {
+		return sname;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setSname(String sname) {
+		this.sname = sname;
 	}
-
-	public List<Classes> getClasses() {
-		return classes;
+	@Override
+	public String toString() {
+		return "Student [sid=" + sid + ", sname=" + sname + "]";
 	}
-
-	public void setClasses(List<Classes> classes) {
-		this.classes = classes;
-	}
+	
+     
 
 }

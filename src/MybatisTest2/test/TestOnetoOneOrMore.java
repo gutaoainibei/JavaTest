@@ -36,4 +36,35 @@ public class TestOnetoOneOrMore {
 	  Classes classes = session.selectOne(statement, 1);
 	  System.out.println("获得结果1:"+classes);
   }
+  @Test
+  public void TestGetAllInfo(){
+	  SqlSession session = GetSession.getSqlSession();
+	  String statement = "MybatisTest2.ClassesMapper.getAllInfo";
+	  List<Classes> classes = session.selectList(statement);
+	  System.out.println("获得结果1:"+classes);
+  }
+  /*
+   * 
+   * */
+  @Test
+  public void TestDeleteStudent(){
+	  SqlSession session = GetSession.getSqlSession();
+	  String statement = "MybatisTest2.ClassesMapper.deleteStudent";
+	  int  i= session.delete(statement,1);
+	  System.out.println("获得结果1:"+i);
+  }
+  /*
+   * 下面这个方法是错的
+   * 因为不能
+   * org.apache.ibatis.exceptions.PersistenceException: 
+     Cannot delete or update a parent row: a foreign key constraint 
+     fails (`test/student`, CONSTRAINT `fros_id` FOREIGN KEY (`cid`) REFERENCES `class` (`cid`))
+   * */
+  @Test
+  public void TestDeleteClass(){
+	  SqlSession session = GetSession.getSqlSession();
+	  String statement = "MybatisTest2.ClassesMapper.deleteClasses";
+	  int  i= session.delete(statement,1);
+	  System.out.println("获得结果1:"+i);
+  }
 }
