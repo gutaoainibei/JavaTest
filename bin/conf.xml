@@ -11,14 +11,15 @@
     <typeAliases>
       <package name="MybatisTest2.model"/>
     </typeAliases>
+    <properties resource="db.properties"></properties>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/test" />
-                <property name="username" value="root" />
-                <property name="password" value="root" />
+                <property name="driver" value="${driver}" />
+                <property name="url" value="${driver}" />
+                <property name="username" value="${driver}" />
+                <property name="password" value="${driver}" />
             </dataSource>
         </environment>
     </environments>
