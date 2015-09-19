@@ -23,22 +23,23 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
   </bean>
      <!--2.mybatis的SqlsessionFactory： SqlsessionFactoryBean
            dataSource:引用数据源
-           typeAliasesPackage：指定实体类的包名，自动将实体的简单类名映射成别名    
+           typeAliasesPackage：指定实体类的包名，自动将实体的简单类名映射成别名
+           mapperLocations：扫描sql映射文件    
              -->
   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
      <property name="dataSource" ref="dataSource"/>
      <property name="typeAliasesPackage" value="MybatisTest2.model"/>
-      <property name="mapperLocations" value="classpath:MybatisTest2/mapping/*.xml" />
+     <property name="mapperLocations" value="classpath:MybatisTest2/mapping/*.xml" />
   </bean>
-  <!-- 3.mybatis自动扫描加载sql的映射文件/接口：MapperScannerConfigurer
-     basePackage：指定sql映射文件/接口所在的包，能动自动扫描
+  <!-- 3.mybatis自动扫描加载sql的映射文件/接口(这里我扫描的是接口，映射文件在上面已经做了)：MapperScannerConfigurer
+     basePackage：指定sql映射文件/接口所在的包，能动自动扫描，对用了@Autowired标签的自动注入
      sqlSessionFactory：引用之前定义好的sqlsessionFactory
     -->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
      <property name="basePackage" value="MybatisTest2.dao"/>
      <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
   </bean>
-  	<!--4. 配置事务管理器 -->
+  	<!--4. 配置事务管理器 ：DataSourceTransactionManager-->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>

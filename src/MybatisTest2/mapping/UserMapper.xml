@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 这里namespace的命名必须和对应的UserMapper.java文件的路径一样否则会报错 -->
 <mapper namespace="MybatisTest2.dao.UserMapper">
 
     <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true">
