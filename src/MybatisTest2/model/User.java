@@ -1,8 +1,6 @@
-package mybatisTest;
+package MybatisTest2.model;
 
-import java.io.Serializable;
-
-public class User implements Serializable{
+public class User{
 	private int id;
 	private String name;
 	private int age;

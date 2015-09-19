@@ -19,6 +19,7 @@ public class TestOnetoOneOrMore {
 	  String statement = "MybatisTest2.ClassesMapper.getone";
 	  Classes classes = session.selectOne(statement, 1);
 	  System.out.println("获得结果1:"+classes);
+	  session.close();
   }
   /*
    * 联合查询，个人比较喜欢，效率高
@@ -29,6 +30,7 @@ public class TestOnetoOneOrMore {
 	  String statement = "MybatisTest2.ClassesMapper.getAll";
 	  List<Classes> classes = session.selectList(statement);
 	  System.out.println("获得结果集:"+classes);
+	  session.close();
   }
   /*
    * 用了连词sql语句，这种查询方式个人不建议用，消耗cpu还繁琐
@@ -39,6 +41,7 @@ public class TestOnetoOneOrMore {
 	  String statement = "MybatisTest2.ClassesMapper.getClass2";
 	  Classes classes = session.selectOne(statement, 1);
 	  System.out.println("获得结果1:"+classes);
+	  session.close();
   }
   @Test
   public void TestGetAllInfo(){
@@ -46,6 +49,7 @@ public class TestOnetoOneOrMore {
 	  String statement = "MybatisTest2.ClassesMapper.getAllInfo";
 	  List<Classes> classes = session.selectList(statement);
 	  System.out.println("获得结果1:"+classes);
+	  session.close();
   }
   /*
    * 
@@ -56,6 +60,7 @@ public class TestOnetoOneOrMore {
 	  String statement = "MybatisTest2.ClassesMapper.deleteStudent";
 	  int  i= session.delete(statement,1);
 	  System.out.println("获得结果1:"+i);
+	  session.close();
   }
   /*
    * 下面这个方法是错的
@@ -70,6 +75,7 @@ public class TestOnetoOneOrMore {
 	  String statement = "MybatisTest2.ClassesMapper.deleteClasses";
 	  int  i= session.delete(statement,1);
 	  System.out.println("获得结果1:"+i);
+	  session.close();
   }
   /*
    * map传值获取age在18到19的用户
@@ -84,6 +90,7 @@ public class TestOnetoOneOrMore {
 	  map.put("maxage", 19);
 	  List<Puser> list= session.selectList(statement,map);
 	  System.out.println("获得结果1:"+list);
+	  session.close();
   }
   /*
    * 模糊查询
@@ -101,6 +108,7 @@ public class TestOnetoOneOrMore {
 //	  SelePuser selePuser = new SelePuser("%"+name+"%",18,19);
 	  List<Puser> list= session.selectList(statement,map);
 	  System.out.println("获得结果1:"+list);
+	  session.close();
   }
 
   @Test
@@ -112,5 +120,6 @@ public class TestOnetoOneOrMore {
 	  map.put("usercount", -1);
 	  session.selectOne(statement,map);
 	  System.out.println("获得人数:"+map.get("usercount"));
+	  session.close();
   }
 }

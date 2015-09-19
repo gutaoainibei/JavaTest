@@ -25,7 +25,7 @@
         </environment>
     </environments>
     <mappers>
-        <!--<mapper resource="MybatisTest2/xml/StudentMapper.xml"/>-->
+       <mapper resource="MybatisTest/xml/userMapper.xml"/>
        <mapper resource="MybatisTest2/xml/ClassesMapper.xml"/>
        <mapper resource="MybatisTest2/xml/PuserMapper.xml"/>
       <!--   <mapper class="mybatisTest.mapper.UserMapper"/>-->
