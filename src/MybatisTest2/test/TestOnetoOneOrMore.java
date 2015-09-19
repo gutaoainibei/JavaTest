@@ -102,4 +102,15 @@ public class TestOnetoOneOrMore {
 	  List<Puser> list= session.selectList(statement,map);
 	  System.out.println("获得结果1:"+list);
   }
+
+  @Test
+  public void TestProcedure(){
+	  SqlSession session = GetSession.getSqlSession();
+	  String statement = "MybatisTest2.PuserMapper.getCount1";
+	  Map<String, Object> map = new HashMap<String, Object>();
+	  map.put("sexid", 0);
+	  map.put("usercount", -1);
+	  session.selectOne(statement,map);
+	  System.out.println("获得人数:"+map.get("usercount"));
+  }
 }

@@ -17,4 +17,17 @@
 		
 		 puser.age between #{minage} and #{maxage} 
 	</select>
+	
+	<!-- 调用存储过程 -->
+	<select id="getCount" parameterMap="procedureMap" statementType="CALLABLE">
+	  CALL test.get_puser_count(?,?);
+	</select>
+	<parameterMap type="java.util.Map" id="procedureMap">
+	   <parameter property="sexid" mode="IN" jdbcType="INTEGER"/>
+	   <parameter property="usercount" mode="OUT" jdbcType="INTEGER"/>
+	</parameterMap>
+	<!-- 调用存储过程2 这里 写不写parameterType="hashmap"也可以-->
+	<select id="getCount1" parameterType="hashmap" resultType="java.util.Map" statementType="CALLABLE">
+	  CALL test.get_puser_count(#{sexid,mode=IN,jdbcType=INTEGER},#{usercount,mode=OUT,jdbcType=INTEGER});
+	</select>
 </mapper>
