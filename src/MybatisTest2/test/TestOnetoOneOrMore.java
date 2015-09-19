@@ -1,12 +1,16 @@
 package MybatisTest2.test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import MybatisTest2.base.GetSession;
 import MybatisTest2.model.Classes;
+import MybatisTest2.model.Puser;
+import MybatisTest2.model.SelePuser;
 
 public class TestOnetoOneOrMore {
   @Test
@@ -66,5 +70,36 @@ public class TestOnetoOneOrMore {
 	  String statement = "MybatisTest2.ClassesMapper.deleteClasses";
 	  int  i= session.delete(statement,1);
 	  System.out.println("获得结果1:"+i);
+  }
+  /*
+   * map传值获取age在18到19的用户
+   * 对应*mapper.xml中的parameterType可以是hashmap或者map
+   * */
+  @Test
+  public void TestgetPuser(){
+	  SqlSession session = GetSession.getSqlSession();
+	  String statement = "MybatisTest2.PuserMapper.getPuser";
+	  Map<String, Integer> map = new HashMap<String, Integer>();
+	  map.put("minage", 18);
+	  map.put("maxage", 19);
+	  List<Puser> list= session.selectList(statement,map);
+	  System.out.println("获得结果1:"+list);
+  }
+  /*
+   * 模糊查询
+   * */
+  @Test
+  public void TestSelectPuser(){
+	  SqlSession session = GetSession.getSqlSession();
+	  String statement = "MybatisTest2.PuserMapper.getSelectPuser";
+	  String name = "nibei";
+	  //name = null; 
+	  Map<String, Object> map = new HashMap<String, Object>();
+	  map.put("minage", 18);
+	  map.put("maxage", 19);
+	  map.put("name", "%"+name+"%");
+//	  SelePuser selePuser = new SelePuser("%"+name+"%",18,19);
+	  List<Puser> list= session.selectList(statement,map);
+	  System.out.println("获得结果1:"+list);
   }
 }

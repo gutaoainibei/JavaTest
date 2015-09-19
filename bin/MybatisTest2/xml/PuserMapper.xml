@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MybatisTest2.PuserMapper">
+ 
+	<!-- 根据条件查询 -->
+	<select id="getPuser" parameterType="map" resultType="Puser">
+		select *from puser where puser.age between #{minage} and #{maxage} 
+	</select>
+	<!-- 多条件模糊查询 hashmap -->
+	<select id="getSelectPuser" parameterType="hashmap" resultType="Puser">
+		select * from puser where  
+		
+		<if test='name != "%null%"'> 
+		  puser.pname like #{name} and 
+		</if>
+		
+		 puser.age between #{minage} and #{maxage} 
+	</select>
+</mapper>

@@ -70,6 +70,7 @@
    <delete id="deleteClasses" parameterType="int">
           delete from class where cid=#{cid}
    </delete>
+   
    <resultMap type="Classes" id="AllInfoMap" extends="getMap">
       <collection property="students" javaType="list" ofType="Student">
         <id property="sid" column="sid"/>

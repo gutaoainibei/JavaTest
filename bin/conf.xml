@@ -27,7 +27,7 @@
     <mappers>
         <!--<mapper resource="MybatisTest2/xml/StudentMapper.xml"/>-->
        <mapper resource="MybatisTest2/xml/ClassesMapper.xml"/>
-         <!-- <mapper resource="MybatisTest2/xml/TeacherMapper.xml"/>-->
+       <mapper resource="MybatisTest2/xml/PuserMapper.xml"/>
       <!--   <mapper class="mybatisTest.mapper.UserMapper"/>-->
     </mappers>
 </configuration>
