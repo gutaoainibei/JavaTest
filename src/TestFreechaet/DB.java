@@ -14,7 +14,7 @@ public class DB {
    private static String pass="root";
    public static Connection getConn() throws Exception{
 	   Class.forName(drivername);
-		  Connection conn = (Connection) DriverManager.getConnection(url, username, pass);
-		  return conn;
+	   Connection conn = (Connection) DriverManager.getConnection(url, username, pass);
+	   return conn;
    }
 }
