@@ -1,7 +1,6 @@
 package TestFreechaet;
 
 import java.awt.Font;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -17,7 +16,6 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
 
 public class TestfreeChart {
 	public static void main(String[] args) throws Exception {
@@ -67,7 +65,7 @@ public class TestfreeChart {
 
 	}
 
-	private static void createChart3D(CategoryDataset dataset) {
+	public static void createChart3D(CategoryDataset dataset) {
 		JFreeChart chart = ChartFactory.createBarChart3D("test", // 图片
 				"水果", // 横轴，
 				"产量", // 纵轴，数值轴
@@ -93,7 +91,7 @@ public class TestfreeChart {
 		}
 
 	}
-	private static void createPie3D(DefaultPieDataset dataset) {
+	public static void createPie3D(DefaultPieDataset dataset) {
 		JFreeChart chart = ChartFactory.createPieChart3D(
 				"水果", // 标题，
 				dataset, // 数据集
