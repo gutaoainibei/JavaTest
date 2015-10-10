@@ -1,5 +1,6 @@
 package test;
 
+import java.net.UnknownHostException;
 import java.util.Set;
 
 import com.mongodb.BasicDBObject;
@@ -8,9 +9,12 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
+import com.mongodb.MongoException;
+
+
 
 public class MongoDBTest {
-   public static void main(String[] args) {
+   public static void main(String[] args) throws UnknownHostException, MongoException {
 	Mongo m = new Mongo();
 	DB db = m.getDB("testmongo");
 	Set<String> cols = db.getCollectionNames();
