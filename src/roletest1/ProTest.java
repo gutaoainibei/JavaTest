@@ -28,4 +28,7 @@ public class ProTest {
     public void add1(){
     	Animal.gt++;
     }
+    private void testPro(){
+    	System.out.println("----role test------");
+    }
 }
