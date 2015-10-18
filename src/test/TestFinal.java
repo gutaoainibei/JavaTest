@@ -8,6 +8,8 @@ public class TestFinal {
 	        final String b = "hello";
 
 	        String d = "hello";
+	        
+	        d = d + "1";
 
 	        String c = b + 2;  
 
@@ -15,6 +17,7 @@ public class TestFinal {
    
 	        System.out.println(c);
 	        System.out.println(e); 
+	        System.out.println(d);
 	        
 	        System.out.println((a == c));
 
