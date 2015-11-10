@@ -12,20 +12,23 @@ public class TestUpdateDate {
     	try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test", "root","root");
-		    preparedStatement = conn.prepareStatement("insert into user values(?,?,?)");
+//		    preparedStatement = conn.prepareStatement("insert into user values(?,?,?)");
 //          用于批量更新，这种方法可以防止sql注入
-//		    preparedStatement = conn.prepareStatement("update `user` set `name`=?,age=? WHERE id=?");
+		    preparedStatement = conn.prepareStatement("update `user` set `name`=?,age=? WHERE id=?");
 		    conn.setAutoCommit(false);
 		    for(int i=0 ; i<3 ; i++){
-		    	preparedStatement.setInt(1, i+10);
-		    	preparedStatement.setString(2, "gutao"+i);
-		    	preparedStatement.setInt(3, 1+20);
+		    	preparedStatement.setInt(2, i+10);
+		    	preparedStatement.setString(1, "gutao"+i);
+		    	preparedStatement.setInt(3, i+10);
 		    	preparedStatement.addBatch();
 		    }
-		    //开启自动提交
+		    //批量执行sql语句
+	        preparedStatement.executeBatch();
+	        //提交
+		    conn.commit();
+//		    //开启自动提交
     	   conn.setAutoCommit(true);
-    	   //批量执行sql语句
-    	   preparedStatement.executeBatch();
+    	   
     	} catch (ClassNotFoundException e) {
 			System.out.println("找不到驱动类！");
 			e.printStackTrace();
