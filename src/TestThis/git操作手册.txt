@@ -1,0 +1,19 @@
+ls
+ls -L
+git remote -v//查看当前的.git
+cd ..//返回上级目录
+ls -l//查看当前文件下的所有目录
+ls//查看当前文件下的文件夹
+git status//查看git的状态
+pwd//显示当前位置
+git init//初始化.git，然后进行添加（git remote add origin url）
+git remote add origin git@github.com:gutaoainibei/Login.git
+git remote -v
+git status
+git add .//添加所有文件
+git status//查看状态
+git commit -am "start"//提交并标记是start提交的
+git push//推送到github
+git push origin master//重新推送
+commit all changed files(提交所有被修改的文件)
+git push -u origin master
