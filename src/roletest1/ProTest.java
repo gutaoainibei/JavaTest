@@ -7,6 +7,7 @@ public class ProTest {
 		ProTest proTest = new ProTest();
 		 Animal animal1 = new Animal();
 		 Animal animal2 = new Animal();
+		
 		 Animal.gt++;
 		 //proTest.test();
 		System.out.println(animal1.gt);
