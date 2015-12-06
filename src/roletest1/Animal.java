@@ -6,4 +6,17 @@ public class Animal {
        public String public_name="aname";
        private String private_des="ades";
        protected String protected_string="gutao";
+       public void publicname() {
+		  System.out.println("public method");
+	   }
+       void defaultname() {
+ 		  System.out.println("default method");
+ 	   }
+       protected void protectedname() {
+ 		  System.out.println("protected method");
+ 	   }
+       private void privatename() {
+ 		  System.out.println("private method");
+ 	   }
+       
 }
