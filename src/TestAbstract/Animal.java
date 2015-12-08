@@ -1,0 +1,5 @@
+package TestAbstract;
+
+public abstract class Animal {
+    public abstract void run();
+}
