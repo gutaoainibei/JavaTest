@@ -1,6 +1,8 @@
 package TestAbstract;
 
 public abstract class Animal {
+	private int a;
+	protected String name;
     public abstract void run();
     public void breath(){
     	System.out.println("呼吸");
@@ -35,6 +37,8 @@ class Dog extends Animal{
 	@Override
 	public void run() {
 	   System.out.println("跑------");
+	   name = "dog";
+	   System.out.println("name:"+name);
 	}
 	public void sound(){
 		System.out.println("汪汪汪");
