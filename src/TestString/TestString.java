@@ -8,6 +8,7 @@ package TestString;
 *
  */
 public class TestString {
+	//String 是由final修饰的类，不可继承
   public static void main(String[] args) {
 	
 }
