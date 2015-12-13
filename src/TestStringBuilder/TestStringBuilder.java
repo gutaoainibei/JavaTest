@@ -19,5 +19,6 @@ public class TestStringBuilder {
 		for(int i = 0;i<1000;i++){
 			str1+=i;
 		}
+		stringBuilder1.delete(1, 2);
 	}
 }
