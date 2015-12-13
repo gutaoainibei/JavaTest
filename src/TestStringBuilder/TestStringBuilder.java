@@ -20,5 +20,8 @@ public class TestStringBuilder {
 			str1+=i;
 		}
 		stringBuilder1.delete(1, 2);
+		StringBuilder stringBuilder = new StringBuilder("asddaa");
+		stringBuilder.insert(2, "aa");
+		System.out.println(stringBuilder);
 	}
 }
