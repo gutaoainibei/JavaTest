@@ -44,5 +44,15 @@ public class TestString {
     System.out.println(g.startsWith("q"));
     System.out.println(g.endsWith("r"));
     System.out.println(g.equalsIgnoreCase("Qwer"));
+    g.replace("q", "a");
+    //这里g是没有变化的，他需要把它付给一个新的String
+    System.out.println(g);
+    System.out.println(g.replace("q", "a"));
+    //StringBuilder则不一样，他会返回来，这也说明了String中的char[]是被final修饰的
+    //而在StringBuilder里面则没有,String改变值，其实都是通过再new一个对象（改变refrence的值达到目标）
+    //而StringBuilder则不是，他和StringBuffer都是可变的字符串数组，而String是字符串常量
+    StringBuilder stringBuilder = new StringBuilder("asdfsadf");
+    stringBuilder.replace(0, 3, "aa");
+    System.out.println(stringBuilder);
 }
 }
