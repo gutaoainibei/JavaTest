@@ -9,6 +9,7 @@ public class TestStringBuilder {
 		//这里StringBuilder是会new一个字符数组长度为32的
 		StringBuilder stringBuilder2 = new StringBuilder(32); 
 		//这里只new了一个对象
+		//默认的16不够，会等到不够是执行扩容，新数组的长度是（原来的length）*2+2，成为新的长度
 		for(int i = 0;i<1000;i++){
 			stringBuilder0.append(""+i);
 		}
