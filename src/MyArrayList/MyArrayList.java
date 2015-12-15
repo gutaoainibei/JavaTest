@@ -1,5 +1,8 @@
 package MyArrayList;
 
+import javax.print.attribute.ResolutionSyntax;
+
+import oracle.net.aso.l;
 
 /**
  * 
@@ -10,17 +13,22 @@ package MyArrayList;
 *
  */
 public class MyArrayList {
+	//存储元素的数组对象
     private Object[] value;
+    //数组当前元素个数
     private int size;
+    //构造器
     public MyArrayList(){
-    	this.value = new Object[10];
+    	this(10);
     }
     public MyArrayList(int size){
     	this.value = new Object[size];
     }
+    //获取数组长度
     public int size(){
     	return this.size;
     }
+    //添加元素
     public void add(Object obj){
     	value[size] = obj;
     	size++;
@@ -33,7 +41,41 @@ public class MyArrayList {
     	   this.value = newvalue;
     	}
     }
+    //获取最后一个传入对象的索引
+    public int lastIndexOf(Object obj){
+    	if(obj == null){
+    		for(int i = size-1; i>0; i--)
+    			if(value[i] == null)
+    				return i;	
+    	}else{
+    		for(int i = size-1; i>0; i--)
+    			if(obj.equals(value[i]))
+    				return i;
+    	}
+    	return -1;
+    	
+    }
+    //通过索引获取到元素
     public Object get(int index){
+    	RangeCheck(index);
+    	return value[index];
+    }
+    //获取第一个传入对象的数组中的索引
+    public int indexOf(Object obj){
+    	if(obj == null){
+    		for(int i = 0; i<size-1; i++)
+    			if(value[i] == null)
+    				return i;	
+    	}else{
+    		for(int i = 0; i<size-1; i++)
+    			if(obj.equals(value[i]))
+    				return i;
+    	}
+    	return -1;
+    }
+    
+    //检测是否在数组长度范围内
+    public void RangeCheck(int index){
     	if(index<0 || index>size-1){
     		try {
     		  throw	new Exception("集合溢出");
@@ -41,9 +83,7 @@ public class MyArrayList {
 				e.printStackTrace();
 			}
     	}
-    	return value[index];
     }
-    
     public static void main(String[] args) {
 		MyArrayList list = new MyArrayList();
 		list.add("gutao");
@@ -54,6 +94,8 @@ public class MyArrayList {
 		System.out.println(list.get(1));
 		Human human2 = (Human)list.get(2);
 		System.out.println(human2.getName());
+		System.out.println(list.lastIndexOf("nibei"));
+		System.out.println(list.indexOf("nibei"));
 	}
 }
 //src the source array.
