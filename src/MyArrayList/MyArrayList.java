@@ -1,5 +1,7 @@
 package MyArrayList;
 
+import java.util.Arrays;
+
 import javax.print.attribute.ResolutionSyntax;
 
 import oracle.net.aso.l;
@@ -84,6 +86,7 @@ public class MyArrayList {
 			}
     	}
     }
+   
     public static void main(String[] args) {
 		MyArrayList list = new MyArrayList();
 		list.add("gutao");
@@ -96,6 +99,7 @@ public class MyArrayList {
 		System.out.println(human2.getName());
 		System.out.println(list.lastIndexOf("nibei"));
 		System.out.println(list.indexOf("nibei"));
+	
 	}
 }
 //src the source array.
