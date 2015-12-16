@@ -43,7 +43,7 @@ public class MyArrayList {
     	   this.value = newvalue;
     	}
     }
-    //
+    //使index位置的元素被替换成obj
     public void set(int index,Object obj){
     	RangeCheck(index);
     	this.value[index] = obj;
@@ -91,7 +91,10 @@ public class MyArrayList {
 			}
     	}
     }
-   
+    //判断是否为空
+    public boolean isEmpty() {
+        return size == 0;
+    }
     public static void main(String[] args) {
 		MyArrayList list = new MyArrayList();
 		list.add("gutao");
