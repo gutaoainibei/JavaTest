@@ -43,6 +43,11 @@ public class MyArrayList {
     	   this.value = newvalue;
     	}
     }
+    //
+    public void set(int index,Object obj){
+    	RangeCheck(index);
+    	this.value[index] = obj;
+    }
     //获取最后一个传入对象的索引
     public int lastIndexOf(Object obj){
     	if(obj == null){
@@ -99,7 +104,8 @@ public class MyArrayList {
 		System.out.println(human2.getName());
 		System.out.println(list.lastIndexOf("nibei"));
 		System.out.println(list.indexOf("nibei"));
-	
+	    list.set(0, "gt");
+	    System.out.println(list.get(0));
 	}
 }
 //src the source array.
