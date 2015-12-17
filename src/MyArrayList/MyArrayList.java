@@ -1,11 +1,5 @@
 package MyArrayList;
 
-import java.util.Arrays;
-
-import javax.print.attribute.ResolutionSyntax;
-
-import oracle.net.aso.l;
-
 /**
  * 
 * @ClassName: MyArrayList 
