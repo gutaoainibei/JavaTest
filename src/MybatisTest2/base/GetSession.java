@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class GetSession {
    public static SqlSession getSqlSession(){
        String resource = "conf.xml";
-//     //加载配置文件
+//     加载配置文件
 //     Reader reader = Resources.getResourceAsReader(resource);
        InputStream reader =GetSession.class.getClassLoader().getResourceAsStream(resource);
 	   //构建sqlsession的工厂

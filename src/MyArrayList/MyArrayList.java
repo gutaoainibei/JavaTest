@@ -105,6 +105,7 @@ public class MyArrayList {
 	    System.out.println(list.get(0));
 	}
 }
+
 //src the source array.
 //srcPos starting position in the source array.
 //dest the destination array.
