@@ -114,5 +114,6 @@ public class MyArrayList {
 //System.arraycopy(src, srcPos, dest, destPos, length);
 //这里我讲一下上面的实现过程，也将一下StringBuilder的insert的实现过程
 //首先我们会对字符数组进行一个扩容，然后把原有的数据copy到新的数组中
-//然后再copy一次，这一次是挪动后面的序列（比如起先说是aadd,要在第二个a后面插入一个aa,则先变成aa__dd）
+//然后再copy一次，这一次是挪动后面的序列（比如起先说是aadd,
+//要在第二个a后面插入一个aa,则先变成aa__dd）
 //然后再添加aa
