@@ -27,7 +27,8 @@ public class CaledarDate {
             day = calendar.get(Calendar.DATE);
             //设置为当前月的第一天
             calendar.set(Calendar.DATE,1);
-            //获得第一天是星期几
+            //获得本月第一天是星期几，1对应星期天，2对应星期二，以此类推，星期六对应7
+            //月份是0到11
 			System.out.println(calendar.get(Calendar.DAY_OF_WEEK));
 			//获得最大天数
 			System.out.println(calendar.getActualMaximum(Calendar.DATE));
