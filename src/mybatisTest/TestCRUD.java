@@ -11,8 +11,7 @@ import mybatisTest.mapper.UserMapper;
 /*
  * 测试mybatis的增删改查
  * */
-public class TestCRUD {
-	
+public class TestCRUD {	
 	/*
      * 配置文件方式来进行查询表中id为1的数据
      * */
