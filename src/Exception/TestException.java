@@ -11,6 +11,7 @@ public class TestException {
 	if(list.isEmpty()){
 		list = new ArrayList();
 	}
+	System.out.println("testing");
 	System.out.println(list.toArray().toString());
 }
 }
