@@ -1,5 +1,7 @@
 package MyArrayList;
 
+import java.util.ArrayList;
+
 /**
  * 
 * @ClassName: MyArrayList 
@@ -23,6 +25,14 @@ public class MyArrayList {
     //获取数组长度
     public int size(){
     	return this.size;
+    }
+    //添加元素，指定位置
+    public void add(int index,Object obj){
+    	  RangeCheck(index);
+    	  int length = size-index-1;
+    	  System.arraycopy(value, index, value, index+1, length);
+    	  value[index]=obj;
+    	  size++;
     }
     //添加元素
     public void add(Object obj){
@@ -85,6 +95,21 @@ public class MyArrayList {
 			}
     	}
     }
+    //删除指定对象
+    public void remove(Object obj){
+    	for(int i =0;i<size;i++){
+    		if(obj.equals(value[i])){
+    			remove(i);
+    		}
+    	}
+    }
+    //删除指定对象
+    public void remove(int index){
+    	RangeCheck(index);
+    	int length = size-index-1;
+    	System.arraycopy(value, index+1, value, index, length);
+    	value[--size]=null;
+    }
     //判断是否为空
     public boolean isEmpty() {
         return size == 0;
@@ -95,25 +120,9 @@ public class MyArrayList {
 		list.add("nibei");
 		Human human = new Human("luoming");
 		list.add(human);
-		System.out.println(list.size());
-		System.out.println(list.get(1));
-		Human human2 = (Human)list.get(2);
-		System.out.println(human2.getName());
-		System.out.println(list.lastIndexOf("nibei"));
-		System.out.println(list.indexOf("nibei"));
-	    list.set(0, "gt");
-	    System.out.println(list.get(0));
+	    list.remove(0);
+	    System.out.println(list.get(1));
+	    System.out.println(list.size());
+
 	}
 }
-
-//src the source array.
-//srcPos starting position in the source array.
-//dest the destination array.
-//destPos starting position in the destination data.
-//length the number of array elements to be copied.
-//System.arraycopy(src, srcPos, dest, destPos, length);
-//这里我讲一下上面的实现过程，也将一下StringBuilder的insert的实现过程
-//首先我们会对字符数组进行一个扩容，然后把原有的数据copy到新的数组中
-//然后再copy一次，这一次是挪动后面的序列（比如起先说是aadd,
-//要在第二个a后面插入一个aa,则先变成aa__dd）
-//然后再添加aa
