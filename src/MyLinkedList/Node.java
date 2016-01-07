@@ -1,32 +1,28 @@
 package MyLinkedList;
 
 public class Node {
-	private Object previous;
+	private Node previous;
 	private Object now;
-	private Object next;
-
-	public Object getPrevious() {
+	private Node next;
+	public Node getPrevious() {
 		return previous;
 	}
-
-	public void setPrevious(Object previous) {
+	public void setPrevious(Node previous) {
 		this.previous = previous;
 	}
-
 	public Object getNow() {
 		return now;
 	}
-
 	public void setNow(Object now) {
 		this.now = now;
 	}
-
-	public Object getNext() {
+	public Node getNext() {
 		return next;
 	}
-
-	public void setNext(Object next) {
+	public void setNext(Node next) {
 		this.next = next;
 	}
+
+	
 
 }

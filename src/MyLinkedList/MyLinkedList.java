@@ -29,10 +29,33 @@ public class MyLinkedList {
 	   }
 	   size++;
    }
+   public Object get(int index){
+	   checkRange(index);
+	   Node node = null;
+	   if(first!=null){
+		   int i = 0;
+		   node = first;
+		   while (i<index) {
+			node = node.getNext();
+			i++;
+		}
+	   } 
+	   return node.getNow();
+   }
+   public void checkRange(int index){
+	   if(index<0 || index>size-1){
+   		try {
+   		  throw	new Exception("集合溢出");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+   	}
+   }
    public static void main(String[] args) {
 	   MyLinkedList list = new MyLinkedList();
 	   list.add("aaa");
 	   list.add("bbb");
 	   System.out.println(list.size());
+	   System.out.println(list.get(2));
 }
 }
