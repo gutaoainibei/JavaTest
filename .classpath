@@ -3,45 +3,6 @@
 	<classpathentry kind="src" path="config"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/aopalliance-1.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/com.springsource.net.sf.cglib-2.2.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/com.springsource.org.aopalliance-1.0.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/commons-logging.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/gson-2.2.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/mysql-connector-java-5.1.30-bin.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/org.springframework.jdbc-3.1.2.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/spring-aop-4.0.0.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/spring-jdbc-4.0.0.RELEASE.jar" sourcepath="G:/U盘/学习/sping/spring-framework-4.0.0.RELEASE-dist/spring-framework-4.0.0.RELEASE/libs/spring-jdbc-4.0.0.RELEASE-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/spring-orm-4.0.0.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/spring-tx-4.0.0.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/spring-web-4.0.0.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/spring-webmvc-4.0.0.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/woc3p0-0.9.1.2.jar" sourcepath="E:/myjava_resource/c3p0-0.9.5.1-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/spring-test-4.0.0.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/spring-context-4.0.0.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/spring-core-4.0.0.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/myjava/spring.jar/spring-expression-4.0.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="E:/mvnrepo/org/springframework/spring-beans/4.0.0.RELEASE/spring-beans-4.0.0.RELEASE.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="org.eclipse.jst.component.archivename" value="spring-beans-4.0.0.RELEASE.jar"/>
-			<attribute name="maven.groupId" value="org.springframework"/>
-			<attribute name="maven.artifactId" value="spring-beans"/>
-			<attribute name="maven.version" value="4.0.0.RELEASE"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="E:/mvnrepo/org/springframework/spring-test/4.0.0.RELEASE/spring-test-4.0.0.RELEASE.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="org.eclipse.jst.component.archivename" value="spring-test-4.0.0.RELEASE.jar"/>
-			<attribute name="maven.groupId" value="org.springframework"/>
-			<attribute name="maven.artifactId" value="spring-test"/>
-			<attribute name="maven.version" value="4.0.0.RELEASE"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jackson"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jfreechart"/>
@@ -49,5 +10,12 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mongoDB"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mybatis"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/oracle"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Jackson"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JfreeChart"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Jstl"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Logger4j"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MongoDB"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Mybatis"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

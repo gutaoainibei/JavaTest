@@ -2,7 +2,6 @@ package TestInnerClass;
 
 import TestInnerClass.Face.ear;
 import TestInnerClass.Face.nose;
-import oracle.net.aso.f;
 
 public class InnerClass {
   public static void main(String[] args) {

@@ -1,6 +1,5 @@
 package roletest1;
 
-import com.sun.javafx.geom.AreaOp.AddOp;
 
 public class ProTest {
     public static void main(String[] args) {
