@@ -51,6 +51,9 @@ public class MyLinkedList {
 			}
    	}
    }
+   public void remove(int index){
+       
+   }
    public static void main(String[] args) {
 	   MyLinkedList list = new MyLinkedList();
 	   list.add("aaa");
