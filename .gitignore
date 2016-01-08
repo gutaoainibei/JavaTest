@@ -1,6 +1,5 @@
-/bin/
-/*.class
-/gen/
-/.settings/
-/.project
-/target/
+bin/
+*.class
+.settings/
+.project
+target/
