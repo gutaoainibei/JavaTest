@@ -1,6 +1,6 @@
 /bin/
-*.class
-*.apk
+/*.class
 /gen/
-.settings/
-.project
+/.settings/
+/.project
+/target/
