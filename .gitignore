@@ -1,5 +1,5 @@
 bin/
-.class
-.settings
+*.class
+settings/
 .project
 target/
