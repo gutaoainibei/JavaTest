@@ -1,5 +1,8 @@
+#Eclispe#
 bin/
 *.class
+.classpath
 .settings/
 .project
 target/
+Servers/
