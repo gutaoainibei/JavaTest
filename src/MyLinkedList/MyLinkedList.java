@@ -1,5 +1,7 @@
 package MyLinkedList;
 
+import com.mysql.jdbc.UpdatableResultSet;
+
 
 public class MyLinkedList {
    private Node first;
@@ -52,13 +54,29 @@ public class MyLinkedList {
    	}
    }
    public void remove(int index){
-       
+       checkRange(index);
+       Node node = null;
+       if(first!=null){
+           int i =0;
+           while(i < index){
+               node = first.getNext();
+               i++;
+           }
+           Node up = node.getPrevious();
+           Node down = node.getNext();
+           up.setNext(down);
+           down.setPrevious(up);
+           size--;
+       }
    }
    public static void main(String[] args) {
 	   MyLinkedList list = new MyLinkedList();
 	   list.add("aaa");
 	   list.add("bbb");
+	   list.add("ccc");
 	   System.out.println(list.size());
-	   System.out.println(list.get(2));
+	   System.out.println(list.get(1));
+	   list.remove(1);
+	   System.out.println(list.get(1));
 }
 }
