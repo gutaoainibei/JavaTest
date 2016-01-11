@@ -129,7 +129,7 @@ public class MyLinkedList {
    /**
     * 
    * @Title: add 
-   * @Description: TODO(这里用一句话描述这个方法的作用) 
+   * @Description: TODO(在指定位置，存储对象) 
    * @param @param args    设定文件 
    * @return void    返回类型 
    * @throws
