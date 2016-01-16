@@ -1,9 +1,10 @@
 package MyMap;
 
-public class MyMap {
+import java.util.HashMap;
 
+public class MyMap {
+    private MyEntry[] entry = new MyEntry[10];
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
 
