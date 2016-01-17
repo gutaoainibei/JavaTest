@@ -53,7 +53,6 @@ public class MyMap {
          map.put("key", "nibei");
          System.out.println(map.size());
          System.out.println(map.get("key"));
-    
 	}
 
 }
