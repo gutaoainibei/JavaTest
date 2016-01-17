@@ -51,6 +51,17 @@ public class MyLinkedList {
 	   }
 	   size++;
    }
+   public Object get(Object object){
+	   Node tempnode = first;
+	   for(int i =0 ; i < size ; i++){
+		   if(tempnode.getNow().equals(object)){
+			   return tempnode.getNow();
+		   }else {
+			tempnode = tempnode.getNext();
+		}
+	   }
+	   return null;
+   }
    /**
     * 
    * @Title: get 
@@ -160,5 +171,6 @@ public class MyLinkedList {
 	   System.out.println(list.get(2));
 	   list.remove(2);
 	   System.out.println(list.get(1));
+	   System.out.println(list.get("aaa"));
 }
 }
