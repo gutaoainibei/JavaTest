@@ -3,6 +3,7 @@ package MyMap;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class MyMap {
     private MyEntry[] entry = new MyEntry[2];
     private int size;
@@ -55,12 +56,4 @@ public class MyMap {
          System.out.println(map.get("key"));
 	}
 
-}
-class MyEntry{
-	Object key;
-	Object value;
-	public MyEntry(Object key,Object value){
-		this.key = key;
-		this.value =value;
-	}
 }
