@@ -105,12 +105,23 @@ public class MyLinkedList {
    public Node getNode(int index){
 	   Node node = null;
 	   if(first!=null){
-		   node = first;
-		   int i = 0;
-		   while (i<index) {
-			node = node.getNext();
-			i++;
+		   if(index < size >> 1){
+			   node = first;
+			   int i = 0;
+			   while (i < index) {
+					node = node.getNext();
+					i++;
+			   }
+		   }else{
+			   node = last;
+			   int i = size-1;
+			   while (i > index) {
+					node = node.getPrevious();
+					i--;
+			   }
 		   }
+		   
+		   
 	   } 
  	   return node;
    }
