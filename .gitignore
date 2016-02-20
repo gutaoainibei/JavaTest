@@ -5,9 +5,4 @@ bin/
 .settings/
 .project
 target/
-<<<<<<< HEAD
 Servers/
-=======
-.classpath
-
->>>>>>> 49b4f95c99d2adc8996dd8fda57a06ef1b2f41d2

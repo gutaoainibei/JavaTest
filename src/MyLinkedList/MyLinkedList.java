@@ -178,10 +178,9 @@ public class MyLinkedList {
 	   System.out.println(list.get(1));
 	   System.out.println(list.get(2));
 	   System.out.println(list.get(3));
-	   list.remove(2);
+	   //list.remove(2);
 	   System.out.println(list.get(2));
-	   list.remove(2);
+	   //list.remove(2);
 	   System.out.println(list.get(1));
-	   System.out.println(list.get("aaa"));
 }
 }

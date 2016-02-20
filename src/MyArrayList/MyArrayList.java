@@ -29,7 +29,7 @@ public class MyArrayList {
     //添加元素，指定位置
     public void add(int index,Object obj){
     	  RangeCheck(index);
-    	  int length = size-index-1;
+    	  int length = size-index;
     	  System.arraycopy(value, index, value, index+1, length);
     	  value[index]=obj;
     	  size++;
@@ -120,9 +120,13 @@ public class MyArrayList {
 		list.add("nibei");
 		Human human = new Human("luoming");
 		list.add(human);
+		list.add(1, "gutaoainibei");
 	    list.remove(0);
 	    System.out.println(list.get(1));
 	    System.out.println(list.size());
+	    for(int i = 0 ;i < list.size ; i++){
+	    	System.out.println(list.get(i));
+	    }
 
 	}
 }
