@@ -26,7 +26,6 @@ class StudyGenericChild3<T1,Integer> extends StudyGeneric <T1,Integer>{
 
 	@Override
 	public void test(Integer t2) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -35,7 +34,6 @@ class StudyGenericChild6<T1,Integer> extends StudyGeneric <T1,String>{
 
 	@Override
 	public void test(String t2) {
-		// TODO Auto-generated method stub
 		
 	}
 	
