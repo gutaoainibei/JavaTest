@@ -18,7 +18,16 @@ public class GenericStudent<T> {
 	public void setName(T name) {
 		this.name = name;
 	}
-    
+    public static void main(String[] args) {
+		GenericStudent g1 = new GenericStudent();
+		g1.test1(g1);
+		//这里解释了泛型擦除不等于Object
+		GenericStudent<Object> g2 = new GenericStudent<Object>();
+		//g1.test1(g2);
+	}
+    public static void test1(GenericStudent<String> g){
+    	
+    }
 }
 class ChildStudent extends GenericStudent<String>{
 	 public void test(){
