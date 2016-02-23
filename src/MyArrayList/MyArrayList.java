@@ -1,6 +1,7 @@
 package MyArrayList;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * 
@@ -114,19 +115,48 @@ public class MyArrayList {
     public boolean isEmpty() {
         return size == 0;
     }
+    public Iterator iterator(){
+    	return new MyIterator();
+    }
+    private class MyIterator<E> implements Iterator<E>{
+        private int coursor = -1;
+        
+		public boolean hasNext() {
+			boolean sign = coursor+1 < size;
+			return sign;
+		}
+
+		public E next() {
+			coursor++;
+			return (E)value[coursor];
+		}
+
+		public void remove() {
+			// TODO Auto-generated method stub
+			
+		}
+    	
+    }
     public static void main(String[] args) {
 		MyArrayList list = new MyArrayList();
 		list.add("gutao");
 		list.add("nibei");
-		Human human = new Human("luoming");
-		list.add(human);
+		//Human human = new Human("luoming");
+		//list.add(human);
 		list.add(1, "gutaoainibei");
-	    list.remove(0);
+	 
 	    System.out.println(list.get(1));
 	    System.out.println(list.size());
 	    for(int i = 0 ;i < list.size ; i++){
 	    	System.out.println(list.get(i));
 	    }
-
+	    list.remove(1);
+	   System.out.println("========================");
+       Iterator<String> myIterator = list.iterator();
+       int count = 0;
+       while(myIterator.hasNext()){
+    	   count++;
+    	   System.out.println(myIterator.next());
+       }
 	}
 }
