@@ -2,20 +2,19 @@
 <classpath>
 	<classpathentry kind="src" path="config"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jackson"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jfreechart"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysql"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mongoDB"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mybatis"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/oracle"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Jackson"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JfreeChart"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Jstl"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Logger4j"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mybits"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/redis"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jackson"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MongoDB"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Mybatis"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JFreeChart"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
