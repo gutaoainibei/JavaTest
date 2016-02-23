@@ -158,5 +158,6 @@ public class MyArrayList {
     	   count++;
     	   System.out.println(myIterator.next());
        }
+       System.out.println("===");
 	}
 }
