@@ -130,7 +130,7 @@ public class MyArrayList {
 			coursor++;
 			return (E)value[coursor];
 		}
-
+        //没有实现remove方法，因为本身已经有一个remove方法
 		public void remove() {
 			// TODO Auto-generated method stub
 			
@@ -141,8 +141,8 @@ public class MyArrayList {
 		MyArrayList list = new MyArrayList();
 		list.add("gutao");
 		list.add("nibei");
-		//Human human = new Human("luoming");
-		//list.add(human);
+		Human human = new Human("luoming");
+		list.add(human);
 		list.add(1, "gutaoainibei");
 	 
 	    System.out.println(list.get(1));
@@ -152,7 +152,7 @@ public class MyArrayList {
 	    }
 	    list.remove(1);
 	   System.out.println("========================");
-       Iterator<String> myIterator = list.iterator();
+       Iterator myIterator = list.iterator();
        int count = 0;
        while(myIterator.hasNext()){
     	   count++;
