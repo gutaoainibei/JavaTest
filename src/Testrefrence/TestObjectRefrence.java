@@ -10,6 +10,7 @@ public class TestObjectRefrence {
 		map.put("age", 22);
 		TestObjectRefrence obj = new TestObjectRefrence();
 		obj.addAge(map);
+		//这里是引用，所以在另外的方法里改了，那么我们此处的值也会改，因为引用所指的是一处物理地址，只有一个对象
 		System.out.println("age"+"：为"+map.get("age"));
 	}
     public void addAge(Map map){
