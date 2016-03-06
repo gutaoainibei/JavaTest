@@ -1,5 +1,9 @@
 package TestSort.mySort.Model;
 
-public class News {
+import java.util.Date;
 
+public class News {
+      private  String title;
+      private  Date  createTime;
+      private int hits;
 }
