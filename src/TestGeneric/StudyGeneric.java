@@ -11,6 +11,15 @@ public abstract class StudyGeneric <T1,T2>{
      T1 age;
      public abstract void test(T2 t2);
 }
+//全部保留
+class StudyGenericChild2<T1,T2> extends StudyGeneric<T1, T2>{
+	@Override
+	public void test(T2 t2) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
 //不保留，这就是泛型的擦除
 //擦除之后，类型类似于Object
 class StudyGenericChild1<T1,T2> extends StudyGeneric{
@@ -22,7 +31,7 @@ class StudyGenericChild1<T1,T2> extends StudyGeneric{
 	
 }
 //部分保留
-class StudyGenericChild3<T1,Integer> extends StudyGeneric <T1,Integer>{
+class StudyGenericChild3<T1,String> extends StudyGeneric <T1,Integer>{
 
 	@Override
 	public void test(Integer t2) {
@@ -30,6 +39,7 @@ class StudyGenericChild3<T1,Integer> extends StudyGeneric <T1,Integer>{
 	}
 	
 }
+
 class StudyGenericChild6<T1,Integer> extends StudyGeneric <T1,String>{
 
 	@Override

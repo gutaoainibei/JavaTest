@@ -10,5 +10,4 @@ public class Classroom <T>{
 	public void setStu(T stu) {
 		this.stu = stu;
 	}
-      
 }
