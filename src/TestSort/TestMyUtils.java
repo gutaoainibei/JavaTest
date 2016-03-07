@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import TestSort.mySort.MySortUtil;
+import TestSort.mySort.MyString;
 
 public class TestMyUtils {
 	public static void main(String[] args) {
@@ -33,10 +34,20 @@ public class TestMyUtils {
 		list1.add("adsdf");
 		list1.add("dsd");
 		list1.add("csss");
-		list1.add("bsda");
+		list1.add("fsda");
 		MySortUtil.Sort(list1);
 		for (int i = 0; i < list1.size(); i++) {
 			System.out.println(list1.get(i));
+		}
+		System.out.println("=========my sort list2 my Comparator=============");
+		List<String> list2 = new ArrayList<String>();
+		list2.add("adsdf");
+		list2.add("dsddddsdfsfsf");
+		list2.add("css");
+		list2.add("bsda");
+		MySortUtil.Sort(list2, new MyString());
+        for (int i = 0; i < list2.size(); i++) {
+			System.out.println(list2.get(i));
 		}
 	}
 }

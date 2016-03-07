@@ -1,8 +1,26 @@
 package TestSort.mySort;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class MySortUtil{
+	
+	public static <T> void Sort(List<T> list, Comparator<T> com){
+		Object[] obj = list.toArray();
+		for (int i = 0; i < obj.length-1; i++) {
+			for (int j = 0; j < obj.length-1-i; j++) {
+				if(com.compare((T)obj[j], (T)obj[j+1])<0){
+					T temp = (T) obj[j];
+					obj[j] = obj[j+1];
+					obj[j+1] = temp;
+				}
+			}
+		}
+		for (int i = 0; i < obj.length; i++) {
+			list.set(i, (T) obj[i]);
+		}
+	}
+	
 	public static  <T> void Sort(List<T> list){
 		Object[] t = list.toArray();
 		Sort(t);
