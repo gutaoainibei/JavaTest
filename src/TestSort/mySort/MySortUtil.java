@@ -1,8 +1,13 @@
 package TestSort.mySort;
-
 import java.util.Comparator;
 import java.util.List;
-
+/**
+ * 
+ * 描述：自己实现以下比较工具类，主要是为了熟悉java底层的一些实现
+ * @author gt
+ * @created 2016年3月8日 下午3:09:33
+ * @since
+ */
 public class MySortUtil{
 	
 	public static <T> void Sort(List<T> list, Comparator<T> com){
