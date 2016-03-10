@@ -117,6 +117,7 @@ public class MyArrayList {
     public Iterator iterator(){
     	return new MyIterator();
     }
+    //实现一个简单的集合迭代器
     private class MyIterator<E> implements Iterator<E>{
         private int coursor = -1;
         
@@ -131,7 +132,6 @@ public class MyArrayList {
 		}
         //没有实现remove方法，因为本身已经有一个remove方法
 		public void remove() {
-			// TODO Auto-generated method stub
 			
 		}
     	
