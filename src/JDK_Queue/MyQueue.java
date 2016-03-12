@@ -2,7 +2,13 @@ package JDK_Queue;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-
+/**
+ * 
+ * 描述：用一个简单的队列实现，来熟悉队列
+ * @author gt
+ * @created 2016年3月11日 上午9:28:05
+ * @since
+ */
 public class MyQueue<E> {
     private Deque<E> container = new ArrayDeque<E>();
     private int size;
