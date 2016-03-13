@@ -1,11 +1,8 @@
 package SymmetryEncryption;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 
- * 描述：加密工具类
+ * 描述：加密工具类,暂时先放着，过段时间过来实现
  * @author gt
  * @created 2016年3月12日 下午1:52:50
  * @since
