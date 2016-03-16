@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 import com.google.common.collect.ImmutableList;
-import com.sun.corba.se.spi.orb.StringPair;
 
 /**
  * 
@@ -30,6 +30,5 @@ public class Test1ImmutableList {
 	List<String>  immutableList = ImmutableList.of("gutao","nibei","gutaoainibei");
 	//immutableList.add("test");//这里会直接报错
 	System.out.println(immutableList.get(0));
-
 }
 }

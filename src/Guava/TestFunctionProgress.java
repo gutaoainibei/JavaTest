@@ -4,9 +4,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.logging.SimpleFormatter;
+
+import javax.swing.SpringLayout.Constraints;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
@@ -30,8 +36,28 @@ import com.google.common.collect.Sets;
  * @since
  */
 public class TestFunctionProgress {
-   public static void main(String[] args) {
-	   
+   /**
+    * 
+    * 描述：final在修饰对象的时候就是对refrences作用的，
+    * 这个refrences不会再改变，但是不代表它里面的内容不会再变
+    * 如果是修饰的基本类型的数据那么则是表示不可再变
+    * @author gt
+    * @created 2016年3月17日 上午12:09:56
+    * @since
+    */
+   public static void test(){
+	   final Map<String,Object> map = new HashMap<String, Object>();
+	   map.put("name", "gutao");
+	   map.put("age", "gutao");
+	   map.put("address", "gutao");
+	   map.put("sh", "gutao");
+	   Iterator<Entry<String, Object>> iterator = map.entrySet().iterator();
+	   while (iterator.hasNext()) {
+		Entry<String, Object> entry = iterator.next();
+		String key = entry.getKey();
+		String value = (String)entry.getValue();
+		System.out.println(key+":"+value);
+	   }
    }
    /**
     * 
