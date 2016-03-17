@@ -18,6 +18,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
@@ -145,4 +146,39 @@ public class TestFunctionProgress {
 			System.out.println(string);
 		}
    }
+   /**
+    * 
+    * 描述：对collection容器里面的数据进行长度控制,且不为空值
+    * @author gt
+    * @created 2016年3月17日 上午10:11:43
+    * @since
+    */
+   public static void test4(){
+	    List<String> list = Lists.newArrayList();
+	    list.add("gutao");
+	    list.add("nibeigutao");
+	    Collection<String> collection = Collections2.filter(list, new Predicate<String>() {
+			@Override
+			public boolean apply(String input) {
+				Preconditions.checkNotNull(input);
+				return input.length() > 5 && input.length() < 10;
+			}
+		});
+	    collection.add("gutaoai");
+	    System.out.println(collection.contains("gutaoai"));
+   }
+   public static void main(String[] args) {
+	    List<String> list = Lists.newArrayList();
+	    list.add("gutao");
+	    list.add("nibeigutao");
+	    Collection<String> collection = Collections2.filter(list, new Predicate<String>() {
+			@Override
+			public boolean apply(String input) {
+				Preconditions.checkNotNull(input);
+				return input.length() > 5 && input.length() < 10;
+			}
+		});
+	    collection.add("gutaoai");
+	    System.out.println(collection.contains("gutaoai"));
+}
 }
