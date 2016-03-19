@@ -15,9 +15,9 @@ import com.google.common.collect.Table.Cell;
  *       所有的第二个key值:columnKeySet();
  *       所有的值:values();
  *       第一个值对应的第二个值:rowMap()+get(第一个值)
- *                         row(第一个值)
+ *                         row(第一个值)，获取第二个key+value的map
  *       第二个值对应的第一个值:columnMap()+get(第二个值)
- *                         colomn(第二个值)   
+ *                         colomn(第二个值)，获取第一个key+value的map  
  * @author gt
  * @created 2016年3月18日 上午10:23:14
  * @since
@@ -47,8 +47,13 @@ public class TableStudy {
 	    for (String string : rowkeySet) {
 			  System.out.print(string+"\t");
 			  Map<String, Double> scoresMap = gradeTable.row(string);
+			                                  
 			  for (String column : columnkeySet) {
 					System.out.print(scoresMap.get(column)+"\t\t");
+					//获取到所有的rowMap,
+					//Open Declaration Map<String, Map<String, Double>> com.google.common.collect.Table.rowMap()
+					//这里会议第一个key为新的map的key，另外一个key和value为新的map元素
+					//System.out.print(gradeTable.columnMap().get(string)+"\t\t");
 			  }
 			  System.out.println();
 		}
