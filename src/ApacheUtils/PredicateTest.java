@@ -1,7 +1,11 @@
 package ApacheUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.functors.NotNullPredicate;
+import org.apache.commons.collections4.list.PredicatedList;
 
 /**
  * 
@@ -17,5 +21,9 @@ public class PredicateTest {
 		String nameString = null;
 		//非空为true，空位false
 		System.out.println(notnull.evaluate(nameString));
-	}
+		//添加容器的非空判断
+		List<Long> list = PredicatedList.predicatedList(new ArrayList<Long>(),notnull);
+	    list.add(100L);
+	    list.add(null);//添加空值会报异常
+    }
 }
