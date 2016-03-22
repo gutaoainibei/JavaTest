@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.PredicateUtils;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.functors.SwitchTransformer;
 
@@ -16,7 +14,7 @@ import ApacheUtils.model.Level;
 
 /**
  * 
- * 描述：函数式编程
+ * 描述：函数式编程,类型转换,这里是一对一，这里希望大家要弄清楚
  * @author gt
  * @created 2016年3月21日 下午8:03:03
  * @since
