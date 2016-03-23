@@ -19,7 +19,6 @@ import com.google.common.collect.Multimap;
 public class ArrayListMultimapAndBimap {
     public static void main(String[] args) {
 		  testBiMap();
-		  testMultiMap();
 	}
     /**
      * 
@@ -32,7 +31,10 @@ public class ArrayListMultimapAndBimap {
     	BiMap<String, String> biMap = HashBiMap.create();
 		biMap.put("gutao", "gutaoai@126.com");
 		biMap.put("nibei", "nibeiai@126.com");
+		//biMap.put("nibei", "nibeiai@12.com");
+
 		System.out.println(biMap.inverse().get("gutaoai@126.com"));
+		System.out.println(biMap);
 		System.out.println(biMap.inverse().inverse() == biMap);
     }
     //测试Multimap的应用，一键多值

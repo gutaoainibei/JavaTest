@@ -17,7 +17,11 @@ import org.apache.commons.collections4.map.HashedMap;
 /**
  * 描述：IterableMap,这个要比之前map.EntrySet.Iterator迭代更好,HashedMap
  *      去重过滤器
- *      
+ *      IterableMap map迭代器
+ *      UniqueFilterIterator去重迭代器
+ *      ArrayListIterator数组迭代器
+ *      FilterIterator自定义迭代器
+ *      LoopingIterator循环迭代器
  * @author gt
  * @created 2016年3月23日 下午4:17:33
  * @since
