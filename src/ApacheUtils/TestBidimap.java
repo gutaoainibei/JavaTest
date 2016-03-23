@@ -7,7 +7,8 @@ import org.apache.commons.collections4.bidimap.DualTreeBidiMap;
 
 /**
  * 
- * 描述：双向map
+ * 描述：双向map，键和值都唯一,DualHashBidiMap无序
+ *             DualTreeBidiMap有序
  * @author gt
  * @created 2016年3月23日 下午7:53:14
  * @since
