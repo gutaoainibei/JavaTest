@@ -31,7 +31,6 @@ public class PredicateTest {
 		  list.add("gutao1");
 		  //list.add("gutao");//报异常
 		  list.add(null);
-		
     }
     public static void unique(){
     	System.out.println("====唯一判断====");

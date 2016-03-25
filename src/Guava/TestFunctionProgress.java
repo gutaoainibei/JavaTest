@@ -1,5 +1,6 @@
 package Guava;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
 import com.google.common.base.Preconditions;
@@ -152,17 +154,6 @@ public class TestFunctionProgress {
 	    System.out.println(collection.contains("gutaoai"));
    }
    public static void main(String[] args) {
-	    List<String> list = Lists.newArrayList();
-	    list.add("gutao");
-	    list.add("nibeigutao");
-	    Collection<String> collection = Collections2.filter(list, new Predicate<String>() {
-			@Override
-			public boolean apply(String input) {
-				Preconditions.checkNotNull(input);
-				return input.length() > 5 && input.length() < 10;
-			}
-		});
-	    collection.add("gutaoai");
-	    System.out.println(collection.contains("gutaoai"));
+      test1();	 
 }
 }
