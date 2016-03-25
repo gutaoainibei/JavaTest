@@ -4,7 +4,7 @@ import java.io.File;
 /**
  * 描述：获取文件名称和路径
  *      路径分隔符：;
- *      文件分隔符：在windos下是\,linux下是/
+ *      文件分隔符：在windows下是\,linux下是/
  *      相对路径
  *      绝对路径
  * @author gt
