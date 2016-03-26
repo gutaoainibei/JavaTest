@@ -42,7 +42,7 @@ public class Testmkdir {
 			}
         	System.out.println("===========过滤输出文件============");
         	childFile = file.listFiles(new FilenameFilter() {
-        		//这里的dir就是file，name就是子文件名,".lastUpdated"
+        		//这里的dir就是file，name就是子文件名,""
 				@Override
 				public boolean accept(File dir, String name) {
 					return new File(dir, name).isFile() && name.endsWith(".txt");

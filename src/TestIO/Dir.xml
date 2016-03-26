@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>文件路径配置XML文件</comment>
+<entry key="dir">D:/mavenRepository</entry>
+<entry key="author">gutao</entry>
+</properties>
