@@ -1,4 +1,11 @@
 package TestIO.FileIO;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * 
  * 描述：描述IO流
@@ -40,6 +47,33 @@ package TestIO.FileIO;
  */
 public class FileIO {
     public static void main(String[] args) {
-		
+    	//建立联系File对象
+		File file = new File("F:/JavaIO/gutao.txt");
+		InputStream in = null;
+		try {
+			//选择流
+			in = new FileInputStream(file);
+			//操作不断读取，缓冲数组
+			byte[] b = new byte[10];
+			int len = 0;//接受实际读取的大小
+			
+			while((len=in.read(b)) != -1){
+				String str = new String(b,0,len);
+				System.out.println(str);
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("文件不存在");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("读取文件失败");
+			e.printStackTrace();
+		}finally{
+			try {
+				in.close();
+			} catch (IOException e) {
+				System.out.println("文件无法关闭");
+				e.printStackTrace();
+			}
+		}
 	}
 }
