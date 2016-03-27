@@ -23,6 +23,7 @@ public class DealFileUtils {
      public static void main(String[] args) {
 		//SetProperties();
 		listAllFile();
+		//列出所有被删除的文件
 		for (String string : names) {
 			System.out.println(string);
 		}
@@ -38,6 +39,7 @@ public class DealFileUtils {
     	 Properties properties = new Properties();
     	 Properties properties2 = new Properties();
     	 try {
+    		 //加载配置文件，这里写了两种方式，加载后缀不一样的配置文件
 			properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("TestIO/Dir.properties"));
 		    properties2.loadFromXML(Thread.currentThread().getContextClassLoader().getResourceAsStream("TestIO/Dir.xml"));
     	    //System.out.println("properties:"+"author:"+properties.get("author")+","+"dir:"+properties.get("dir"));
