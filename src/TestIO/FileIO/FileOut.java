@@ -19,13 +19,14 @@ public class FileOut {
  		File file = new File("F:/JavaIO/gutao.txt");
  		OutputStream out = null;
         try {
-        	 //选择流
+        	 //选择流,以追加的形式导出文件，这里第二个参数必须为true，否则为false默认为false
 			 out = new FileOutputStream(file,true);
 			 //写入字符串
-			 String string = "gutao ai nibei\r\n";
+			 String string = " gutao ai nibei\r\n";
 			 //操作不断写入，缓冲数组
 			 byte[] b = string.getBytes();
 			 out.write(b, 0, b.length);
+			 out.flush();//强制刷新输出
 		} catch (FileNotFoundException e) {
 			System.out.println("文件找不到");
 			e.printStackTrace();
