@@ -33,7 +33,10 @@ public class TestFileCopy {
         //这里只是为了展示一下字节流到字符流的转换通过inputStreamReader
         //建立连接
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(srcPath)),"gbk"));
-        //写出的时候进行转流，字节流转换成字符流可以进行转码，读入流是解码，写出流失编码，FileOutputStream(file,boolean)第二个参数是用来判断新内容是追加还是覆盖
+        //写出的时候进行转流，字节流转换成字符流可以进行转码，读入流是解码（InputStreamReader）,
+        //写出流编码（OutputStreamWriter）,
+        //FileOutputStream(file,boolean)
+        //第二个参数是用来判断新内容是追加还是覆盖
         //true是追加，false是覆盖，默认是覆盖
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(destPath),true),"utf-8"));
         String string = null;
