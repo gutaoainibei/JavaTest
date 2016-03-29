@@ -44,24 +44,16 @@ import TestIO.FileUtils;
  */
 public class CopyFile {
 	static Logger logger = Logger.getLogger(CopyFile.class);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
     	
 	    String srcpath = "F:/JavaIO/1.jpg";	
-	    String destpath = "F:/JavaIO/lm/2.jpg";
-	    String srcFolder = "F:/JavaIO/gutao";
-	    String destFolder = "F:/JavaIO/lm";
-	    File filesrc = new File("F:/JavaIO/gutao");
-	    File filedest = new File("F:/JavaIO/lm");
-	    try {
-			FileUtils.CopyFolder(filesrc, filedest);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-//	    try {
-//			FileUtils.CopyFile(srcpath, destpath);
-//		} catch (IOException e) {
-//			System.out.println("文件读取异常");
-//			e.printStackTrace();
-//		}
+	    String destpath = "F:/JavaIO/lm/4.jpg";
+//	    String srcFolder = "F:/JavaIO/gutao";
+//	    String destFolder = "F:/JavaIO/li";
+//	    File filesrc = new File(srcFolder);
+//	    File filedest = new File(destFolder);
+//		FileUtils.CopyFolder(filesrc, filedest);
+        FileUtils.CopyFile(srcpath, destpath);
+	
 	}
 }

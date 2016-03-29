@@ -1,5 +1,7 @@
 package TestIO;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
 import org.apache.log4j.Logger;
 /**
  * 描述：文件操作：拷贝
@@ -53,8 +56,8 @@ public class FileUtils {
 	    //写出流
 	    OutputStream out = null;
 		//建立读取联系
-		in = new FileInputStream(srcFile);
-		out = new FileOutputStream(destFile);
+		in = new BufferedInputStream(new FileInputStream(srcFile));
+		out = new BufferedOutputStream(new FileOutputStream(destFile));
 	    //读取长度
 	    int len = 0;
 	    //每次读入的字节数
