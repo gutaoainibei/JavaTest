@@ -58,7 +58,7 @@ public class FileIO {
 			int len = 0;//接受实际读取的大小
 			
 			while((len=in.read(b)) != -1){
-				String str = new String(b,0,len);
+				String str = new String(b,0,len,"gbk");
 				System.out.println(str);
 			}
 		} catch (FileNotFoundException e) {
