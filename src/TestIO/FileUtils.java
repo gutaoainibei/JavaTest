@@ -2,6 +2,7 @@ package TestIO;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,7 +21,7 @@ import org.apache.log4j.Logger;
 public class FileUtils {
 	static Logger logger = Logger.getLogger(FileUtils.class);
 	/**
-	 * 描述：拷贝文件
+	 * 描述：按路径拷贝文件
 	 * @author gt
 	 * @created 2016年3月28日 上午11:04:06
 	 * @since 
@@ -66,11 +67,10 @@ public class FileUtils {
 				out.write(b, 0, len);
 		}
 		out.flush();
-		out.close();
-		in.close();
+		FileUtils.Close(in,out);
     }
     /**
-     * 描述：
+     * 描述：按路径拷贝文件夹
      * @author gt
      * @created 2016年3月28日 下午1:54:21
      * @since 
@@ -90,7 +90,7 @@ public class FileUtils {
         CopyFolder(srcFolder, destFolder);
     }
     /**
-     * 描述：
+     * 描述：拷贝文件夹
      * @author gt
      * @created 2016年3月28日 下午1:52:08
      * @since 
@@ -117,6 +117,46 @@ public class FileUtils {
 			}
 			//拷贝文件
 			CopyFile(child_file, new File(destFolder, child_file.getName()));
+		}
+    }
+    /**
+     * 
+     * 描述：关闭工具方法
+     *      可变参数：... 只能是形参最后一个参数,处理方式和数组一致
+     *      
+     *      The variable argument type Closeable of 
+     *      the method CloseAll must be the last parameter
+     * @author gt
+     * @created 2016年4月1日 上午12:10:55
+     * @since 
+     * @param io
+     */
+    public static void Close(Closeable ... io){
+    	for (Closeable closeable : io) {
+			try {
+				if(null != closeable){
+				 closeable.close();
+				}
+				} catch (Exception e) {
+			}
+		}
+    }
+    /**
+     * 
+     * 描述：使用泛型方法来实现关闭
+     * @author gt
+     * @created 2016年4月1日 上午12:40:59
+     * @since 
+     * @param io
+     */
+    public static <T extends Closeable> void CloseAll(T ... io){
+    	for (Closeable t : io) {
+			try {
+				if(null != t){
+				t.close();
+				}
+			} catch (Exception e) {
+			}
 		}
     }
 }

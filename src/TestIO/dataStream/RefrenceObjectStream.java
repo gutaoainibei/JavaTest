@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 
 import TestIO.dataStream.model.Employee;
 import TestIO.dataStream.model.NoSerializable;
@@ -49,6 +50,9 @@ public class RefrenceObjectStream {
         	System.out.println(employee.getName());
         	System.out.println(employee.getSalary());
         }
+        object = objectInputStream.readObject();
+        int[] arr= (int[])object;
+        System.out.println(Arrays.toString(arr));
         objectInputStream.close();
     }
     /**
@@ -62,8 +66,10 @@ public class RefrenceObjectStream {
      */
     public static void write(String destPath) throws IOException{
     	File file = new File(destPath);
-		ObjectOutputStream ObjectOutputStream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file,true)));
+    	int[] arr = {2,1,3,5};
+		ObjectOutputStream ObjectOutputStream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
 	    ObjectOutputStream.writeObject(new Employee("gutao", 2000.00));
+	    ObjectOutputStream.writeObject(arr);
 	    ObjectOutputStream.flush();
 	    ObjectOutputStream.close();
     }
