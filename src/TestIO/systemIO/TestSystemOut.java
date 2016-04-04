@@ -1,12 +1,10 @@
 package TestIO.systemIO;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
-import TestIO.FileUtils;
 
 /**
  * 
@@ -17,7 +15,21 @@ import TestIO.FileUtils;
  */
 public class TestSystemOut {
     public static void main(String[] args) throws FileNotFoundException {
-		System.out.println("test");
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("请输入：");
+		String string = scanner.nextLine();
+		System.out.println(string);
+	}
+    /**
+     * 
+     * 描述：测试输出流，System.out是标准输出流
+     * @author gt
+     * @throws FileNotFoundException 
+     * @created 2016年4月4日 下午10:40:50
+     * @since
+     */
+    public static void Test1() throws FileNotFoundException{
+    	System.out.println("test");
 		PrintStream ps = System.out;
 		ps.println(false);
 		
@@ -27,5 +39,5 @@ public class TestSystemOut {
 		ps.println("gutao ai ni");
 		ps.flush();
 		ps.close();
-	}
+    }
 }
