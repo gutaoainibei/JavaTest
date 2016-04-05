@@ -1,7 +1,14 @@
 package TestIO.systemIO;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -14,12 +21,55 @@ import java.util.Scanner;
  * @since
  */
 public class TestSystemOut {
-    public static void main(String[] args) throws FileNotFoundException {
-		Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+		//TestScanner();
+    	//System();
+    	//testSystemIn();
+    	testSystemSetOut();
+	}
+    public static void testSystemIn() throws IOException{
+    	InputStream in = System.in;
+    	BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+    	System.out.println("请输入");
+    	System.out.println(reader.readLine());
+    }
+    public static void testSystemSetOut() throws FileNotFoundException{
+    	System.setOut(new PrintStream(new FileOutputStream("F:/JavaIO/systemio.txt",true),true));
+        System.out.println("ai");
+        System.out.println("nibei");
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out),true));
+        System.out.println("gutao ai nibei");
+    }
+    /**
+     * 
+     * 描述：测试标准流
+     * @author gt
+     * @created 2016年4月5日 下午11:42:21
+     * @since
+     */
+    public static void System(){
+    	System.out.println("gutao");
+    	System.err.println("ai");//标准错误输出流
+    	System.out.println("nibei");//标准输出流
+    }
+    /**
+     * 
+     * 描述：输入流测试
+     * @author gt
+     * @throws FileNotFoundException 
+     * @created 2016年4月5日 下午11:32:14
+     * @since
+     */
+    public static void TestScanner() throws FileNotFoundException{
+    	Scanner scanner = new Scanner(System.in);
 		System.out.print("请输入：");
 		String string = scanner.nextLine();
 		System.out.println(string);
-	}
+		File file = new File("F:/JavaIO/systemio.txt");
+		//Scanner可以通过file，inputstream，reader进行构造
+		scanner = new Scanner(new InputStreamReader(new FileInputStream(file)));
+        System.out.println(scanner.nextLine());
+    }
     /**
      * 
      * 描述：测试输出流，System.out是标准输出流
