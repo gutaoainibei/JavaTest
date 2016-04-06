@@ -33,6 +33,14 @@ public class TestSystemOut {
     	System.out.println("请输入");
     	System.out.println(reader.readLine());
     }
+    /**
+     * 
+     * 描述：标准输出流重定向
+     * @author gt
+     * @created 2016年4月5日 下午11:57:44
+     * @since 
+     * @throws FileNotFoundException
+     */
     public static void testSystemSetOut() throws FileNotFoundException{
     	System.setOut(new PrintStream(new FileOutputStream("F:/JavaIO/systemio.txt",true),true));
         System.out.println("ai");

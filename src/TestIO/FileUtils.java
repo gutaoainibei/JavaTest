@@ -99,6 +99,10 @@ public class FileUtils {
      * @throws IOException
      */
     public static void CopyFolder(File srcFolder,File destFolder) throws IOException{
+    	if(destFolder.getAbsolutePath().contains(srcFolder.getAbsolutePath())){
+    		System.out.println("父文件夹不能拷到子文件夹下");
+    		return;
+    	}
     	if(srcFolder.isFile()){
         	throw new IOException("文件夹拷贝，源文件不能是文件");
         } 
@@ -111,12 +115,14 @@ public class FileUtils {
     	destFolder.mkdirs();
     	//遍历你要拷贝的文件夹下的子文件
         for (File child_file : srcFolder.listFiles()) {
+        	
 			//如果是文件夹，则继续遍历
         	if(!child_file.isFile()){
 				CopyFolder(child_file, destFolder);
+			}else if (child_file.isDirectory()) {
+				//拷贝文件
+				CopyFile(child_file, new File(destFolder, child_file.getName()));
 			}
-			//拷贝文件
-			CopyFile(child_file, new File(destFolder, child_file.getName()));
 		}
     }
     /**

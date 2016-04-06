@@ -46,14 +46,14 @@ public class CopyFile {
 	static Logger logger = Logger.getLogger(CopyFile.class);
     public static void main(String[] args) throws IOException {
     	
-	    String srcpath = "F:/JavaIO/1.jpg";	
-	    String destpath = "F:/JavaIO/lm/4.jpg";
-//	    String srcFolder = "F:/JavaIO/gutao";
-//	    String destFolder = "F:/JavaIO/li";
-//	    File filesrc = new File(srcFolder);
-//	    File filedest = new File(destFolder);
+//	    String srcpath = "F:/JavaIO/1.jpg";	
+//	    String destpath = "F:/JavaIO/lm/4.jpg";
+	    String srcFolder = "F:/JavaIO/gutao";
+	    String destFolder = "F:/JavaIO/lm";
+	    File filesrc = new File(srcFolder);
+	    File filedest = new File(destFolder);
 //		FileUtils.CopyFolder(filesrc, filedest);
-        FileUtils.CopyFile(srcpath, destpath);
-	
+//        FileUtils.CopyFile(srcpath, destpath);
+	   FileUtils.CopyFolder(filesrc, filedest);
 	}
 }
