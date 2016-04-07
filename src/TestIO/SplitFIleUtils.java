@@ -36,7 +36,7 @@ public class SplitFIleUtils {
      public SplitFIleUtils(String filePath){
     	 this(filePath,1024L);
      }
-     public SplitFIleUtils(String filePath,Long blockSize){
+     public SplitFIleUtils(String filePath,long blockSize){
     	 this();
     	 this.filePath = filePath;
     	 this.blockSize = blockSize;
@@ -50,12 +50,12 @@ public class SplitFIleUtils {
       * @since
       */
      public void init(){
-    	 File file = null;
-    	 if(null == filePath && !((file=new File(filePath)).exists())){
+    	 File file = new File(filePath);
+    	 if(null == filePath && !(file.exists())){
     		 System.out.println("文件不存在！");  
     		 return;
     	 }
-    	 if(!file.isFile()){
+    	 if(file.isDirectory()){
     		 System.out.println("分割目标不是文件");
     		 return;
     	 }
@@ -85,13 +85,24 @@ public class SplitFIleUtils {
 				//最后一块的实际大小
 				autualBlockSize = length-(size-1)*blockSize;
 			}
-			beginIndex += (size-1)*blockSize;
-			SplitDetail(destPath+"/"+fileName+"block-"+i,i,beginIndex,autualBlockSize);
+			beginIndex = i*blockSize;
+			SplitDetail(destPath+"/"+fileName+"block-"+i,beginIndex,autualBlockSize);
 		 }
     	 
      }
-     public void SplitDetail(String destBlockPath,int index,long beginIndex,long autualBlockSize) throws IOException{
-    	   File file = new File(fileName);
+     /**
+      * 
+      * 描述：实现分割
+      * @author gt
+      * @created 2016年4月8日 上午12:01:04
+      * @since 
+      * @param destBlockPath 目标块的路径
+      * @param beginIndex  读取的起始位置
+      * @param autualBlockSize 实际块的大小
+      * @throws IOException
+      */
+     public void SplitDetail(String destBlockPath,long beginIndex,long autualBlockSize) throws IOException{
+    	   File file = new File(this.filePath);
     	   RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
     	   randomAccessFile.seek(beginIndex);
     	   byte[] flush = new byte[1024];
@@ -103,10 +114,13 @@ public class SplitFIleUtils {
         	    	autualBlockSize -= len;
         	    }else {
         	    	bufferedStream.write(flush, 0, (int)autualBlockSize);
+        	    	break;
 				}
-                	
  		   }
-           
            FileUtils.Close(randomAccessFile,bufferedStream);
+     }
+     public static void main(String[] args) throws IOException {
+		SplitFIleUtils splitFIleUtils = new SplitFIleUtils("F:/JavaIO/gutao.txt", 100);
+	    splitFIleUtils.Split("F:/JavaIO/ming");
      }
 }
