@@ -76,6 +76,11 @@ public class SplitFIleUtils {
      * @throws IOException 
       */
      public void Split(String destPath) throws IOException{
+    	 File fileDirectory = new File(destPath);
+    	 if(!(fileDirectory.isDirectory())){
+    		 System.out.println("目标目录不存在");
+    		 return;
+    	 }
     	 long  autualBlockSize = blockSize;
     	 long  beginIndex = 0L;
     	 for (int i = 0; i < size; i++) {
@@ -120,7 +125,7 @@ public class SplitFIleUtils {
            FileUtils.Close(randomAccessFile,bufferedStream);
      }
      public static void main(String[] args) throws IOException {
-		SplitFIleUtils splitFIleUtils = new SplitFIleUtils("F:/JavaIO/gutao.txt", 100);
-	    splitFIleUtils.Split("F:/JavaIO/ming");
+		SplitFIleUtils splitFIleUtils = new SplitFIleUtils("F:/JavaIO/lm/1.jpg", 5000);
+	    splitFIleUtils.Split("F:/JavaIO/lm");
      }
 }
