@@ -87,7 +87,7 @@ public class RefrenceObjectStream {
         Object object = objectInputStream.readObject();
         if(object instanceof NoSerializable){
         	NoSerializable no = (NoSerializable) object;
-        	//这里那么回为空，因为name属性被transient修饰之后就不会再被序列化
+        	//这里那name为空，因为name属性被transient修饰之后就不会再被序列化
         	System.out.println(no.getName());
         	System.out.println(no.getAddress());
         }
