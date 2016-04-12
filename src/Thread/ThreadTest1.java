@@ -17,8 +17,11 @@ public class ThreadTest1 implements Runnable{
 		}
 	}
    public static void main(String[] args) {
+	//创建实际线程
 	ThreadTest1 test1 = new ThreadTest1();
+	//创建静态代理
 	Thread thread = new Thread(test1);
+	//启动线程
 	thread.start();
 	for (int i = 10; i > 0; i--) {
 		System.out.println("倒计时"+i);
