@@ -14,10 +14,15 @@ package Thread.SynchronizedTest;
  */
 public class SimpleStyleThread {
      public static void main(String[] args) {
+    	 
 	    JvmThread jvm1 = new JvmThread(1000);
 	    JvmThread jvm2 = new JvmThread(500);
 	    jvm1.start();
 	    jvm2.start();
+//    	 virtualJvm v1 = virtualJvm.getInstance(1000);
+//    	 virtualJvm v2 = virtualJvm.getInstance(1000);
+//    	 System.out.println(v1);
+//    	 System.out.println(v2);
      }
 }
 /**
@@ -59,13 +64,17 @@ class virtualJvm{
 	 * @return
 	 */
 	public static virtualJvm getInstance(long time){
-		if (jvm == null) {
-			try {
-				Thread.sleep(time);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		if (null == jvm) {//这一层为空判断是为了提高效率
+			synchronized (virtualJvm.class) {
+				try {
+					Thread.sleep(time);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				if(null == jvm){//这一层判断是为了安全，因为可能会存在延时，这样几个线程可能都已经通过了第一层判断，为了还能够保证一致，这里用了双重验证
+				jvm = new virtualJvm();
+				}
 			}
-			jvm = new virtualJvm();
 		}
 		return jvm;
 	}
