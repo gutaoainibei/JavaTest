@@ -21,10 +21,10 @@ import java.net.UnknownHostException;
  *   1）、先封装
  *   2）、先拆封
  * 相关类：
- *     InetAddress InetSocketAddress
- *     URL  URI
- *     TCP: ServerSocket Socket
- *     UDP: DatagramSocket DatagramPacket
+ *     InetAddress InetSocketAddress       //这是网络层，ip协议应用类
+ *     URL  URI                            //这是应用层，http等协议
+ *     TCP: ServerSocket Socket            //传输层，建立在网路层之上
+ *     UDP: DatagramSocket DatagramPacket  //传输层建立在网络层之上
  *     应用层
  *     表示层           应用层（http或者其他）
  *     会话层

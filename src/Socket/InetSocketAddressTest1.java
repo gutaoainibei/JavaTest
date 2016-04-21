@@ -18,5 +18,7 @@ public class InetSocketAddressTest1 {
 	    InetAddress add1 = address.getAddress();
 	    System.out.println(add1.getHostAddress());
 	    System.out.println(add1.getHostName());
+	    address = new InetSocketAddress(1111);
+	    System.out.println(address.getAddress());
 	}
 }
