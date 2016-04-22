@@ -31,6 +31,7 @@ public class Server {
 //		int len = packet.getLength();
 //		//分析数据
 //		System.out.println(new String(pdata,0,len));
+		System.out.println(packet.getAddress()+":"+packet.getPort());
 		double num = convert(packet.getData());
 		//关闭服务端
 		System.out.println(num);

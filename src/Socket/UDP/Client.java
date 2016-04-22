@@ -17,8 +17,8 @@ import java.net.SocketException;
  */
 public class Client {
     public static void main(String[] args) throws IOException {
-		//创建客户端+端口
-    	DatagramSocket client = new DatagramSocket(6666);
+		//创建客户端+端口,这里客户端端口需要指定，也可以不指定,如果不指定，就会任意分配可用的接口
+    	DatagramSocket client = new DatagramSocket();
     	//准备数据
 //    	String msg = "顾涛爱倪贝";
 //    	byte[] data = msg.getBytes();
