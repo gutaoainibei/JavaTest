@@ -81,7 +81,6 @@ public class MultiServer {
 				e.printStackTrace();
 			}
 	    }
-	    
 	    /**
 	     * 描述：向客户端发送信息
 	     * @author gt
