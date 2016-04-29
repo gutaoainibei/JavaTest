@@ -168,21 +168,9 @@ public class MyServer {
 		    StringBuffer responseContext = new StringBuffer();
 		    responseContext.append("<html><head><title>响应实例</title>"+
 		    "</head><body></body><table border='1'><tr><th>Month</th><th>顾涛</th></tr><tr><td>January</td><td>$100</td></tr></table>");
-    	    StringBuffer response = new StringBuffer();
-    	    //1.http协议版本 状态码  描述
-    	    response.append("HTTP/1.1").append(BLANK).append("200").append(BLANK).append("gutao success");
-    	    //2.头信息（Response Head）
-    	    response.append("Server:gt Server/1.0.0").append(CRLF);
-    	    response.append("Date:").append(new Date()).append(CRLF);
-    	    response.append("Content-type:text/html;charset=UTF-8").append(CRLF);
-    	    response.append("Content-Length").append(responseContext.toString().getBytes().length).append(CRLF);
-    	    response.append(CRLF);
-    	    response.append(responseContext);
-    	    
-		    BufferedOutputStream out = new BufferedOutputStream(simple_socket.getOutputStream());
-		    out.write(response.toString().getBytes());
-		    out.flush();
-		    out.close();
+		    Response response = new Response(simple_socket.getOutputStream());
+		    response.print(responseContext.toString());
+		    response.SendResponse(200);
     	} catch (IOException e) {
 			e.printStackTrace();
 		}
