@@ -1,13 +1,10 @@
 package Socket.server;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Date;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * 
@@ -170,7 +167,7 @@ public class MyServer {
 		    "</head><body></body><table border='1'><tr><th>Month</th><th>顾涛</th></tr><tr><td>January</td><td>$100</td></tr></table>");
 		    Response response = new Response(simple_socket.getOutputStream());
 		    response.print(responseContext.toString());
-		    response.SendResponse(200);
+		    response.SendResponse(404);
     	} catch (IOException e) {
 			e.printStackTrace();
 		}

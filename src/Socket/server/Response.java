@@ -96,10 +96,10 @@ public class Response {
 		  }
 		  if(code == 500) {
 			  content = new StringBuffer();
-			  content.append("NO FOUND");
+			  content.append("SERVER ERROR");
 		  }else if (code == 404) {
 			  content = new StringBuffer();
-			  content.append("SERVER ERROR");
+			  content.append("NO FOUND");
 		  }
 		  CreateHeader(code, unicode);
 		  try {
