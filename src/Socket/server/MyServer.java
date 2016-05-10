@@ -1,11 +1,8 @@
 package Socket.server;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-
 /**
  * 
  * 描述：实现自己简单服务器
@@ -143,7 +140,7 @@ public class MyServer {
     private void receive(){
     	try {
 			Socket simple_socket = server.accept();
-			 StringBuffer stringBuffer = new StringBuffer();
+			StringBuffer stringBuffer = new StringBuffer();
 			//如果是post方式这里就是不对的，这里我们是按行在读，但是post方式会有空行
 			//所以还是用字节流比较好这里
 //			BufferedReader reader = new BufferedReader(new InputStreamReader(simple_socket.getInputStream()));
@@ -156,12 +153,14 @@ public class MyServer {
 //					break;
 //				}
 //			}
-			BufferedInputStream inputStream = new BufferedInputStream(simple_socket.getInputStream());
-			byte[] flush = new byte[1024];
-			int len = inputStream.read(flush);
-		    System.out.println("获取到的请求信息：");
-		    System.out.println(new String(flush,0,len));
+//			BufferedInputStream inputStream = new BufferedInputStream(simple_socket.getInputStream());
+//			byte[] flush = new byte[1024];
+//			int len = inputStream.read(flush);
+//		    System.out.println("获取到的请求信息：");
+//		    System.out.println(new String(flush,0,len));
 		    
+		    Request request = new Request(simple_socket.getInputStream());
+		    System.out.println(request.toString());
 		    StringBuffer responseContext = new StringBuffer();
 		    responseContext.append("<html><head><title>响应实例</title>"+
 		    "</head><body></body><table border='1'><tr><th>Month</th><th>顾涛</th></tr><tr><td>January</td><td>$100</td></tr></table>");

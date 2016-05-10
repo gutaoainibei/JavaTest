@@ -21,6 +21,7 @@ public class Server {
     public static void main(String[] args) throws IOException {
     	//创建服务端
 		DatagramSocket server = new DatagramSocket(8888); 
+		while (true) {
 	    //准备容器接收数据
 		byte[] data = new byte[1024];
 	    //封装成包DatagramPacket
@@ -35,7 +36,7 @@ public class Server {
 		double num = convert(packet.getData());
 		//关闭服务端
 		System.out.println(num);
-		server.close();
+		}
     }
     public static double convert(byte[] data) throws IOException{
     	ByteArrayInputStream in = new ByteArrayInputStream(data);

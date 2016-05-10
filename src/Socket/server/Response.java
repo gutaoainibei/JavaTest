@@ -6,8 +6,6 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Date;
 import TestIO.FileUtils;
-
-
 /**
  * 
  * 描述：封装相应类
