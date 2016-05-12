@@ -2,9 +2,17 @@ package Socket.server;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
+
+import oracle.net.aso.s;
+
+import com.mysql.fabric.xmlrpc.base.Array;
+import com.sun.crypto.provider.RSACipher;
 
 import sun.security.util.Length;
 
@@ -49,7 +57,7 @@ public class Request {
 		}
 		getParmerString();
 	}
-	public void getParmerString(){
+	private void getParmerString(){
 		if (null==requestString||(requestString=requestString.trim()).equals("")) {
 			return;
 		} 
@@ -69,21 +77,89 @@ public class Request {
 		String urlString = firstString.substring(index, firstString.indexOf("HTTP/")).trim();
 		if (method.equalsIgnoreCase("post")) {
 			this.url = urlString;//如果是post请求这里就是url不会有参数，参数应该在正文部分，所以这里这样写
+		    paramerString = requestString.substring(requestString.lastIndexOf(CRLF)).trim();
 		} else if(method.equalsIgnoreCase("get")){
-            if(urlString.contains("?")){
+            if(urlString.contains("?")){//这里url的全称，/index.html?name=gutao&age=21
             	String[] paramerArray = urlString.split("\\?");
-            	this.url = paramerArray[0];
-            	paramerString = paramerArray[1];
+            	this.url = paramerArray[0];//获取到？前面的url:/index.html
+            	paramerString = paramerArray[1];//获取到传到后台的参数:name=gutao&age=21
             }else{
             	this.url = urlString;
             }
 		}
+		if (paramerString.equals("")) {
+			return ;
+		}
+		initParamerValues(paramerString);
 	}
-	@Override
-	public String toString() {
-		return "Request [method=" + method + ", url=" + url
-				+ ", parmerStringMap=" + parmerStringMap + ", requestString="
-				+ requestString + ", in=" + in + "]";
+	/**
+	 * 
+	 * 描述：初始化请求参数格式，变成Map格式
+	 * @author gt
+	 * @created 2016年5月12日 下午3:43:36
+	 * @since 
+	 * @param paramerString
+	 */
+	private void initParamerValues(String paramerString){
+		StringTokenizer stringTokenizer = new StringTokenizer(paramerString,"&");
+		while(stringTokenizer.hasMoreTokens()){
+			String keyvalue = stringTokenizer.nextToken();
+			String[] keyvalues = keyvalue.split("=");
+			if(keyvalues.length == 1){//这里考虑如果没有传值过来怎么办
+				keyvalues = Arrays.copyOf(keyvalues, 2);
+			}
+			String key = keyvalues[0].trim();
+			String value = null == keyvalues[1] ? null : keyvalues[1].trim();//判断值是否为空
+			if (!parmerStringMap.containsKey(key)) {
+				parmerStringMap.put(key, new ArrayList<String>());
+			} 
+			List<String> valuesList = parmerStringMap.get(key);
+			valuesList.add(value);
+		}
 	}
-	
+	/**
+	 * 
+	 * 描述：获取一个key有多个值的传参，如复选框
+	 * @author gt
+	 * @created 2016年5月12日 下午3:44:44
+	 * @since 
+	 * @param name
+	 * @return
+	 */
+	public String[] getParamerValues(String name){
+		  List<String> values = parmerStringMap.get(name);
+		  if (null == values) {
+			 return null;
+		} else {
+             return values.toArray(new String[0]);
+		}
+	}
+	/**
+	 * 
+	 * 描述：获取单个值
+	 * @author gt
+	 * @created 2016年5月12日 下午3:45:17
+	 * @since 
+	 * @param name
+	 * @return
+	 */
+	public String getParamerValue(String name){
+		String[] values = getParamerValues(name);
+		if(values == null){
+			return null;
+		}else {
+			return values[0];
+		}
+	}
+	/**
+	 * 
+	 * 描述：获取用户的url
+	 * @author gt
+	 * @created 2016年5月12日 下午3:49:01
+	 * @since 
+	 * @return
+	 */
+	public String getUrl() {
+		return url;
+	}
 }

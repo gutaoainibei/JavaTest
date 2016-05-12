@@ -160,13 +160,12 @@ public class MyServer {
 //		    System.out.println(new String(flush,0,len));
 		    
 		    Request request = new Request(simple_socket.getInputStream());
-		    System.out.println(request.toString());
+		    System.out.println(request.getUrl());
 		    StringBuffer responseContext = new StringBuffer();
-		    responseContext.append("<html><head><title>响应实例</title>"+
-		    "</head><body></body><table border='1'><tr><th>Month</th><th>顾涛</th></tr><tr><td>January</td><td>$100</td></tr></table>");
+		    responseContext.append("欢迎:"+request.getParamerValue("name"));
 		    Response response = new Response(simple_socket.getOutputStream());
 		    response.print(responseContext.toString());
-		    response.SendResponse(404);
+		    response.SendResponse(200);
     	} catch (IOException e) {
 			e.printStackTrace();
 		}
