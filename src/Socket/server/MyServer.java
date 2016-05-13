@@ -2,9 +2,7 @@ package Socket.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 /**
- * 
  * 描述：实现自己简单服务器
  *    协议
  *    1）应用层HTTP FTP TELNET SNMP DNS
@@ -111,9 +109,10 @@ public class MyServer {
     private ServerSocket server;
     private static final String CRLF="\r\n";
     private static final String BLANK=" ";
+    private boolean runningAble = true;
     public static void main(String[] args) {
 		MyServer serverTest = new MyServer();
-		serverTest.start();
+		serverTest.start(8888);
 	}
     /**
      * 
@@ -122,9 +121,9 @@ public class MyServer {
      * @created 2016年4月25日 下午11:37:53
      * @since
      */
-    private void start(){
+    private void start(int port){
     	try {
-			server = new ServerSocket(8888);
+			server = new ServerSocket(port);
 			this.receive();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -139,34 +138,13 @@ public class MyServer {
      */
     private void receive(){
     	try {
-			Socket simple_socket = server.accept();
-			StringBuffer stringBuffer = new StringBuffer();
-			//如果是post方式这里就是不对的，这里我们是按行在读，但是post方式会有空行
-			//所以还是用字节流比较好这里
-//			BufferedReader reader = new BufferedReader(new InputStreamReader(simple_socket.getInputStream()));
-//		    
-//			String msg = "";   
-//		    while ((msg=reader.readLine()).length()>0) {
-//				stringBuffer.append(msg);
-//				stringBuffer.append("\r\n");
-//				if (msg==null) {
-//					break;
-//				}
-//			}
-//			BufferedInputStream inputStream = new BufferedInputStream(simple_socket.getInputStream());
-//			byte[] flush = new byte[1024];
-//			int len = inputStream.read(flush);
-//		    System.out.println("获取到的请求信息：");
-//		    System.out.println(new String(flush,0,len));
-		    
-		    Request request = new Request(simple_socket.getInputStream());
-		    System.out.println(request.getUrl());
-		    StringBuffer responseContext = new StringBuffer();
-		    responseContext.append("欢迎:"+request.getParamerValue("name"));
-		    Response response = new Response(simple_socket.getOutputStream());
-		    response.print(responseContext.toString());
-		    response.SendResponse(200);
+    		while (runningAble) {
+    			//为每一个客户请求new一个线程处理，这里加入了Dispatcher转发类
+    			//Dispatcher是一个转发线程类，对每一个请求，new一个Servlet处理
+    			new Thread(new Dispatcher(server.accept())).start();
+			}
     	} catch (IOException e) {
+    		stop();
 			e.printStackTrace();
 		}
     }
@@ -178,6 +156,11 @@ public class MyServer {
      * @since
      */
     private void stop(){
-    	
+    	runningAble = false;
+    	try {
+			server.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 }
