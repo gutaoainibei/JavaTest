@@ -17,7 +17,7 @@ public class Dispatcher implements Runnable{
     private Request request;
     //客户端响应请求实例
     private Response response;
-    //
+    //相应码，就是我们前台得到的200，404，500之类的
     private int code;
     public Dispatcher(Socket client){
     	this.client = client;

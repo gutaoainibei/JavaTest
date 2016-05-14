@@ -2,6 +2,8 @@ package Socket.server;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -51,6 +53,7 @@ public class Request {
 		try {
 			len = in.read(data);
 			requestString = new String(data,0,len);
+			System.out.println(requestString);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
@@ -78,11 +81,13 @@ public class Request {
 		if (method.equalsIgnoreCase("post")) {
 			this.url = urlString;//如果是post请求这里就是url不会有参数，参数应该在正文部分，所以这里这样写
 		    paramerString = requestString.substring(requestString.lastIndexOf(CRLF)).trim();
+        	System.out.println("post方式获得参数字符串："+paramerString);
 		} else if(method.equalsIgnoreCase("get")){
             if(urlString.contains("?")){//这里url的全称，/index.html?name=gutao&age=21
             	String[] paramerArray = urlString.split("\\?");
             	this.url = paramerArray[0];//获取到？前面的url:/index.html
             	paramerString = paramerArray[1];//获取到传到后台的参数:name=gutao&age=21
+            	System.out.println("get方式获得参数字符串："+paramerString);
             }else{
             	this.url = urlString;
             }
@@ -109,7 +114,7 @@ public class Request {
 				keyvalues = Arrays.copyOf(keyvalues, 2);
 			}
 			String key = keyvalues[0].trim();
-			String value = null == keyvalues[1] ? null : keyvalues[1].trim();//判断值是否为空
+			String value = null == keyvalues[1] ? null : Decode(keyvalues[1].trim(),"gbk");//判断值是否为空
 			if (!parmerStringMap.containsKey(key)) {
 				parmerStringMap.put(key, new ArrayList<String>());
 			} 
@@ -161,5 +166,24 @@ public class Request {
 	 */
 	public String getUrl() {
 		return url;
+	}
+	/**
+	 * 
+	 * 描述：
+	 * @author gt
+	 * @created 2016年5月14日 下午10:24:22
+	 * @since 
+	 * @param value 原始字符串
+	 * @param code 编码 如gbk，utf-8等
+	 * @return
+	 */
+	public String Decode(String value, String code){
+		try {
+			return URLDecoder.decode(value, code);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 }
