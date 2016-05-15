@@ -38,8 +38,12 @@ public class Dispatcher implements Runnable{
     }
 	@Override
 	public void run() {
-		Servlet servlet = new Servlet();
-		servlet.service(request, response);
+		Servlet servlet = Webapp.getServlet(request.getUrl());
+		if (servlet == null) {
+			code = 404;
+		} else {
+			servlet.service(request, response);
+		}
 		response.SendResponse(code);
 	}
 

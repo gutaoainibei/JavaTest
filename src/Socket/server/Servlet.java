@@ -6,11 +6,15 @@ package Socket.server;
  * @created 2016年5月13日 下午1:36:07
  * @since
  */
-public class Servlet {
+public abstract class Servlet {
      public void service(Request request , Response response){
-		    System.out.println(request.getUrl());
-		    StringBuffer responseContext = new StringBuffer();
-		    responseContext.append("欢迎:"+request.getParamerValue("name"));
-		    response.print(responseContext.toString());
+		    if(request.getMethod().equalsIgnoreCase("get")){
+		    	doGet(request, response);
+		    }else if (request.getMethod().equalsIgnoreCase("post")) {
+				doPost(request, response);
+			}
      }
+     public abstract void doGet(Request request , Response response);
+     
+     public abstract void doPost(Request request , Response response);
 }

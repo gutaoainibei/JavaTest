@@ -167,6 +167,17 @@ public class Request {
 	public String getUrl() {
 		return url;
 	}
+	
+	/**
+	 * 描述：获取请求方式
+	 * @author gt
+	 * @created 2016年5月15日 下午8:08:26
+	 * @since 
+	 * @return
+	 */
+	public String getMethod() {
+		return method;
+	}
 	/**
 	 * 
 	 * 描述：
