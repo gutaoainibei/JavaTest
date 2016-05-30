@@ -38,8 +38,6 @@ import java.net.ServerSocket;
  *    3)响应正文(Response Content)
  *   
  *    常见类型:
- *    
- *    
  *    头字段                                    定义
       Accept               客户端可以处理的媒体类型（MIME-Type），按优先级排序；在一个以逗号为分隔的列表中，可以定义多种类型和使用通配符
       Accept-Language      客户端支持的自然语言列表
