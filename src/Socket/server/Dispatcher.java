@@ -38,7 +38,16 @@ public class Dispatcher implements Runnable{
     }
 	@Override
 	public void run() {
-		Servlet servlet = Webapp.getServlet(request.getUrl());
+		Servlet servlet = null;
+		try {
+			servlet = Webapp.getServlet(request.getUrl());
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		if (servlet == null) {
 			code = 404;
 		} else {
