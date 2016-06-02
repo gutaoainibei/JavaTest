@@ -40,6 +40,7 @@ public class Dispatcher implements Runnable{
 	public void run() {
 		Servlet servlet = null;
 		try {
+			System.out.println("请求地址"+request.getUrl());
 			servlet = Webapp.getServlet(request.getUrl());
 		} catch (InstantiationException e) {
 			e.printStackTrace();
