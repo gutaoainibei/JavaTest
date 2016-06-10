@@ -29,7 +29,6 @@ public class GetAnnotation {
    public static void main(String[] args) throws Exception {
              GetAnnotation getAnnotation = new GetAnnotation();
              getAnnotation.getTableClass(Shoping.class);
-             getAnnotation.TableName = ";";
              System.out.println(getAnnotation.TableName);
              for (Map map : getAnnotation.columnsList) {
 				System.out.println(map.get("columnName")+","+map.get("type")+","+map.get("length"));
