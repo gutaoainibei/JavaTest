@@ -19,10 +19,13 @@ public class TestGenericClass implements GenericTest<String> {
 		Type[] ts =TestGenericClass.class.getGenericInterfaces();
 		for (Type type : ts) {
 			System.out.println("#"+type);
+			//获取实际类型参数
 			Type[] types = ((ParameterizedType)type).getActualTypeArguments();
 			for (Type intype : types) {
 				Class class1 = (Class)intype;
+				//这里intype是个type类型
 				System.out.println(intype.getClass().getSimpleName());
+				//class1才是对象Class模板对象，这里要弄清楚Type和Class的关系和区别
 				System.out.println(class1.getSimpleName());
 			}
 		}

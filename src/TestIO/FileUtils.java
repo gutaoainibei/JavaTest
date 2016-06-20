@@ -153,7 +153,7 @@ public class FileUtils {
      * @author gt
      * @created 2016年4月1日 上午12:40:59
      * @since 
-     * @param io
+     * @param io 要关闭的的文件流
      */
     public static <T extends Closeable> void CloseAll(T ... io){
     	for (Closeable t : io) {
