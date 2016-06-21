@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 注解是从jdk5开始引入的新特性
  * 注解和注释其实区别就在于注解是可以被其他程序读取，而注释不行，注解也是解释的作用
  * 描述：测试注解SuppressWarnings,Deprecated
  *           SuppressWarnings:强压声明出来警告

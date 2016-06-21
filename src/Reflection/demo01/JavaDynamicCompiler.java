@@ -1,25 +1,20 @@
 package Reflection.demo01;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
-import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
- * 
+ * JDK6.0引入动态编译机制
  * 描述：测试动态编译
  * @author gt
  * @created 2016年6月14日 下午11:15:35
@@ -40,7 +35,7 @@ public class JavaDynamicCompiler {
 	try {
 		//ClassPath:资源路径，className：类名
 		//  java -cp ClassPath className
-		process = runtime.exec("java -cp "+"F:/JavaIO"+" DynamicCompiler");
+		process = runtime.exec("java -cp "+"F:/JavaIO/"+" DynamicCompiler");
 		//获取进程输出流
 		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 		while ((msg=reader.readLine())!=null) {
@@ -49,10 +44,11 @@ public class JavaDynamicCompiler {
 	} catch (IOException e) {
 		e.printStackTrace();
 	}
-//	System.out.println(JavaDynamicCompiler.class.getResource(""));
-//	System.out.println(Thread.currentThread().getContextClassLoader().getResource(""));
-	//通过反射来运行编译好的类
-	String dir = "F:/JavaIO";
+	//获取当前的项目的绝对根路径
+	System.out.println(JavaDynamicCompiler.class.getResource("/"));
+	System.out.println(Thread.currentThread().getContextClassLoader().getResource(""));
+	//通过反射来运行编译好的类，这后面的斜杠是必须加的
+	String dir = "F:/JavaIO/";
 	try {
 		//1.资源路径
 		URL[] urls = new URL[]{new URL("file:/"+dir)};
@@ -71,19 +67,14 @@ public class JavaDynamicCompiler {
 	} catch (ClassNotFoundException e) {
 		e.printStackTrace();
 	} catch (SecurityException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} catch (NoSuchMethodException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} catch (IllegalArgumentException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} catch (IllegalAccessException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} catch (InvocationTargetException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 }
