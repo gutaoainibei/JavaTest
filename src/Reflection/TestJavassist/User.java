@@ -1,4 +1,4 @@
-package Reflection.demo01;
+package Reflection.TestJavassist;
 
 public class User {
 	private String id;
@@ -38,7 +38,8 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-    private void test(){
-    	System.out.println("test insert class code in order to dynamic language");
-    }
+
+	private void test() {
+		System.out.println("test insert class code in order to dynamic language");
+	}
 }

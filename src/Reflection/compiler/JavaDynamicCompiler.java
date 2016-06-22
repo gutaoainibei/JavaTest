@@ -1,4 +1,4 @@
-package Reflection.demo01;
+package Reflection.compiler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
