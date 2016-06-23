@@ -1,13 +1,17 @@
 package Reflection.TestJavassist;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+import javax.jws.soap.SOAPBinding.Use;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
+import Annotation.demo1.gutao;
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -39,18 +43,85 @@ import javassist.NotFoundException;
  * @since
  */
 public class TestJavassist {
-     public static void main(String[] args) throws CannotCompileException, NotFoundException, IOException {
-    	 InsertClassCode();
+     public static void main(String[] args) throws CannotCompileException, NotFoundException, IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+    	 getUserAnnotation();
      }
-     
+     /**
+      * 
+      * 描述：获取类的注解
+      * @author gt
+      * @created 2016年6月23日 上午10:33:33
+      * @since
+      */
+     public static void getUserAnnotation(){
+    	 ClassPool classPool = ClassPool.getDefault();
+    	 try {
+			CtClass ctClass = classPool.get("Reflection.TestJavassist.User");
+			gutao annotation = (gutao) ctClass.getAnnotation(gutao.class);
+			System.out.println(annotation.name()+","+annotation.age());
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+     }
+     /**
+      * 
+      * 描述：向类中动态添加属性
+      * @author gt
+      * @created 2016年6月23日 上午10:19:25
+      * @since 
+      * @throws InstantiationException
+      */
+     public static void InsertField() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+    	 ClassPool classPool = ClassPool.getDefault();
+    	 try {
+			CtClass ctclass = classPool.get("Reflection.TestJavassist.User");
+			CtField ctField = new CtField(classPool.get("java.lang.String"),"addField",ctclass);
+			ctField.setModifiers(Modifier.PRIVATE);
+			ctclass.addField(ctField);
+			Class class1 = ctclass.toClass();
+			Field[] fields = class1.getDeclaredFields();
+			for (Field field : fields) {
+				System.out.println(field);
+			}
+			System.out.println("----------------------");
+			//通过反射获得
+			Class testClass = User.class;//Class.forName("Reflection.TestJavassist.User");
+			Field[] fields2 = testClass.getDeclaredFields();
+			for (Field field : fields2) {
+				System.out.println(field);
+			}
+			CtConstructor[] ctConstructors = ctclass.getDeclaredConstructors();
+			for (CtConstructor ctConstructor : ctConstructors) {
+				System.out.println(ctConstructor.toString());
+			}
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		} catch (CannotCompileException e) {
+			e.printStackTrace();
+		}
+     }
+     /**
+      * 
+      * 描述：动态改变方法结构的字节码
+      * @author gt
+      * @created 2016年6月23日 上午10:25:40
+      * @since
+      */
      public static void InsertClassCode(){
     	 ClassPool classPool = ClassPool.getDefault();
     	 try {
 			CtClass ctClass = classPool.get("Reflection.TestJavassist.User");
 			CtMethod ctMethod = ctClass.getDeclaredMethod("test", null);
+			//在方法执行之前，先执行当前语句
 			ctMethod.insertBefore("System.out.println(\"gt insert before\");");
+			//在执行相应的方法后
 			ctMethod.insertAfter("System.out.println(\"gt insert after\");");
-			ctMethod.insertAt(44, "System.out.println(\"gt insert linenumber\");");
+			//在方法对应的行插入记录，当然如果行数小于方法所在行就直接在方法内第一行执行，
+			//如果行数大于方法的结尾行那么就是在方法的最后一行执行
+			ctMethod.insertAt(80, "System.out.println(\"gt insert linenumber\");");
 			Class class1 = ctClass.toClass();
             Object object = class1.newInstance();
             Method method = class1.getDeclaredMethod("test", null);

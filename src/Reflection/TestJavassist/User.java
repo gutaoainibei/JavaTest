@@ -1,5 +1,8 @@
 package Reflection.TestJavassist;
 
+import Annotation.demo1.gutao;
+
+@gutao(name="gutao",age=24)
 public class User {
 	private String id;
 	public String name;
@@ -41,5 +44,6 @@ public class User {
 
 	private void test() {
 		System.out.println("test insert class code in order to dynamic language");
+		System.out.println("gutao test javassist change the class code");
 	}
 }
