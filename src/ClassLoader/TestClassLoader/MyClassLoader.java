@@ -1,4 +1,14 @@
 package ClassLoader.TestClassLoader;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
+import oracle.net.aso.p;
+import TestIO.byteArrayStream.ByteArrayStream;
+
 /**
  * 
  * 描述：实现自己定义的类加载器：
@@ -31,14 +41,51 @@ public class MyClassLoader extends ClassLoader{
 			//采用默认的双亲委托加载机制
 			ClassLoader classLoader = this.getParent();
 			System.out.println(classLoader);
-			c = classLoader.loadClass(name);
+			try {
+				c = classLoader.loadClass(name);
+			} catch (Exception e) {
+				//e.printStackTrace();
+			}
 			//如果可以通过父类加载器得到
 			if(c != null){
 				return c;
 			}else{
-				MyClassLoader myClassLoader = new MyClassLoader(rootdir);
+				byte[] arrayCode = getClassCode(name);
+				if(arrayCode == null){
+					throw new ClassNotFoundException();
+				}else{
+					c = defineClass(name, arrayCode, 0,arrayCode.length);
+				}
 			}
 		}
-    	return super.findClass(name);
+    	return c;
     }
+	private byte[] getClassCode(String name) {
+		String path = rootdir+"/"+name.replace(".", "/")+".class";
+		InputStream inputStream =null;
+		try {
+			inputStream = new FileInputStream(path);
+			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+            byte[] flush = new byte[1024];
+            int temp = 0;
+            while ((temp = inputStream.read(flush))!=-1) {
+				outStream.write(flush, 0, temp);
+			}
+            return outStream.toByteArray();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}finally{
+			try {
+				if(inputStream!=null){
+				  inputStream.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
