@@ -5,13 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
-import oracle.net.aso.p;
-import TestIO.byteArrayStream.ByteArrayStream;
 
 /**
  * 
  * 描述：实现自己定义的类加载器：
+ * 基于双亲委托加载模式
  * @author gt
  * @created 2016年6月26日 下午4:25:36
  * @since
@@ -54,6 +54,7 @@ public class MyClassLoader extends ClassLoader{
 				if(arrayCode == null){
 					throw new ClassNotFoundException();
 				}else{
+					//导入类到方法区
 					c = defineClass(name, arrayCode, 0,arrayCode.length);
 				}
 			}
@@ -64,6 +65,7 @@ public class MyClassLoader extends ClassLoader{
 		String path = rootdir+"/"+name.replace(".", "/")+".class";
 		InputStream inputStream =null;
 		try {
+			URL url = new URL("");
 			inputStream = new FileInputStream(path);
 			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
             byte[] flush = new byte[1024];
