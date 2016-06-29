@@ -5,6 +5,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
 import javax.jws.soap.SOAPBinding.Use;
@@ -21,6 +22,7 @@ import javassist.CtMethod;
 import javassist.CtNewMethod;
 import javassist.Modifier;
 import javassist.NotFoundException;
+import javassist.util.proxy.ProxyFactory;
 /**
  * 
  * 描述：想在编译时不存在运行时动态创建并加载，通常有两种做法
