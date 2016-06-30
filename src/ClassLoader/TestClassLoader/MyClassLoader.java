@@ -65,7 +65,6 @@ public class MyClassLoader extends ClassLoader{
 		String path = rootdir+"/"+name.replace(".", "/")+".class";
 		InputStream inputStream =null;
 		try {
-			URL url = new URL("");
 			inputStream = new FileInputStream(path);
 			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
             byte[] flush = new byte[1024];
