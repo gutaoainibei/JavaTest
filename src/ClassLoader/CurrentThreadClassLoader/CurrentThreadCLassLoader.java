@@ -1,6 +1,7 @@
 package ClassLoader.CurrentThreadClassLoader;
 
 import ClassLoader.TestClassLoader.MyClassLoader;
+import ClassLoader.TestClassLoader.MyClassLoader2;
 
 /**
  * 
@@ -10,15 +11,25 @@ import ClassLoader.TestClassLoader.MyClassLoader;
  * @since
  */
 public class CurrentThreadCLassLoader {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
     	//获取当前类的类加载器
 		ClassLoader classLoader1 = CurrentThreadCLassLoader.class.getClassLoader();
 		System.out.println(classLoader1);
 		//获取当前线程上下文的类加载器
         ClassLoader classLoader2 = Thread.currentThread().getContextClassLoader();
         System.out.println(classLoader2);
-        		
-        Thread.currentThread().setContextClassLoader(new MyClassLoader("F:/JavaIO/"));
-        System.out.println(Thread.currentThread().getContextClassLoader());
+        System.out.println("------------------------");
+//        Thread.currentThread().setContextClassLoader(new MyClassLoader("F:/JavaIO"));
+//        System.out.println(Thread.currentThread().getContextClassLoader());
+//        Class<?> class1 = Thread.currentThread().getContextClassLoader().loadClass("ClassLoader.test1");
+//        System.out.println(class1);
+//        System.out.println(class1.getClassLoader());
+        System.out.println("*********************************");
+        Thread.currentThread().setContextClassLoader(new MyClassLoader2("F:/JavaIO/com/gt"));
+       MyClassLoader2 c1 = (MyClassLoader2) Thread.currentThread().getContextClassLoader();
+        System.out.println("当前类加载器："+c1);
+        Class<?> class2 = c1.loadClass("Person");
+        System.out.println(class2);
+        System.out.println(class2.getClassLoader());
     }
 }

@@ -18,5 +18,5 @@ public class ClassLoaderTest {
 	System.out.println("扩展类加载器:"+ClassLoader.getSystemClassLoader().getParent());
 	//这里因为我们的引导类加载器是用C写的所以无法加载到
 	System.out.println("引导类加载器:"+ClassLoader.getSystemClassLoader().getParent().getParent());
-}
+   }
 }

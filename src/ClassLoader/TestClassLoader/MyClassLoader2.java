@@ -11,16 +11,17 @@ import java.net.URL;
 /**
  * 
  * 描述：实现自己定义的类加载器：
- * 基于双亲委托加载模式
+ * 自定义加载机制
  * @author gt
  * @created 2016年6月26日 下午4:25:36
  * @since
  */
-public class MyClassLoader extends ClassLoader{
+public class MyClassLoader2 extends ClassLoader{
 	//根目录
 	private String rootdir;
 	
-	public MyClassLoader(String rootdir){
+	public MyClassLoader2(String rootdir){
+		System.out.println("gg");
 		this.rootdir = rootdir;
 	}
     public String getRootdir() {
@@ -32,32 +33,24 @@ public class MyClassLoader extends ClassLoader{
 	}
 
 	@Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
+    public Class<?> findClass(String name) throws ClassNotFoundException {
        	//查看是否加载过这个类,如果已经加载了就直接返回已经加载的，如果没有就重新加载
-		Class<?> c = findLoadedClass(name);
+		Class<?> c = null;//findLoadedClass(name);
+		//采用自定义加载机制
+		byte[] arrayCode = getClassCode(name);
+		try {
+			c = defineClass(name, arrayCode, 0,arrayCode.length);
+
+		} catch (Exception e) {
+			//e.printStackTrace();
+		}
+		//如果可以通过父类加载器得到
 		if(c != null){
 			return c;
 		}else{
-			//采用默认的双亲委托加载机制
+			//采用父类加载器
 			ClassLoader classLoader = this.getParent();
-			System.out.println(classLoader);
-			try {
-				c = classLoader.loadClass(name);
-			} catch (Exception e) {
-				//e.printStackTrace();
-			}
-			//如果可以通过父类加载器得到
-			if(c != null){
-				return c;
-			}else{
-				byte[] arrayCode = getClassCode(name);
-				if(arrayCode == null){
-					throw new ClassNotFoundException();
-				}else{
-					//导入类到方法区
-					c = defineClass(name, arrayCode, 0,arrayCode.length);
-				}
-			}
+			c = classLoader.loadClass(name);
 		}
     	return c;
     }

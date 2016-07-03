@@ -18,5 +18,6 @@ public class MyTestClassLoader {
 		//父类加载器就可以加载到了
 		System.out.println(class4.getClassLoader());
 		System.out.println(System.getProperty("user.dir"));
+		
 	}
 }
