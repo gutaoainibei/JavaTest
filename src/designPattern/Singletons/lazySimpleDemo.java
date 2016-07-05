@@ -31,7 +31,7 @@ public class lazySimpleDemo implements Serializable{
 		}
     	return l1;
     }
-    
+    //反序列化之后直接读入这个方法，不会再新创建
     private Object readResolve() throws ObjectStreamException{
     	return l1;
     }
