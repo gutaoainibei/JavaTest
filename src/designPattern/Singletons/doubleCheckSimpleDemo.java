@@ -24,7 +24,7 @@ public class doubleCheckSimpleDemo {
 				}
 			}
 		}
-    	 return d1;
+    	return d1;
      }
      private doubleCheckSimpleDemo(){}
 }
