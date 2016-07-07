@@ -1,9 +1,5 @@
-package designPattern;
+package designPattern.Singletons;
 
-import designPattern.Singletons.enumSimpleDemo;
-import designPattern.Singletons.hungrySimpleDemo;
-import designPattern.Singletons.lazySimpleDemo;
-import designPattern.Singletons.staticSimpledemo;
 
 /**
  * 
