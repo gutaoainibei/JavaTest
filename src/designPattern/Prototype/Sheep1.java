@@ -1,5 +1,6 @@
 package designPattern.Prototype;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  * @created 2016年7月11日 下午11:46:01
  * @since
  */
-public class Sheep1 implements Cloneable {
+public class Sheep1 implements Cloneable,Serializable{
 
 	private String name;
 	private Date birthday;
