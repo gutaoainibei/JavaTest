@@ -17,6 +17,7 @@ public class TestSerizable {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		ObjectOutputStream objectOut = new ObjectOutputStream(outputStream);
 		objectOut.writeObject(s1);
+		//反序列化
 		byte[] arr = outputStream.toByteArray();
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(arr);
 		ObjectInputStream objinput = new ObjectInputStream(inputStream);
