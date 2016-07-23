@@ -7,5 +7,8 @@ package designPattern.facade;
  * @since
  */
 public class Client {
-
+    public static void main(String[] args) {
+		RegisterFacade registerFacade = new RegisterFacade();
+		registerFacade.openAccount();
+	}
 }
