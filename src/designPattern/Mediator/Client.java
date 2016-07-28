@@ -7,5 +7,13 @@ package designPattern.Mediator;
  * @since
  */
 public class Client {
-
+    public static void main(String[] args) {
+		Mediator mediator = new President();
+		Development development = new Development(mediator);
+		Finacial finacial = new Finacial(mediator);
+		Market market = new Market(mediator);
+		
+		market.selfAction();
+		market.outAction();
+	}
 }
