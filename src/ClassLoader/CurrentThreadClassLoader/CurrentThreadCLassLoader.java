@@ -1,6 +1,5 @@
 package ClassLoader.CurrentThreadClassLoader;
 
-import ClassLoader.TestClassLoader.MyClassLoader;
 import ClassLoader.TestClassLoader.MyClassLoader2;
 
 /**
