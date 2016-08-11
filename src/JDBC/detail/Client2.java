@@ -12,12 +12,12 @@ import designPattern.Proxy.dynamicProxy.starHandler;
 
 /**
  * 
- * 描述：测试预处理
+ * 描述：batch
  * @author gt
  * @created 2016年8月9日 下午11:08:17
  * @since
  */
-public class Client1 {
+public class Client2 {
 	static Connection conn = null;
 	static PreparedStatement preparedStatement = null;
 	static ResultSet resultSet = null;
@@ -26,20 +26,29 @@ public class Client1 {
          try {
 			Class.forName("com.mysql.jdbc.Driver");
 		    conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/mytest", "root", "root");
+		    conn.setAutoCommit(false);
+		    long start = System.currentTimeMillis();
 		    preparedStatement = conn.prepareStatement("insert into t_user_pwd values(?,?,?)");
-            preparedStatement.setObject(1, 1114);
-            preparedStatement.setObject(2, "gutao");
-            preparedStatement.setObject(3, "gutao");
-            preparedStatement.executeUpdate();
-            PreparedStatement sele = conn.prepareStatement("select * from t_user_pwd");
-            resultSet = sele.executeQuery();
-            while (resultSet.next()) {
-				System.out.println(resultSet.getString(1)+","+resultSet.getString(2)+","+resultSet.getString(3));
+            for (int i = 0; i < 10000; i++) {
+            	preparedStatement.setObject(1, i);
+                preparedStatement.setObject(2, "gutao"+i);
+                preparedStatement.setObject(3, "gutao"+i);
+                preparedStatement.addBatch();
 			}
+            preparedStatement.executeBatch();
+            conn.commit();
+            long end = System.currentTimeMillis();
+            System.out.println("用时："+(end-start));
          } catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}finally{
 			//关闭连接由里向外层层关闭，不要放在同一个try中因为如果放在同一个try中出现一个异常下面的就都不会关闭了
 			try {
