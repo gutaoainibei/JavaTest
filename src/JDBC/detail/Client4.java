@@ -12,14 +12,15 @@ import designPattern.Proxy.dynamicProxy.starHandler;
 
 /**
  * 
- * 描述：batch
+ * 描述：事务测试
  * @author gt
  * @created 2016年8月9日 下午11:08:17
  * @since
  */
-public class Client2 {
+public class Client4 {
 	static Connection conn = null;
 	static PreparedStatement preparedStatement = null;
+	static PreparedStatement preparedStatement2 = null;
 	static ResultSet resultSet = null;
     public static void main(String[] args) {
     	
@@ -29,19 +30,20 @@ public class Client2 {
 		    conn.setAutoCommit(false);
 		    long start = System.currentTimeMillis();
 		    preparedStatement = conn.prepareStatement("insert into t_user_pwd values(?,?,?)");
-            for (int i = 0; i < 10000; i++) {
-            	preparedStatement.setObject(1, i);
-                preparedStatement.setObject(2, "gutao"+i);
-                preparedStatement.setObject(3, "gutao"+i);
-                preparedStatement.addBatch();
-			}
-            preparedStatement.executeBatch();
+        	preparedStatement.setObject(1, "1234");
+            preparedStatement.setObject(2, "gutao");
+            preparedStatement.setObject(3, "gutao");
+            preparedStatement.executeUpdate();
+            preparedStatement2 = conn.prepareStatement("insert into t_user_pwd values(?,?,?,?)");
+            preparedStatement2.setObject(1, "1235");
+            preparedStatement2.setObject(2, "nibei");
+            preparedStatement2.setObject(3, "nibei");
+            preparedStatement2.executeUpdate();
             conn.commit();
             long end = System.currentTimeMillis();
             System.out.println("用时："+(end-start));//10000条，用时：1822
          } catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			try {
