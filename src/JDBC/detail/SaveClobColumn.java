@@ -56,7 +56,7 @@ public class SaveClobColumn {
 			int len2 =0 ;
 			while ((len2 = in2.read(flush2))!=-1) {
 				System.out.println(flush2);
-				out2.write(flush2,0,flush2.length);
+				out2.write(flush2,0,len2);
 			}
 		}
         out1.close();out2.close();
