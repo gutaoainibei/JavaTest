@@ -9,7 +9,7 @@ public class TestOracleJdbc {
     	Connection conn = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl","system","Gutao1111");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl","system","Gutao");
 		} catch (ClassNotFoundException e) {
 			System.out.println("没有找到驱动类！");
 			e.printStackTrace();

@@ -29,7 +29,6 @@ public class JdbcUtils {
     	 try {
 			properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
      }
@@ -45,6 +44,25 @@ public class JdbcUtils {
     	 try {
 			 Class.forName(properties.getProperty("driver"));
 			 conn = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("username"), properties.getProperty("password"));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	 return conn;
+     }
+     /**
+      * 
+      * 描述：获取连接
+      * @author gt
+      * @created 2016年8月18日 下午11:19:55
+      * @since 
+      * @return
+      */
+     public static Connection getOrclConn(){
+    	 try {
+			 Class.forName(properties.getProperty("orcldriver"));
+			 conn = DriverManager.getConnection(properties.getProperty("orclurl"), properties.getProperty("orclusername"), properties.getProperty("orclpassword"));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
