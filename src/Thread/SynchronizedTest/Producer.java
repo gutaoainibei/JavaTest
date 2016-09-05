@@ -12,7 +12,6 @@ public class Producer implements Runnable{
     	super();
     	this.product = product;
     }
-	@Override
 	public void run() {
 		for (int i = 0; i < 10; i++) {
 			product.product("第"+(i+1)+"件商品");

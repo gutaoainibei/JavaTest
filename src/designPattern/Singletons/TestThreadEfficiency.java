@@ -18,7 +18,6 @@ public class TestThreadEfficiency {
 	final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
 	for (int i = 0; i < threadNum; i++) {
 		new Thread(new Runnable() {
-			@Override
 			public void run() {
 				for (int j = 0; j < 100000; j++) {
 					//Object o = lazySimpleDemo.getInstances();//44ms

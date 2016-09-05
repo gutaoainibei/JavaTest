@@ -23,7 +23,6 @@ public class TestJoinThread {
 }
 class ThreadRunnaleJoin implements Runnable{
 	private int i = 0;
-	@Override
 	public void run() {
 		for (int i = 0; i < 30; i++) {
 			System.out.println("join in thread ........"+(i));

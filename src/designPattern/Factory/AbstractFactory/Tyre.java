@@ -5,7 +5,6 @@ public interface Tyre {
 }
 class lowTyre implements Tyre{
 
-	@Override
 	public void revolve() {
 		System.out.println("磨损大");
 	}
@@ -13,7 +12,6 @@ class lowTyre implements Tyre{
 }
 class luxuryTyre implements Tyre{
 
-	@Override
 	public void revolve() {
 		System.out.println("磨损小");
 	}

@@ -43,7 +43,6 @@ public class Testmkdir {
         	System.out.println("===========过滤输出文件============");
         	childFile = file.listFiles(new FilenameFilter() {
         		//这里的dir就是file，name就是子文件名,""
-				@Override
 				public boolean accept(File dir, String name) {
 					return new File(dir, name).isFile() && name.endsWith(".txt");
 				}
@@ -55,7 +54,6 @@ public class Testmkdir {
         	//这里我用断言来实现一个与上面一样可以过滤掉不满足条件的
         	childFile = file.listFiles();
         	Predicate<File> predicate = new Predicate<File>() {
-        		@Override
         		public boolean apply(File file) {
         			return file.isFile() && file.getName().endsWith(".txt");
         		}

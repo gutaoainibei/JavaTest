@@ -28,7 +28,6 @@ public class SynthronizedThread {
 class Thread12306 implements Runnable{
 	  private boolean flag = true;
 	    private int num = 20;
-		@Override
 		public void run() {
 			while (flag) {
 				test7();

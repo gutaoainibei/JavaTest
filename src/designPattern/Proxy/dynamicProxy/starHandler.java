@@ -18,7 +18,6 @@ public class starHandler implements InvocationHandler{
 		this.realStar = realStar;
 	}
 
-	@Override
 	public Object invoke(Object proxy, Method method, Object[] args)
 			throws Throwable {
 		Object object = null;

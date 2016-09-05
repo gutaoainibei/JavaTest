@@ -10,7 +10,6 @@ public class TestTreeSetMain {
     public static void main(String[] args) {
 		TreeSet<Person> treeSet = new TreeSet<Person>(
 				new Comparator<Person>() {
-					@Override
 					public int compare(Person o1, Person o2) {
 						return o1.getIndex()-o2.getIndex();
 					}

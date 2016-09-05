@@ -9,7 +9,6 @@ package Thread.TestRunnable;
 public class Test12306Thread implements Runnable{
     private boolean flag = true;
     private int num = 50;
-	@Override
 	public void run() {
 		while (flag) {
 			if(num < 0){

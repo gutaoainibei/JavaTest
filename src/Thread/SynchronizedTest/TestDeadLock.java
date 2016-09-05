@@ -26,7 +26,6 @@ class Test2 implements Runnable{
         this.good = good;
         this.money = money;
 	}
-	@Override
 	public void run() {
 		while (true) {
 			System.out.println("要货开始");
@@ -51,7 +50,6 @@ class Test3 implements Runnable{
         this.good = good;
         this.money = money;
 	}
-	@Override
 	public void run() {
 		while (true) {
 			System.out.println("要钱开始");

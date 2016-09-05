@@ -8,7 +8,6 @@ package designPattern.state;
  */
 public class CheckedInState implements State{
 
-	@Override
 	public void handle() {
 		System.out.println("房间入住！请勿打扰！");
 	}

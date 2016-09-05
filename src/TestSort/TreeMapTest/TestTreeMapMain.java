@@ -14,7 +14,6 @@ public class TestTreeMapMain {
 	    treeMap.put(w3, "gt");
         System.out.println(treeMap.entrySet());
 		TreeMap<Person,Object>  treeMap1 = new TreeMap<Person, Object>(new Comparator<Person>() {
-			@Override
 			public int compare(Person o1, Person o2) {
 				return o1.getIndex()-o2.getIndex();
 			}

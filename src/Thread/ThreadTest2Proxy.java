@@ -17,7 +17,6 @@ interface Marry{
 	public void marry();
 }
 class You implements Marry{
-	@Override
 	public void marry() {
 	   System.out.println("ni marry");	
 	}
@@ -31,7 +30,6 @@ class WeddingCompany implements Marry{
     public WeddingCompany(Marry you){
        this.you = you;	
     }
-	@Override
 	public void marry() {
 		before();
 		you.marry();

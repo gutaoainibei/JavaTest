@@ -19,7 +19,6 @@ class TextFile implements AbstractFile{
 		super();
 		this.name = name;
 	}
-	@Override
 	public void killVirus() {
 		System.out.println("杀除文本文件：" + name);
 	}
@@ -30,7 +29,6 @@ class VideoFile implements AbstractFile{
 		super();
 		this.name = name;
 	}
-	@Override
 	public void killVirus() {
 		System.out.println("杀除视频文件：" + name);
 	}
@@ -41,7 +39,6 @@ class MusicFile implements AbstractFile{
 		super();
 		this.name = name;
 	}
-	@Override
 	public void killVirus() {
 		System.out.println("杀除音乐文件：" + name);
 	}
@@ -62,7 +59,6 @@ class Folder implements AbstractFile{
 	 public AbstractFile getChild(int index){
 	 	return list.get(index);
 	 }
-	@Override
 	public void killVirus() {
 		System.out.println("杀除文件夹：" + name);
         for (AbstractFile file : list) {

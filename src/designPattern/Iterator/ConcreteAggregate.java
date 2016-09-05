@@ -24,19 +24,16 @@ public class ConcreteAggregate {
      }
      private class ConcreteIterator implements MyIterator{
         private int cursor;
-		@Override
 		public void first() {
 			cursor = 0;
 		}
 
-		@Override
 		public void next() {
 			if(cursor < list.size()){
 			     cursor++;
 			}
 		}
 
-		@Override
 		public boolean hasNext() {
 			if(cursor < list.size()){
 				return true;
@@ -44,17 +41,14 @@ public class ConcreteAggregate {
 			return false;
 		}
 
-		@Override
 		public boolean isFirst() {
 			return cursor == 0 ? true : false;
 		}
 
-		@Override
 		public boolean isLast() {
 			return cursor == (list.size()-1) ? true : false;
 		}
 
-		@Override
 		public Object getCurrentObj() {
 			return list.get(cursor);
 		}

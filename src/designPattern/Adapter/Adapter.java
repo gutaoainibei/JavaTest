@@ -8,7 +8,6 @@ package designPattern.Adapter;
  */
 public class Adapter implements Target{
     private needAdaptee adaptee;
-	@Override
 	public void adapterHandler() {
 		adaptee.test();
 	}

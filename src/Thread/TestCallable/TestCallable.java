@@ -17,7 +17,6 @@ import Thread.ThreadTest1;
  */
 public class TestCallable implements Callable<Integer>{
 
-	@Override
 	public Integer call() throws Exception {
 		
 		return 100;
@@ -104,7 +103,6 @@ class Animal implements Callable<Integer>{
     	this.name = name;
     	this.time = time;
     }
-	@Override
 	public Integer call() throws Exception {
 		while (flag) {
 			Thread.sleep(time);//进行延时模拟速度

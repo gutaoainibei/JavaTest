@@ -40,7 +40,6 @@ public class StaticInnerClasss {
     		}
     		Test test = new Test() {
 				//方法匿名内部类
-				@Override
 				public void run() {
 					
 				}
@@ -56,7 +55,6 @@ public class StaticInnerClasss {
     //类名内部类
     Test test = new Test() {
 		
-		@Override
 		public void run() {
 			System.out.println(name);
 			System.out.println(age);

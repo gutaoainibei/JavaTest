@@ -63,7 +63,6 @@ public class TestIterator {
     	list.add("mom");
     	list.add("nibei");
     	Predicate<String> predicate = new Predicate<String>() {
-			@Override
 			public boolean evaluate(String string) {
 				return new StringBuilder(string).reverse().toString().equals(string);
 			}

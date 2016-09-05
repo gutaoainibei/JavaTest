@@ -71,7 +71,6 @@ public class TestYeildThread {
 
 class ThreadRunnaleYeild implements Runnable{
 	private int i = 0;
-	@Override
 	public void run() {
 		for (int i = 0; i < 1000; i++) {
 			System.out.println("yeild in thread ........"+(i));

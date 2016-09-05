@@ -97,7 +97,6 @@ public class MultiServer {
 				now_channel.send(name+"说："+msg);
 			}
 	    }
-		@Override
 		public void run() {
 			while (isRunning) {
 				sendOthers();

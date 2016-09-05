@@ -19,7 +19,6 @@ public interface ICar {
  */
 class Car implements ICar{
 
-	@Override
 	public void move() {
 		System.out.println("普通的跑");
 	}
@@ -37,7 +36,6 @@ class SuperCar implements ICar{
 		super();
 		this.car = car;
 	}
-	@Override
 	public void move() {
 		car.move();
 	}

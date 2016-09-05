@@ -11,7 +11,6 @@ public class Customer implements Runnable{
     public Customer(Product product){
     	this.product = product;
     }
-	@Override
 	public void run() {
 		for (int i = 0; i < 20; i++) {
 			product.buy();

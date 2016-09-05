@@ -20,7 +20,6 @@ public class PredicateTest {
     public static void main(String[] args) {
 		  System.out.println("====自定义判断====");
 		  Predicate mypredicate = new Predicate<String>() {
-			@Override
 			public boolean evaluate(String string) {
 				return string.length()>5&&string.length()<11;
 			}

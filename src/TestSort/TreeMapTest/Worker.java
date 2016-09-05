@@ -20,11 +20,9 @@ public class Worker implements Comparable<Worker>{
 	public void setIndex(int index){
 		this.salary = index;
 	}
-	@Override
 	public String toString() {
 		return "Person [name=" + name + ", index=" + salary + "]\n";
 	}
-	@Override
 	public int compareTo(Worker o) {
 		return this.salary>o.salary?1:(this.salary==o.salary?0:-1);
 	} 

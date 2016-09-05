@@ -61,13 +61,11 @@ public class TestFunctionProgress {
        //组合式函数编程
 	   //确保容器中的字符串长度都不超过5,超过5的截取前面的,然后把字符串全部大写
 	   Function<String, String> f1 = new Function<String, String>() {
-		@Override
 		public String apply(String input) {
 			return input.length() > 5 ? input.substring(0,5):input;
 		}
 	   };
 	   Function<String, String> f2 = new Function<String, String>() {
-		@Override
 		public String apply(String input) {
 			return input.toUpperCase();
 		}
@@ -91,7 +89,6 @@ public class TestFunctionProgress {
 	   set.add(50000000000000L);
 	   set.add(3000000000L);
 	   Collection<String> collection = Collections2.transform(set,new Function<Long,String>() {
-			@Override
 			public String apply(Long input) {
 				return new SimpleDateFormat("yyyy-MM-dd").format(input);
 			}
@@ -113,14 +110,12 @@ public class TestFunctionProgress {
 		list.add("mom");
 		//过虑，回文输出（这个规则是自己建的）
 		Collection<String> collection = Collections2.filter(list, new Predicate<String>() {
-			@Override
 			public boolean apply(String input) {
 				return new StringBuilder(input).reverse().toString().equals(input);
 			}
 		});
 		//过滤，长度要大于4的（规则自己定，实现即可）
 		Collection<String> collection1 = Collections2.filter(list, new Predicate<String>() {
-			@Override
 			public boolean apply(String input) {
 				return input.length()>4;
 			}
@@ -144,7 +139,6 @@ public class TestFunctionProgress {
 	    list.add("gutao");
 	    list.add("nibeigutao");
 	    Collection<String> collection = Collections2.filter(list, new Predicate<String>() {
-			@Override
 			public boolean apply(String input) {
 				Preconditions.checkNotNull(input);
 				return input.length() > 5 && input.length() < 10;

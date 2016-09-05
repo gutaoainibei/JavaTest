@@ -45,7 +45,6 @@ public class TestMySortString implements Comparable<String>{
         System.out.println(test1.compareTo(s1));//实现自己的string比较
 	}
 
-	@Override
 	public int compareTo(String o) {
 		int len1 = name.length();
 		int len2 = o.length();

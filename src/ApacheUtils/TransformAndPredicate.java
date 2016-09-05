@@ -23,26 +23,22 @@ import ApacheUtils.model.Level;
 public class TransformAndPredicate {
     public static void main(String[] args) {
 		Predicate lowSalary = new Predicate<Employee>() {
-			@Override
 			public boolean evaluate(Employee employee) {
 				return employee.getSalary() < 10000;
 			}
 		};
 		Predicate highSalary = new Predicate<Employee>() {
-			@Override
 			public boolean evaluate(Employee employee) {
 				return employee.getSalary() > 10000;
 			}
 		};
 		Predicate[] mypPredicate = {lowSalary,highSalary};
 		Transformer<Employee, Level> lowLevel = new Transformer<Employee, Level>() {
-			@Override
 			public Level transform(Employee employee) {
 				return new Level(employee.getName(),"苦逼码农");
 			}
 		};
         Transformer<Employee, Level> highLevel = new Transformer<Employee, Level>() {
-			@Override
 			public Level transform(Employee employee) {
 				return new Level(employee.getName(), "架构师");
 			}

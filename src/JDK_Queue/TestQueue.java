@@ -15,7 +15,6 @@ public class TestQueue {
 	 for(int i = 0; i < 5 ;i++){
 		 final int num = i+1;
 		 arrayQueue.offer(new BankRequest() {
-			@Override
 			public void doposit() {
 				System.out.println("第"+num+"个人办理业务,存款额度为："+(Math.random()*1000));
 			}

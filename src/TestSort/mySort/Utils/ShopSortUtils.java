@@ -9,7 +9,6 @@ public class ShopSortUtils implements Comparator<Shop>{
 	   //按照1：销售额
 	   //   2：地址
 	   //   3：名称
-	@Override
 	public int compare(Shop o1, Shop o2) {
 		int result = o1.getSoles_Volume() - o2.getSoles_Volume();
 		if(result == 0){

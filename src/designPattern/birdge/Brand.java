@@ -11,7 +11,6 @@ public interface Brand {
 }
 class Lenovo implements Brand{
 
-	@Override
 	public void sale() {
 		System.out.println("销售联想电脑");
 	}
@@ -19,7 +18,6 @@ class Lenovo implements Brand{
 }
 class Shenzhou implements Brand{
 
-	@Override
 	public void sale() {
 		System.out.println("销售神州电脑");
 	}
@@ -27,7 +25,6 @@ class Shenzhou implements Brand{
 }
 class Dell implements Brand{
 
-	@Override
 	public void sale() {
 		System.out.println("销售戴尔电脑");
 	}

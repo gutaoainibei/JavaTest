@@ -37,14 +37,12 @@ public class TestClosure {
        list.add(new Shop("电风扇", 200.0, false));
        //折上减
        Closure<Shop> subtractClosure = new Closure<Shop>() {
-		@Override
 		public void execute(Shop shop) {
 				shop.setPrice(shop.getPrice()-30);
 		}
 	   };
 	   //打折
 	   Closure<Shop> discountClosure = new Closure<Shop>() {
-		@Override
 		public void execute(Shop shop) {
 			shop.setPrice(shop.getPrice()*0.8);
 		}
@@ -69,14 +67,12 @@ public class TestClosure {
      
 	   //不满10000就加工资
 	   Closure<Employee> addClosure = new Closure<Employee>() {
-		@Override
 		public void execute(Employee employee) {
 				employee.setSalary(employee.getSalary()*1.2);
 		}
 	    };
 	    //断言
 	    Predicate<Employee> predicate = new Predicate<Employee>() {
-			@Override
 			public boolean evaluate(Employee employee) {
 				return employee.getSalary() < 10000;
 			}
@@ -102,7 +98,6 @@ public class TestClosure {
        list.add(new Shop("电风扇", 1500.0, false));
        //满1500减
        Closure<Shop> subtractClosure = new Closure<Shop>() {
-		@Override
 		public void execute(Shop shop) {
 			if(shop.getPrice() >= 1800){
 				shop.setPrice(shop.getPrice()-300);
@@ -111,14 +106,12 @@ public class TestClosure {
 	   };
 	   //打折
 	   Closure<Shop> discountClosure = new Closure<Shop>() {
-		@Override
 		public void execute(Shop shop) {
 			shop.setPrice(shop.getPrice()*0.8);
 		}
 	    };
 	    //断言
 	    Predicate<Shop> predicate = new Predicate<Shop>() {
-			@Override
 			public boolean evaluate(Shop shop) {
 				return shop.isDiscount();
 			}
@@ -138,7 +131,6 @@ public class TestClosure {
 		  list.add(new Employee("nibei", 7000));
 		  list.add(new Employee("luoming", 8000));
 		  Closure<Employee> closure = new Closure<Employee>() {
-			@Override
 			public void execute(Employee employee) {
 				employee.setSalary(employee.getSalary()*1.2);
 			}

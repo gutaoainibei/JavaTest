@@ -53,7 +53,6 @@ public class Send implements Runnable{
 			e.printStackTrace();
 		}
     }
-	@Override
 	public void run() {
 		while (isRunning) {
 			send();

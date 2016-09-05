@@ -35,7 +35,6 @@ public class Receive implements Runnable{
 			e.printStackTrace();
 		}
     }
-    @Override
 	public void run() {
 		while (isRunning) {
 			receive();

@@ -8,27 +8,22 @@ package designPattern.Proxy.staticProxy;
  */
 public class realStar implements Star{
 
-	@Override
 	public void confer() {
 		System.out.println("realStar.confer");
 	}
 
-	@Override
 	public void signContract() {
 		System.out.println("realStar.signContract");
 	}
 
-	@Override
 	public void bookTicket() {
 		System.out.println("realStar.bookTicket");
 	}
 
-	@Override
 	public void sing() {
 		System.out.println("realStar.sing");
 	}
 
-	@Override
 	public void collectMoney() {
 		System.out.println("realStar.collectMoney");
 	}

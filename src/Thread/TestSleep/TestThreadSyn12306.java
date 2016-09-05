@@ -35,7 +35,6 @@ public class TestThreadSyn12306 {
 }
 class Ticket implements Callable<Integer>{
     private int total = 50;
-	@Override
 	public Integer call() throws Exception {
 		while (true) {
 			if(total<=0){
@@ -52,7 +51,6 @@ class Ticket implements Callable<Integer>{
 }
 class TicketThread implements Runnable{
 	private int total = 50;
-	@Override
 	public void run() {
 		while (true) {
 			if(total<=0){
