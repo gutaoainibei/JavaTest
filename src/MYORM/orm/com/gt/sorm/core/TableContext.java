@@ -33,8 +33,9 @@ public class TableContext {
 //		    String types：一个指出返回何种表的数组。
 			ResultSet tableSet = metaData.getTables(null, null, null, new String[]{"table"});
 		   while (tableSet.next()) {
-			System.out.println(tableSet.getObject("table_name"));
-			
+			    System.out.println(tableSet.getObject("table_name"));
+			    String tableName = (String)tableSet.getObject("table_name");
+			    TableInfo ti = new TableInfo(tname, columns, onlyPriKey)
 		}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

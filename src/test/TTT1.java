@@ -13,5 +13,7 @@ public class TTT1 implements t1 {
     	TTT1 tt = new TTT1();
 	    tt.testst();
 	    System.out.println(tt.getName());
+	    t1 y = new TTT1();
+	    y.testst();
     }
 } 
