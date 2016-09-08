@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import MYORM.orm.com.gt.sorm.bean.ColumnInfo;
 import MYORM.orm.com.gt.sorm.bean.TableInfo;
 /**
  * 
@@ -17,9 +19,9 @@ import MYORM.orm.com.gt.sorm.bean.TableInfo;
  */
 public class TableContext {
 	//保存所有表名合表信息
-	private Map<String, TableInfo> tables = new HashMap<String,TableInfo>();
+	private static Map<String, TableInfo> tables = new HashMap<String,TableInfo>();
 	//保存所有对象合表对应的数据
-	private Map<Class, TableInfo> persistClassToTable = new HashMap<Class,TableInfo>();
+	private static Map<Class, TableInfo> persistClassToTable = new HashMap<Class,TableInfo>();
     
 	static{
 		try {
@@ -35,8 +37,23 @@ public class TableContext {
 		   while (tableSet.next()) {
 			    System.out.println(tableSet.getObject("table_name"));
 			    String tableName = (String)tableSet.getObject("table_name");
-			    TableInfo ti = new TableInfo(tname, columns, onlyPriKey)
-		}
+			    TableInfo ti = new TableInfo(tableName, new HashMap<String,ColumnInfo>(), new ArrayList<ColumnInfo>());
+		        tables.put(tableName, ti);
+		        ResultSet columnset = metaData.getColumns(null, "%", tableName, "%"); 
+		        while (columnset.next()) {
+					ColumnInfo columnInfo = new ColumnInfo(columnset.getString("COLUMN_NAME"),columnset.getString("TYPE_NAME"),0);
+				    ti.getColumns().put(columnset.getString("COLUMN_NAME"), columnInfo);
+		        }
+		        ResultSet result2 = metaData.getPrimaryKeys(null, "%", tableName);
+		        while (result2.next()) {
+					ColumnInfo ci2 = (ColumnInfo)ti.getColumns().get(result2.getObject("COLUMN_NAME"));
+				    ci2.setKeyType(1);
+				    ti.getPriKeys().add(ci2);
+		        }
+		        if (ti.getPriKeys().size() > 0) {
+					ti.setOnlyPriKey(ti.getPriKeys().get(0));
+				}
+		   }
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

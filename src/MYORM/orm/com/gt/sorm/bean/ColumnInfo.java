@@ -32,4 +32,14 @@ public class ColumnInfo {
 		this.keyType = keyType;
 	}
 
+	public ColumnInfo(String name, String dataType, int keyType) {
+		super();
+		this.name = name;
+		this.dataType = dataType;
+		this.keyType = keyType;
+	}
+
+	public ColumnInfo() {
+	}
+    
 }
