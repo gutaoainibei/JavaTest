@@ -33,8 +33,9 @@ public class TableContext {
 //		    String schema：要获得表所在的模式。"“”"意味着没有任何模式，Null表示所有模式。
 //		    String tableName：指出要返回表名与该参数匹配的那些表，
 //		    String types：一个指出返回何种表的数组。
-			ResultSet tableSet = metaData.getTables(null, null, null, new String[]{"table"});
-		   while (tableSet.next()) {
+			//"%" means match any substring of 0 or more characters, and "_" means match any one character
+			ResultSet tableSet = metaData.getTables(null, "%", "%", new String[]{"table"});
+		    while (tableSet.next()) {
 			    System.out.println(tableSet.getObject("table_name"));
 			    String tableName = (String)tableSet.getObject("table_name");
 			    TableInfo ti = new TableInfo(tableName, new HashMap<String,ColumnInfo>(), new ArrayList<ColumnInfo>());
@@ -55,11 +56,10 @@ public class TableContext {
 				}
 		   }
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	public static void main(String[] args) {
-		System.out.println("gutao");
+		System.out.println(tables);
 	}
 }
