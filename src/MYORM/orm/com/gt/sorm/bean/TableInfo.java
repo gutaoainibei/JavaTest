@@ -62,5 +62,11 @@ public class TableInfo {
 	public void setPriKeys(List<ColumnInfo> priKeys) {
 		this.priKeys = priKeys;
 	}
+
+	@Override
+	public String toString() {
+		return "[tname=" + tname + ", columns=" + columns
+				+ ", onlyPriKey=" + onlyPriKey + ", priKeys=" + priKeys + "]";
+	}
     
 }
