@@ -17,7 +17,9 @@ public class JavaFileUtils {
 		
 	}
 	public static JavaFieldGetSet createFieldSetGetSRC(ColumnInfo columnInfo,TypeConvertor convertor){
+		JavaFieldGetSet jfgs = new JavaFieldGetSet();
 		String javaFieldType = convertor.DatabaseTypetojavaDataType(columnInfo.getDataType());
+		jfgs.setFieldInfo("\tprivate "+javaFieldType+" "+columnInfo.getName()+";\n");
 		return null;
 	}
 }
