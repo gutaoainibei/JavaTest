@@ -46,5 +46,12 @@ public class JavaFieldGetSet {
 	}
 	public JavaFieldGetSet() {
 	}
+	@Override
+	public String toString() {
+		System.out.println(fieldInfo);
+		System.out.println(setInfo);
+		System.out.println(getInfo);
+		return super.toString();
+	}
      
 }
