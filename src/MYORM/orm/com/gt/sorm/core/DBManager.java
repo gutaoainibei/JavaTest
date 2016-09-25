@@ -8,7 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
+
 import MYORM.orm.com.gt.sorm.bean.Configuration;
+import designPattern.Proxy.dynamicProxy.starHandler;
 public class DBManager {
     private static Configuration configutation;
     static{
@@ -21,7 +24,7 @@ public class DBManager {
 		    configutation.setUser(properties.getProperty("username"));
 		    configutation.setPassword(properties.getProperty("password"));
 		    configutation.setSrcPath(properties.getProperty("srcPath"));
-		    configutation.setSrcPath(properties.getProperty("usingDB"));
+		    configutation.setUsingDB(properties.getProperty("usingDB"));
     	} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -122,8 +125,13 @@ public class DBManager {
 			}
 		}
    }
+   public static Configuration getConfig(){
+	    return configutation;
+   }
    public static void main(String[] args) {
 	Connection connection = DBManager.getConnection();
 	System.out.println("获取连接："+connection);
+//	System.out.println(configutation);
+	System.out.println(configutation.getUsingDB());
 }
 }

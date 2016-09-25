@@ -1,7 +1,14 @@
 package MYORM.orm.com.gt.sorm.utils;
 
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import MYORM.orm.com.gt.sorm.bean.ColumnInfo;
 import MYORM.orm.com.gt.sorm.bean.JavaFieldGetSet;
+import MYORM.orm.com.gt.sorm.bean.TableInfo;
+import MYORM.orm.com.gt.sorm.core.DBManager;
 import MYORM.orm.com.gt.sorm.core.MysqlTypeConvertor;
 import MYORM.orm.com.gt.sorm.core.TypeConvertor;
 
@@ -31,9 +38,20 @@ public class JavaFileUtils {
 		jfgs.setSetInfo(getInfo.toString());
 		return jfgs;
 	}
+	public static String getBean(TableInfo tableInfo,TypeConvertor convertor){
+		Map<String, ColumnInfo> map = tableInfo.getColumns();
+		List<JavaFieldGetSet> list = new ArrayList<JavaFieldGetSet>();
+		for (ColumnInfo columnInfo : map.values()) {
+			list.add(createFieldSetGetSRC(columnInfo,convertor));
+		}
+		StringBuffer classStr = new StringBuffer();
+		classStr.append("package "+DBManager.getConfig().getSrcPath());
+		return null;
+	}
 	public static void main(String[] args) {
-		ColumnInfo columnInfo = new ColumnInfo("username","int",0);
-		JavaFieldGetSet f = createFieldSetGetSRC(columnInfo, new MysqlTypeConvertor());
-		System.out.println(f);
+//		ColumnInfo columnInfo = new ColumnInfo("username","int",0);
+//		JavaFieldGetSet f = createFieldSetGetSRC(columnInfo, new MysqlTypeConvertor());
+//		System.out.println(f);
+		System.out.println(DBManager.getConfig().getSrcPath());
 	}
 }
