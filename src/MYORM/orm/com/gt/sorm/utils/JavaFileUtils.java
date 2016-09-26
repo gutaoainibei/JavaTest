@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 
-
-
-
-
-
+import sun.util.logging.resources.logging;
 import MYORM.orm.com.gt.sorm.bean.ColumnInfo;
 import MYORM.orm.com.gt.sorm.bean.JavaFieldGetSet;
 import MYORM.orm.com.gt.sorm.bean.TableInfo;
@@ -31,6 +28,7 @@ import MYORM.orm.com.gt.sorm.core.TypeConvertor;
  * @since
  */
 public class JavaFileUtils {
+	private static Logger logger = Logger.getLogger(JavaFileUtils.class);
    /**
     * 
     * 描述：根据列信息生成对应的java属性和set、get方法的内容的字符串
@@ -92,7 +90,6 @@ public class JavaFileUtils {
 			classStr.append(javaFieldGetSet.getSetInfo());
 		}
 		classStr.append("}\n");
-		System.out.println(classStr.toString());
 		return classStr.toString();
 	}
 	/**
@@ -108,7 +105,6 @@ public class JavaFileUtils {
 		String srcStr = createJavaSrcStr(tableInfo, convertor);
 		String srcPath = DBManager.getConfig().getSrcPath();
 		String packagePath = DBManager.getConfig().getPackagePath().replaceAll("\\.", "/");
-		System.out.println(srcPath+"/"+packagePath);
 	    BufferedWriter writer = null;
 	    String fllePath = srcPath+"/"+packagePath+"/";
 	    File file = new File(fllePath);
@@ -117,6 +113,7 @@ public class JavaFileUtils {
 	    }
 	    try {
 			writer = new BufferedWriter(new FileWriter(file.getAbsolutePath()+"/"+StringUtils.upFirstCharOfString(tableInfo.getTname())+".java"));
+			logger.info("创建文件："+file.getAbsolutePath()+"/"+StringUtils.upFirstCharOfString(tableInfo.getTname())+".java");
 			writer.write(srcStr);
 			writer.flush();
 			writer.close();
@@ -129,9 +126,8 @@ public class JavaFileUtils {
 //		JavaFieldGetSet f = createFieldSetGetSRC(columnInfo, new MysqlTypeConvertor());
 //		System.out.println(f);
 		Map<String,TableInfo> tableInfos = TableContext.tables;
-		TableInfo tableInfo = tableInfos.get("address");
-//		createJavaSrcStr(tableInfo, new MysqlTypeConvertor());
-		creteJavaFile(tableInfo, new MysqlTypeConvertor());
-		
+		for (TableInfo tableInfo : tableInfos.values()) {
+			creteJavaFile(tableInfo, new MysqlTypeConvertor());
+		}
 	}
 }

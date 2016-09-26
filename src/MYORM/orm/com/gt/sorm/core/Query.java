@@ -38,7 +38,7 @@ public interface Query {
        * @param clazz 和表对应的class对象
        * @param id 主键id
        */
-      public void delete(Class clazz,String id);
+      public void delete(Class clazz,Object id);
       /**
        * 
        * 描述：删除对象

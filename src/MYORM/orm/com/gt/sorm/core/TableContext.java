@@ -11,6 +11,8 @@ import java.util.Map;
 import oracle.net.aso.p;
 import MYORM.orm.com.gt.sorm.bean.ColumnInfo;
 import MYORM.orm.com.gt.sorm.bean.TableInfo;
+import MYORM.orm.com.gt.sorm.utils.JavaFileUtils;
+import MYORM.orm.com.gt.sorm.utils.StringUtils;
 /**
  * 
  * 描述：表信息
@@ -78,9 +80,45 @@ public class TableContext {
 			    if(table.getPriKeys().size() > 0){
 			    	table.setOnlyPriKey(table.getPriKeys().get(0));
 			    }
+			    //更新持久化类文件
+			    updateJavaPoFile();
+			    //添加类和表的关联
+			    loadPoTableClass();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	/**
+	 * 
+	 * 描述：更新持久化类
+	 * @author gt
+	 * @created 2016年9月26日 下午4:56:01
+	 * @since
+	 */
+	public static void updateJavaPoFile(){
+		if(tables != null){
+			for (TableInfo tableInfo : tables.values()) {
+				JavaFileUtils.creteJavaFile(tableInfo, new MysqlTypeConvertor());
+			}
+		}
+	}
+	/**
+	 * 
+	 * 描述：表和对应的class关联起来
+	 * @author gt
+	 * @created 2016年9月26日 下午5:03:33
+	 * @since
+	 */
+	public static  void loadPoTableClass(){
+		for (TableInfo tableInfo : tables.values()) {
+			try {
+				Class clazz = Class.forName(DBManager.getConfig().getPackagePath()+"."+StringUtils.upFirstCharOfString(tableInfo.getTname()));
+				persistClassToTable.put(clazz, tableInfo);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			
 		}
 	}
 	public static void main(String[] args) {
