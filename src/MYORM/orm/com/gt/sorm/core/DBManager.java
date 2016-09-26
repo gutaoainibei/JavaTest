@@ -24,6 +24,7 @@ public class DBManager {
 		    configutation.setUser(properties.getProperty("username"));
 		    configutation.setPassword(properties.getProperty("password"));
 		    configutation.setSrcPath(properties.getProperty("srcPath"));
+		    configutation.setPackagePath(properties.getProperty("packagePath"));
 		    configutation.setUsingDB(properties.getProperty("usingDB"));
     	} catch (IOException e) {
 			e.printStackTrace();
@@ -132,6 +133,12 @@ public class DBManager {
 	Connection connection = DBManager.getConnection();
 	System.out.println("获取连接："+connection);
 //	System.out.println(configutation);
-	System.out.println(configutation.getUsingDB());
+	System.out.println("当前数据库："+configutation.getUsingDB());
+	System.out.println("当前驱动："+configutation.getDriver());
+	System.out.println("当前url："+configutation.getUrl());
+	System.out.println("当前用户："+configutation.getUser());
+	System.out.println("当前用户密码："+configutation.getPassword());
+	System.out.println("当前资源绝对路径："+configutation.getSrcPath());
+	System.out.println("当前包名："+configutation.getPackagePath());
 }
 }

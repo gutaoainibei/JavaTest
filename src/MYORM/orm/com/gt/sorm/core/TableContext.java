@@ -20,9 +20,9 @@ import MYORM.orm.com.gt.sorm.bean.TableInfo;
  */
 public class TableContext {
 	//保存所有表名合表信息
-	private static Map<String, TableInfo> tables = new HashMap<String,TableInfo>();
+	public static Map<String, TableInfo> tables = new HashMap<String,TableInfo>();
 	//保存所有对象合表对应的数据
-	private static Map<Class, TableInfo> persistClassToTable = new HashMap<Class,TableInfo>();
+	public static Map<Class, TableInfo> persistClassToTable = new HashMap<Class,TableInfo>();
 	static{
 		try {
 //			Connection connection = DBManager.getConnection();

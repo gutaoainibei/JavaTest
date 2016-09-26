@@ -23,8 +23,8 @@ public class TestCallable implements Callable<String>{
 	}
     public static void main(String[] args) throws InterruptedException, ExecutionException {
     	TestCallable highCall = new TestCallable();
-		FutureTask<String> task = new FutureTask<>(highCall);
-		new Thread(task).start();
-		System.out.println(task.get());
+//		FutureTask<String> task = new FutureTask<>(highCall);
+//		new Thread(task).start();
+//		System.out.println(task.get());
 	}
 }

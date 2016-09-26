@@ -1,4 +1,4 @@
-package ApacheUtils;
+ package ApacheUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +16,13 @@ import org.apache.commons.collections4.list.PredicatedList;
  * @created 2016年3月20日 下午11:46:22
  * @since
  */
+@SuppressWarnings("all")
 public class PredicateTest {
     public static void main(String[] args) {
 		  System.out.println("====自定义判断====");
 		  Predicate mypredicate = new Predicate<String>() {
 			public boolean evaluate(String string) {
-				return string.length()>5&&string.length()<11;
+				return string.length() > 5 && string.length() < 11;
 			}
 		  };
 		  Predicate notnull = NotNullPredicate.notNullPredicate();
