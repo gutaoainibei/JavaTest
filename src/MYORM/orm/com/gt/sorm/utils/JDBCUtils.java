@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class JDBCUtils {
       public static void handleParamers(PreparedStatement ptmt , Object[] params){
     	  if(params != null){
-    		  for (int i = 0; i < params.length-1; i++) {
+    		  for (int i = 0; i <= params.length-1; i++) {
 				try {
 					ptmt.setObject(1+i, params[i]);
 				} catch (SQLException e) {

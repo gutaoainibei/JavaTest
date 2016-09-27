@@ -50,7 +50,16 @@ public interface Query {
       public void delete(Object object);
       /**
        * 
-       * 描述：更新对象
+       * 描述：直接更新传入对象
+       * @author gt
+       * @created 2016年9月27日 下午2:07:13
+       * @since 
+       * @param object
+       */
+      public void update(Object object);
+      /**
+       * 
+       * 描述：更新对象，按照要求的列
        * @author gt
        * @created 2016年8月30日 下午10:28:14
        * @since 
@@ -58,7 +67,7 @@ public interface Query {
        * @param fieldNames
        * @return
        */
-      public int update(Object object , String[] fieldNames);//update *** set name = ?,password = ?
+      public void update(Object object , String[] fieldNames);//update *** set name = ?,password = ?
       /**
        * 
        * 描述：条件查询，返回结果集
