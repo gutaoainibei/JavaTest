@@ -7,14 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.log4j.Logger;
-
 import MYORM.orm.com.gt.sorm.bean.TableInfo;
 import MYORM.orm.com.gt.sorm.po.Address;
 import MYORM.orm.com.gt.sorm.utils.JDBCUtils;
 import MYORM.orm.com.gt.sorm.utils.ReflectUtils;
-import MYORM.orm.com.gt.sorm.utils.commonUtils;
 
 public class MysqlQuery implements Query {
     Logger logger = Logger.getLogger(MysqlQuery.class);
@@ -36,26 +33,29 @@ public class MysqlQuery implements Query {
 	@Override
 	public void insert(Object object) {
 		    Class clazz = object.getClass();
-		    TableInfo tableInfo = TableContext.tables.get(clazz);
+		    TableInfo tableInfo = TableContext.persistClassToTable.get(clazz);
 		    List<Object> params = new ArrayList<Object>();
 		    StringBuffer sql = new StringBuffer("insert into "+tableInfo.getTname()+"(");
 		    Field[] fieldNames = clazz.getDeclaredFields();
 		    int count = 0;
 		    for (Field field : fieldNames) {
 		    	String colunmnName = field.getName();
-		    	count++;
-				sql.append(colunmnName+",");
 			    Object fieldValue = ReflectUtils.getMethodRetunValue(object, colunmnName);
-			    params.add(fieldValue);
+			    if(fieldValue != null){
+			    	 sql.append(colunmnName+","); 
+			    	 count++;
+			    	 params.add(fieldValue);
+			    }
 			}
 		    sql.setCharAt(sql.length()-1, ')');
-		    sql.append(" values(");
-		    for (Object object2 : params) {
+		    sql.append(" values (");
+		    for (int i = 0;i < count; i++) {
 				sql.append("?,");
 			}
 		    sql.setCharAt(sql.length()-1, ')');
-		    System.out.println(sql.toString());
-//		    executeSql(sql.toString(), params.toArray());
+		    if (count > 0) {
+		    	executeSql(sql.toString(), params.toArray());
+			}
 	}
 
 	@Override
@@ -93,8 +93,9 @@ public class MysqlQuery implements Query {
 	    Object primaryValue = ReflectUtils.getMethodRetunValue(object, primaryKey); 
 	    sql.append("where " + primaryKey + "= ?");
 	    params.add(primaryValue);
-	    System.out.println(sql.toString());
-	    executeSql(sql.toString(), params.toArray());
+	    if (count > 0) {
+	      executeSql(sql.toString(), params.toArray());
+	    }
 	}
 	@Override
 	public void update(Object object) {
@@ -124,6 +125,7 @@ public class MysqlQuery implements Query {
 	}
 	@Override
 	public List queryRows(String sql, Class clazz, Object[] params) {
+		
 		return null;
 	}
 
@@ -145,12 +147,13 @@ public class MysqlQuery implements Query {
 		MysqlQuery query = new MysqlQuery();
 //		query.delete(Address.class, "1");
 		Address address = new Address();
-		address.setId(2);
-		address.setAddress("湖北省");
-		address.setCreate_time(commonUtils.getToday());
-		address.setUpdate_time(commonUtils.getToday());
+//		address.setId(5);
+		address.setAddress("顾涛");
+//		address.setCreate_time(commonUtils.getToday());
+//		address.setUpdate_time(commonUtils.getToday());
 //		query.update(address, new String[]{"address","create_time"});
-//		query.delete(address);
-		query.update(address);
+		query.delete(address);
+//		query.update(address);
+//		query.insert(address);
 	}
 }
