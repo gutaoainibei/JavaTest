@@ -3,6 +3,8 @@ package MYORM.orm.com.gt.sorm.core;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +14,13 @@ import MYORM.orm.com.gt.sorm.bean.TableInfo;
 import MYORM.orm.com.gt.sorm.po.Address;
 import MYORM.orm.com.gt.sorm.utils.JDBCUtils;
 import MYORM.orm.com.gt.sorm.utils.ReflectUtils;
-
+/**
+ * 
+ * 描述：
+ * @author gt
+ * @created 2016年9月29日 上午9:37:39
+ * @since
+ */
 public class MysqlQuery implements Query {
     Logger logger = Logger.getLogger(MysqlQuery.class);
 	@Override
@@ -125,35 +133,90 @@ public class MysqlQuery implements Query {
 	}
 	@Override
 	public List queryRows(String sql, Class clazz, Object[] params) {
-		
-		return null;
+		Connection conn = DBManager.getConnection();
+		List list = null;
+		PreparedStatement psmt = null;
+		try {
+			psmt = conn.prepareStatement(sql);
+			JDBCUtils.handleParamers(psmt, params);
+			ResultSet rs = psmt.executeQuery();
+			ResultSetMetaData metaData = rs.getMetaData();
+			while (rs.next()) {
+				if(list == null){
+					list = new ArrayList();
+				}
+				Object object = clazz.newInstance();
+				for (int i = 0; i < metaData.getColumnCount(); i++) {
+					String columnName = metaData.getColumnLabel(i+1);
+					Object objValue = rs.getObject(i+1);
+					ReflectUtils.setMethodSetValue(object, columnName, objValue);
+				}
+				list.add(object);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(psmt, conn);
+		}
+		return list;
 	}
 
 	@Override
 	public Object queryUniqueRow(String sql, Class clazz, Object[] params) {
-		return null;
+		List list = queryRows(sql, clazz, params);
+		return list == null ? null : list.get(0);
 	}
-
 	@Override
 	public Object getValue(String sql, Object[] params) {
-		return null;
+		Connection conn = DBManager.getConnection();
+		Object obj = null;
+		PreparedStatement psmt = null;
+		try {
+			psmt = conn.prepareStatement(sql);
+			JDBCUtils.handleParamers(psmt, params);
+			ResultSet rs = psmt.executeQuery();
+			ResultSetMetaData metaData = rs.getMetaData();
+			while (rs.next()) {
+				obj = rs.getObject(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBManager.close(psmt, conn);
+		}
+		return obj;
 	}
 
 	@Override
 	public Number queryNumber(String sql, Object[] params) {
-		return null;
+		Number num = (Number)getValue(sql, params);
+		return num;
 	}
     public static void main(String[] args) {
 		MysqlQuery query = new MysqlQuery();
 //		query.delete(Address.class, "1");
 		Address address = new Address();
 //		address.setId(5);
-		address.setAddress("顾涛");
+//		address.setAddress("顾涛");
 //		address.setCreate_time(commonUtils.getToday());
 //		address.setUpdate_time(commonUtils.getToday());
 //		query.update(address, new String[]{"address","create_time"});
-		query.delete(address);
+//		query.delete(address);
 //		query.update(address);
 //		query.insert(address);
-	}
+//		List<Address> list = query.queryRows("select * from address where id = ?", Address.class, new Object[]{1});
+//		for (Address address2 : list) {
+//			System.out.println(address2.getId()+","+address2.getAddress()+","+address2.getCreate_time()+","+address2.getUpdate_time());
+//		}
+		Address address2= (Address) query.queryUniqueRow("select * from address where id = 5", Address.class, null);
+		System.out.println(address2);
+//		System.out.println(address2.getId()+","+address2.getAddress()+","+address2.getCreate_time()+","+address2.getUpdate_time());
+//        Object name = query.queryNumber("select count(*) from address ", null);
+//        System.out.println(name);
+    }
+	
 }

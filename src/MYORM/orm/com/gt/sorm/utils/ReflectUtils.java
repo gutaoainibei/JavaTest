@@ -1,5 +1,6 @@
 package MYORM.orm.com.gt.sorm.utils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 @SuppressWarnings("all")
@@ -22,5 +23,22 @@ public class ReflectUtils {
 		} catch (Exception e) {
 			return null;
 		} 
+    }
+    public static void setMethodSetValue(Object object , String columnName,Object objValue){
+    	try {
+			Class clazz = object.getClass();
+			Method method = clazz.getDeclaredMethod("set"+StringUtils.upFirstCharOfString(columnName), objValue.getClass());
+			method.invoke(object, objValue);
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
     }
 }

@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import oracle.net.aso.p;
 import MYORM.orm.com.gt.sorm.bean.ColumnInfo;
 import MYORM.orm.com.gt.sorm.bean.TableInfo;
 import MYORM.orm.com.gt.sorm.utils.JavaFileUtils;
@@ -38,11 +36,6 @@ public class TableContext {
 //	        //types有"TABLE"、"VIEW"、"SYSTEM TABLE"， "GLOBAL TEMPORARY"，"LOCAL  TEMPORARY"，"ALIAS"，"SYSNONYM"
 			Connection conn = DBManager.getConnection();
 			DatabaseMetaData metaData = conn.getMetaData();
-			System.out.println("产品名称："+metaData.getDatabaseProductName());
-			System.out.println("产品版本："+metaData.getDatabaseProductVersion());
-			System.out.println("驱动名称："+metaData.getDriverName());
-			System.out.println("驱动版本："+metaData.getDriverVersion());
-			System.out.println("当前数据库的类型信息："+metaData.getTypeInfo());
 			//  通过getTables（）方法返回的结果集中的每个表都有下面是10字段的描述信息，
 			//  而且只有10个。通常我们用到的也就是标红的几个字段。
 			//而且在结果集中直接使用下面字段前面的序号即可获取字段值。
@@ -122,6 +115,7 @@ public class TableContext {
 		}
 	}
 	public static void main(String[] args) {
-		System.out.println(tables);
+//		System.out.println(tables);
 	}
+	
 }
