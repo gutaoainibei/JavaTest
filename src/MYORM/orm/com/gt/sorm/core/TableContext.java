@@ -73,11 +73,11 @@ public class TableContext {
 			    if(table.getPriKeys().size() > 0){
 			    	table.setOnlyPriKey(table.getPriKeys().get(0));
 			    }
-			    //更新持久化类文件
-			    updateJavaPoFile();
-			    //添加类和表的关联
-			    loadPoTableClass();
 			}
+			//更新持久化类文件
+		    updateJavaPoFile();
+			//添加类和表的关联
+		    loadPoTableClass();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -111,11 +111,10 @@ public class TableContext {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-			
 		}
 	}
 	public static void main(String[] args) {
-//		System.out.println(tables);
+		System.out.println(tables);
 	}
 	
 }
