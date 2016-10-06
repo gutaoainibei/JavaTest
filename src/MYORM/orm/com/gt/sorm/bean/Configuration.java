@@ -37,12 +37,24 @@ public class Configuration {
 	 * java持久化包的路径
 	 */
 	private String packagePath;
-
+	/**
+	 * 项目中的查询类是哪个类
+	 */
+    private String queryClass;
+    /**
+     * 连接池最小容量
+     */
+    private Integer minPool;
+    /**
+     *连接池最大容量
+     */
+    private Integer maxPool;
+    
 	public Configuration() {
 	}
-
-	public Configuration(String driver, String url, String user,
-			String password, String usingDB, String srcPath, String packagePath) {
+	
+	public Configuration(String driver, String url, String user, String password, String usingDB, String srcPath,
+			String packagePath, String queryClass, Integer minPool, Integer maxPool) {
 		super();
 		this.driver = driver;
 		this.url = url;
@@ -51,6 +63,9 @@ public class Configuration {
 		this.usingDB = usingDB;
 		this.srcPath = srcPath;
 		this.packagePath = packagePath;
+		this.queryClass = queryClass;
+		this.minPool = minPool;
+		this.maxPool = maxPool;
 	}
 
 	public String getDriver() {
@@ -109,4 +124,28 @@ public class Configuration {
 		this.packagePath = packagePath;
 	}
 
+	public String getQueryClass() {
+		return queryClass;
+	}
+
+	public void setQueryClass(String queryClass) {
+		this.queryClass = queryClass;
+	}
+
+	public Integer getMinPool() {
+		return minPool;
+	}
+
+	public void setMinPool(Integer minPool) {
+		this.minPool = minPool;
+	}
+
+	public Integer getMaxPool() {
+		return maxPool;
+	}
+
+	public void setMaxPool(Integer maxPool) {
+		this.maxPool = maxPool;
+	}
+    
 }

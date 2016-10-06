@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import MYORM.orm.com.gt.sorm.bean.TableInfo;
 import MYORM.orm.com.gt.sorm.utils.JDBCUtils;
 import MYORM.orm.com.gt.sorm.utils.ReflectUtils;
@@ -21,7 +20,34 @@ import MYORM.orm.com.gt.sorm.utils.ReflectUtils;
  * @created 2016年8月24日 下午7:33:21
  * @since
  */
-public abstract class Query {
+public abstract class Query implements Cloneable{
+	/**
+	 * 
+	* @Title: queryTemplete 
+	* @Description: TODO(查询模板) 
+	* @param @param sql       sql语句
+	* @param @param clazz     查询表对应的class
+	* @param @param params    参数
+	* @param @param callBack  回掉方法
+	* @param @return    设定文件 
+	* @return Object    返回类型 
+	* @throws
+	 */
+	public Object queryTemplete(String sql , Class clazz , Object[] params,CallBack callBack){
+		Connection conn = DBManager.getConnection();
+  		PreparedStatement psmt = null;
+  		try {
+  			psmt = conn.prepareStatement(sql);
+  			JDBCUtils.handleParamers(psmt, params);
+  			ResultSet rs = psmt.executeQuery();
+  			return callBack.doExecute(clazz,rs);
+  		} catch (SQLException e) {
+  			e.printStackTrace();
+  			return null;
+  		}finally{
+  			DBManager.close(psmt, conn);
+  		}
+	}
 	  /**
 	   * 
 	   * 描述：执行sql语句
@@ -54,7 +80,7 @@ public abstract class Query {
        * @param object
        */
       public void insert(Object object){
-    	  Class clazz = object.getClass();
+    	    Class clazz = object.getClass();
 		    TableInfo tableInfo = TableContext.persistClassToTable.get(clazz);
 		    List<Object> params = new ArrayList<Object>();
 		    StringBuffer sql = new StringBuffer("insert into "+tableInfo.getTname()+"(");
@@ -184,37 +210,36 @@ public abstract class Query {
        * @param params
        * @return
        */
-      public List queryRows(String sql , Class clazz , Object[] params){
-    	Connection conn = DBManager.getConnection();
-  		List list = null;
-  		PreparedStatement psmt = null;
-  		try {
-  			psmt = conn.prepareStatement(sql);
-  			JDBCUtils.handleParamers(psmt, params);
-  			ResultSet rs = psmt.executeQuery();
-  			ResultSetMetaData metaData = rs.getMetaData();
-  			while (rs.next()) {
-  				if(list == null){
-  					list = new ArrayList();
-  				}
-  				Object object = clazz.newInstance();
-  				for (int i = 0; i < metaData.getColumnCount(); i++) {
-  					String columnName = metaData.getColumnLabel(i+1);
-  					Object objValue = rs.getObject(i+1);
-  					ReflectUtils.setMethodSetValue(object, columnName, objValue);
-  				}
-  				list.add(object);
-  			}
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  		} catch (InstantiationException e) {
-  			e.printStackTrace();
-  		} catch (IllegalAccessException e) {
-  			e.printStackTrace();
-  		} finally{
-  			DBManager.close(psmt, conn);
-  		}
-  		return list;
+      public List queryRows(String sql ,final Class clazz , Object[] params){
+  		return (List)queryTemplete(sql, clazz, params, new CallBack() {
+			@Override
+			public Object doExecute(Class clazz, ResultSet rs) {
+				List list = new ArrayList();
+				ResultSetMetaData metaData;
+	  			try {
+	  				metaData = rs.getMetaData();
+					while (rs.next()) {
+						if(list == null){
+							list = new ArrayList();
+						}
+						Object object = clazz.newInstance();
+						for (int i = 0; i < metaData.getColumnCount(); i++) {
+							String columnName = metaData.getColumnLabel(i+1);
+							Object objValue = rs.getObject(i+1);
+							ReflectUtils.setMethodSetValue(object, columnName, objValue);
+						}
+						list.add(object);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+	  			return list;
+			}
+		});
       }
       /**
        * 
@@ -229,7 +254,7 @@ public abstract class Query {
        */
       public Object queryUniqueRow(String sql , Class clazz , Object[] params){
     	  List list = queryRows(sql, clazz, params);
-  		  return list == null ? null : list.get(0);
+  		  return (list != null && list.size()>0) ? list.get(0) : null;
       }
       /**
        * 
@@ -242,23 +267,21 @@ public abstract class Query {
        * @return
        */
       public Object getValue(String sql , Object[] params){
-    	  Connection conn = DBManager.getConnection();
-  		Object obj = null;
-  		PreparedStatement psmt = null;
-  		try {
-  			psmt = conn.prepareStatement(sql);
-  			JDBCUtils.handleParamers(psmt, params);
-  			ResultSet rs = psmt.executeQuery();
-  			ResultSetMetaData metaData = rs.getMetaData();
-  			while (rs.next()) {
-  				obj = rs.getObject(1);
-  			}
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  		} finally{
-  			DBManager.close(psmt, conn);
-  		}
-  		return obj;
+    	  return queryTemplete(sql, null, params, new CallBack() {
+    		  Object obj = null;
+			@Override
+			public Object doExecute(Class clazz, ResultSet rs) {
+				try {
+					while (rs.next()) {
+						obj = rs.getObject(1);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return obj;
+			}
+		});
+
       }
       /**
        * 
@@ -273,5 +296,9 @@ public abstract class Query {
       public Number queryNumber(String sql , Object[] params){
     	  Number num = (Number)getValue(sql, params);
   		  return num;
+      }
+      @Override
+      protected Object clone() throws CloneNotSupportedException {
+    	return super.clone();
       }
 }
