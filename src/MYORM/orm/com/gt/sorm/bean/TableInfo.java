@@ -3,7 +3,13 @@ package MYORM.orm.com.gt.sorm.bean;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+	* @ClassName: TableInfo 
+	* @Description: 表对应的java bean实例 
+	* @author gutao 
+	* @date 2016年10月8日 下午2:25:20 
+	*
+ */
 public class TableInfo {
 	// 表名
 	private String tname;

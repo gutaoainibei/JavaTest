@@ -12,16 +12,19 @@ import MYORM.orm.com.gt.sorm.bean.TableInfo;
 import MYORM.orm.com.gt.sorm.utils.JavaFileUtils;
 import MYORM.orm.com.gt.sorm.utils.StringUtils;
 /**
- * 
- * 描述：表信息
- * @author gt
- * @created 2016年9月4日 上午10:35:14
- * @since
+	* @ClassName: TableContext 
+	* @Description: 表信息 
+	* @author gutao 
+	* @date 2016年10月8日 下午1:25:48 
  */
 public class TableContext {
-	//保存所有表名合表信息
+	/**
+	 * 保存所有表名合表信息
+	 */
 	public static Map<String, TableInfo> tables = new HashMap<String,TableInfo>();
-	//保存所有对象合表对应的数据
+	/**
+	 * 保存所有对象合表对应的数据
+	 */
 	public static Map<Class, TableInfo> persistClassToTable = new HashMap<Class,TableInfo>();
 	static{
 		try {
@@ -83,11 +86,11 @@ public class TableContext {
 		}
 	}
 	/**
-	 * 
-	 * 描述：更新持久化类
-	 * @author gt
-	 * @created 2016年9月26日 下午4:56:01
-	 * @since
+		* @Title: updateJavaPoFile 
+		* @Description: 更新持久化类 
+		* @param     设定文件 
+		* @return void    返回类型 
+		* @throws
 	 */
 	public static void updateJavaPoFile(){
 		if(tables != null){
@@ -97,11 +100,11 @@ public class TableContext {
 		}
 	}
 	/**
-	 * 
-	 * 描述：表和对应的class关联起来
-	 * @author gt
-	 * @created 2016年9月26日 下午5:03:33
-	 * @since
+		* @Title: loadPoTableClass 
+		* @Description: 表和对应的class关联起来 
+		* @param     设定文件 
+		* @return void    返回类型 
+		* @throws
 	 */
 	public static  void loadPoTableClass(){
 		for (TableInfo tableInfo : tables.values()) {
@@ -113,8 +116,4 @@ public class TableContext {
 			}
 		}
 	}
-	public static void main(String[] args) {
-		System.out.println(tables);
-	}
-	
 }

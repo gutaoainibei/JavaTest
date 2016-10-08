@@ -5,16 +5,12 @@ package MYORM.orm.com.gt.sorm.core;
 import org.apache.log4j.Logger;
 /**
  * 
- * 描述：
- * @author gt
- * @created 2016年9月29日 上午9:37:39
- * @since
+* @ClassName: MysqlQuery 
+* @Description: mysql数据库的数据操作类
+* @author gutao 
+* @date 2016年10月8日 下午1:12:48 
+*
  */
 public class MysqlQuery extends Query {
     Logger logger = Logger.getLogger(MysqlQuery.class);
-	
-    public static void main(String[] args) {
-		MysqlQuery query = new MysqlQuery();
-    }
-	
 }

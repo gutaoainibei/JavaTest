@@ -7,16 +7,23 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+/**
+ * 
+* @ClassName: commonUtils 
+* @Description: 通用工具类
+* @author gutao 
+* @date 2016年10月8日 下午2:19:43 
+*
+ */
 public class commonUtils {
 	/**
-	 * 
-	 * ��������������С��λ���ҿ�����������
-	 * @author gt
-	 * @created 2016��7��20�� ����5:27:42
-	 * @since 
-	 * @param num С��
-	 * @param count ��Ҫ����С����λ��
-	 * @return
+		* @Title: getDoubleRound 
+		* @Description: 四舍五入数字 
+		* @param @param 需要操作的数字
+		* @param @param 精确到几位
+		* @param @return    设定文件 
+		* @return double    返回类型 
+		* @throws
 	 */
     public static double getDoubleRound(Double num,int count){
     	double number = num;
@@ -25,25 +32,24 @@ public class commonUtils {
     	number = number/100;
     	return number;
     }
-    /**
-     * 
-     * ��������ȡ����ʱ��ʱ��
-     * @author gt
-     * @created 2016��9��1�� ����10:11:01
-     * @since 
-     * @return
-     */
+   /**
+	   * @Title: getToday 
+	   * @Description: 获取当前时间（yyyy-MM-dd HH:mm:ss格式） 
+	   * @param @return    设定文件 
+	   * @return String    返回当前时间
+	   * @throws
+    */
     public static String getToday(){
     	return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }
     /**
-     * 
-     * ��������ȡ���뵱ǰʱ���������������ַ���
-     * @author gt
-     * @created 2016��9��2�� ����2:13:48
-     * @since 
-     * @param days ���������˵���Ǻ��죬��������ǰdays��
-     * @return
+	    * @Title: getTodayRecentDay 
+	    * @Description: 获取当前时间的近几天的时间 
+	    * @param @param 需要的格式
+	    * @param @param 近几天，如果是0就是当天
+	    * @param @return    设定文件 
+	    * @return String    返回类型 
+	    * @throws
      */
     public static String getTodayRecentDay(String format,int days){
     	Calendar calendar = Calendar.getInstance();
@@ -52,24 +58,25 @@ public class commonUtils {
     	String dataStr = new SimpleDateFormat(format).format(date);
     	return dataStr;
     }
-    /**
-     * 
-     * ��������ȡ���ظ���id
-     * @author gt
-     * @created 2016��9��6�� ����4:59:21
-     * @since 
-     * @return
-     */
+   /**
+	   * @Title: getUUID 
+	   * @Description: 获取UUID
+	   * @param @return    设定文件 
+	   * @return String    返回类型 
+	   * @throws
+    */
     public static String getUUID(){
     	return UUID.randomUUID().toString();
     }
     /**
-     * 
-     * ������
-     * @author gt
-     * @created 2016��9��7�� ����2:42:36
-     * @since 
-     * @return
+	    * @Title: compareDate 
+	    * @Description: 比较时间 
+	    * @param @param begintime
+	    * @param @param endtime
+	    * @param @param format
+	    * @param @return    设定文件 
+	    * @return boolean    返回类型 
+	    * @throws
      */
     public static boolean compareDate(String begintime,String endtime,String format){
     	try {
@@ -88,15 +95,14 @@ public class commonUtils {
 		} 
     	return false;
     }
-    /**
-     * 
-     * �������Ƿ��ǷǸ�ʵ��
-     * @author gt
-     * @created 2016��9��14�� ����2:48:05
-     * @since 
-     * @param param
-     * @return
-     */
+   /**
+	   * @Title: isNumber 
+	   * @Description: 判断是否是非负实数 
+	   * @param @param param
+	   * @param @return    设定文件 
+	   * @return boolean    返回类型 
+	   * @throws
+    */
     public static boolean isNumber(String param){
     	boolean flag = false;
     	Pattern pattern = Pattern.compile("^\\d*\\.{0,1}\\d+$");
@@ -104,7 +110,4 @@ public class commonUtils {
     	flag = matcher.matches();
     	return flag;
     }
-    public static void main(String[] args) {
-		System.out.println(isNumber("20160-914"));
-	}
 }

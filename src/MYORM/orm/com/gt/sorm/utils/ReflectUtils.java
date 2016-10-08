@@ -2,7 +2,14 @@ package MYORM.orm.com.gt.sorm.utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
+/**
+ * 
+* @ClassName: ReflectUtils 
+* @Description: 反射工具操作类 
+* @author gutao 
+* @date 2016年10月8日 下午2:22:09 
+*
+ */
 @SuppressWarnings("all")
 public class ReflectUtils {
 	/**

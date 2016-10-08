@@ -15,16 +15,17 @@ import MYORM.orm.com.gt.sorm.utils.ReflectUtils;
 
 /**
  * 
- * 描述：
- * @author gt
- * @created 2016年8月24日 下午7:33:21
- * @since
+* @ClassName: Query 
+* @Description: 数据库操作父类 
+* @author gutao 
+* @date 2016年10月8日 下午1:14:00 
+*
  */
 public abstract class Query implements Cloneable{
 	/**
 	 * 
 	* @Title: queryTemplete 
-	* @Description: TODO(查询模板) 
+	* @Description: 查询模板 
 	* @param @param sql       sql语句
 	* @param @param clazz     查询表对应的class
 	* @param @param params    参数
@@ -48,15 +49,14 @@ public abstract class Query implements Cloneable{
   			DBManager.close(psmt, conn);
   		}
 	}
-	  /**
-	   * 
-	   * 描述：执行sql语句
-	   * @author gt
-	   * @created 2016年8月24日 下午7:38:19
-	   * @since 
-	   * @param sql sql语句
-	   * @param params 参数
-	   */
+	 /**
+	 * @Title: executeSql 
+	 * @Description: sql执行方法
+	 * @param @param sql      执行的sql语句
+	 * @param @param params   参数
+	 * @return void    返回类型 
+	 * @throws
+	  */
       public  void executeSql(String sql, Object[] params){
     	  Connection conn = DBManager.getConnection();
 		  PreparedStatement pstm = null;
@@ -71,14 +71,13 @@ public abstract class Query implements Cloneable{
 				DBManager.close(pstm, conn);
 			}
       }
-      /**
-       * 
-       * 描述：插入数据，存储一个对象
-       * @author gt
-       * @created 2016年8月24日 下午7:41:30
-       * @since 
-       * @param object
-       */
+     /**
+	     * @Title: insert 
+	     * @Description: 插入数据，存储一个对象 
+	     * @param @param object    插入的数据 
+	     * @return void    返回类型 
+	     * @throws
+      */
       public void insert(Object object){
     	    Class clazz = object.getClass();
 		    TableInfo tableInfo = TableContext.persistClassToTable.get(clazz);
@@ -106,13 +105,12 @@ public abstract class Query implements Cloneable{
 			}
       }
       /**
-       * 
-       * 描述：按照id删除一个对象
-       * @author gt
-       * @created 2016年8月30日 下午10:20:15
-       * @since 
-       * @param clazz 和表对应的class对象
-       * @param id 主键id
+	      * @Title: delete 
+	      * @Description: 按照id删除一个对象
+	      * @param @param clazz
+	      * @param @param id    设定文件 
+	      * @return void    返回类型 
+	      * @throws
        */
       public void delete(Class clazz,Object id){
     	  Map<Class, TableInfo> map = TableContext.persistClassToTable;
@@ -121,12 +119,12 @@ public abstract class Query implements Cloneable{
           executeSql(sql,new Object[]{id});
       }
       /**
-       * 
-       * 描述：删除对象
-       * @author gt
-       * @created 2016年8月30日 下午10:24:23
-       * @since 
-       * @param object
+          * 
+	      * @Title: delete 
+	      * @Description: 删除对象 
+	      * @param @param object  要删除的对象
+	      * @return void    返回类型 
+	      * @throws
        */
       public void delete(Object object){
     	  Class clazz = object.getClass();
@@ -136,12 +134,11 @@ public abstract class Query implements Cloneable{
           delete(clazz, obj);
       }
       /**
-       * 
-       * 描述：直接更新传入对象
-       * @author gt
-       * @created 2016年9月27日 下午2:07:13
-       * @since 
-       * @param object
+	      * @Title: update 
+	      * @Description:直接更新传入对象
+	      * @param @param object    要更新的对象 
+	      * @return void    返回类型 
+	      * @throws
        */
       public void update(Object object){
     	  Class clazz = object.getClass();
@@ -169,46 +166,43 @@ public abstract class Query implements Cloneable{
  		 }
       }
       /**
-       * 
-       * 描述：更新对象，按照要求的列
-       * @author gt
-       * @created 2016年8月30日 下午10:28:14
-       * @since 
-       * @param object
-       * @param fieldNames
-       * @return
+	      * @Title: update 
+	      * @Description: 更新对象，按照要求的列 
+	      * @param @param object        要更新的对象
+	      * @param @param fieldNames    要更新的字段
+	      * @return void    返回类型 
+	      * @throws
        */
       public void update(Object object , String[] fieldNames){
-    	  Class clazz = object.getClass();
-  	    TableInfo tableInfo = TableContext.persistClassToTable.get(clazz);
-  	    List<Object> params = new ArrayList<Object>();
-  	    StringBuffer sql = new StringBuffer("update "+tableInfo.getTname()+" set ");
-  	    int count = 0;
-  	    for (String colunmnName : fieldNames) {
+    	    Class clazz = object.getClass();
+	  	    TableInfo tableInfo = TableContext.persistClassToTable.get(clazz);
+	  	    List<Object> params = new ArrayList<Object>();
+	  	    StringBuffer sql = new StringBuffer("update "+tableInfo.getTname()+" set ");
+	  	    int count = 0;
+	  	    for (String colunmnName : fieldNames) {
   	    	count++;
   			sql.append(colunmnName+" = ? ,");
   		    Object fieldValue = ReflectUtils.getMethodRetunValue(object, colunmnName);
   		    params.add(fieldValue);
-  		}
-  	    sql.setCharAt(sql.length()-1, ' ');
-  	    String primaryKey = tableInfo.getOnlyPriKey().getName();
-  	    Object primaryValue = ReflectUtils.getMethodRetunValue(object, primaryKey); 
-  	    sql.append("where " + primaryKey + "= ?");
-  	    params.add(primaryValue);
-  	    if (count > 0) {
-  	      executeSql(sql.toString(), params.toArray());
-  	    }
-      }//update *** set name = ?,password = ?
+  		    }
+	  	    sql.setCharAt(sql.length()-1, ' ');
+	  	    String primaryKey = tableInfo.getOnlyPriKey().getName();
+	  	    Object primaryValue = ReflectUtils.getMethodRetunValue(object, primaryKey); 
+	  	    sql.append("where " + primaryKey + "= ?");
+	  	    params.add(primaryValue);
+	  	    if (count > 0) {
+	  	      executeSql(sql.toString(), params.toArray());
+	  	    }
+      }
       /**
-       * 
-       * 描述：条件查询，返回结果集
-       * @author gt
-       * @created 2016年8月30日 下午10:33:30
-       * @since 
-       * @param sql
-       * @param clazz
-       * @param params
-       * @return
+	      * @Title: queryRows 
+	      * @Description: 条件查询，返回结果集
+	      * @param 查询sql
+	      * @param 查询对应的class
+	      * @param 查询参数
+	      * @param @return    设定文件 
+	      * @return List      返回查询数据
+	      * @throws
        */
       public List queryRows(String sql ,final Class clazz , Object[] params){
   		return (List)queryTemplete(sql, clazz, params, new CallBack() {
@@ -242,29 +236,27 @@ public abstract class Query implements Cloneable{
 		});
       }
       /**
-       * 
-       * 描述：返回一行
-       * @author gt
-       * @created 2016年8月30日 下午10:36:02
-       * @since 
-       * @param sql
-       * @param clazz 用于封装对象
-       * @param params
-       * @return
+      * @Title: queryUniqueRow 
+      * @Description: 查询一行
+      * @param 查询sql
+      * @param 查询数据对应的class
+      * @param 查询的输入参数
+      * @param @return    设定文件 
+      * @return Object    返回类型 
+      * @throws
        */
       public Object queryUniqueRow(String sql , Class clazz , Object[] params){
     	  List list = queryRows(sql, clazz, params);
   		  return (list != null && list.size()>0) ? list.get(0) : null;
       }
       /**
-       * 
-       * 描述：获取一行一直
-       * @author gt
-       * @created 2016年8月30日 下午10:38:09
-       * @since 
-       * @param sql
-       * @param params
-       * @return
+	      * @Title: getValue 
+	      * @Description:获取一行一值 
+	      * @param @param 执行的sql
+	      * @param @param 执行的参数
+	      * @param 返回值
+	      * @return Object    返回类型 
+	      * @throws
        */
       public Object getValue(String sql , Object[] params){
     	  return queryTemplete(sql, null, params, new CallBack() {
@@ -284,14 +276,13 @@ public abstract class Query implements Cloneable{
 
       }
       /**
-       * 
-       * 描述：获取一行一列的值（数字）
-       * @author gt
-       * @created 2016年8月30日 下午10:42:32
-       * @since 
-       * @param sql
-       * @param params
-       * @return
+	      * @Title: queryNumber 
+	      * @Description: 获取一行一列的值（数字） 
+	      * @param @param 执行sql
+	      * @param @param 输入的参数
+	      * @param @return    设定文件 
+	      * @return Number    返回数字
+	      * @throws
        */
       public Number queryNumber(String sql , Object[] params){
     	  Number num = (Number)getValue(sql, params);

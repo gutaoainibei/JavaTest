@@ -1,5 +1,12 @@
 package MYORM.orm.com.gt.sorm.core;
-
+/**
+ * 
+* @ClassName: MysqlTypeConvertor 
+* @Description:mysql数据库类型转换类 
+* @author gutao 
+* @date 2016年10月8日 下午1:13:26 
+*
+ */
 public class MysqlTypeConvertor implements TypeConvertor {
 
 	@Override

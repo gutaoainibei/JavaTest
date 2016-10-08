@@ -9,7 +9,7 @@ import MYORM.orm.com.gt.sorm.core.DBManager;
 /**
  * 
 * @ClassName: DBConnectionPool 
-* @Description: TODO(连接池) 
+* @Description: 连接池 
 * @author gutao 
 * @date 2016年10月6日 下午12:20:39 
 *
@@ -28,16 +28,22 @@ public class DBConnectionPool {
      */
     private static final Integer minPoolSize = DBManager.getConfig().getMinPool();
     /**
-     * 
-    * @Title: initPool 
-    * @Description: 初始化连接池 
-    * @param     设定文件 
-    * @return void    返回类型 
-    * @throws
+	    * @Title: initPool 
+	    * @Description: 初始化连接池 
+	    * @param     设定文件 
+	    * @return void    返回类型 
+	    * @throws
      */
     public DBConnectionPool(){
     	initPool();
     }
+    /**
+	    * @Title: initPool 
+	    * @Description: 初始化连接池 
+	    * @param     设定文件 
+	    * @return void    返回类型 
+	    * @throws
+     */
     public void initPool(){
     	if(poolList == null){
     		poolList = new ArrayList<Connection>();
@@ -48,11 +54,11 @@ public class DBConnectionPool {
 		}
     }
     /**
-    * @Title: close 
-    * @Description: 关闭连接（放回到连接池） 
-    * @param     设定文件 
-    * @return void    返回类型 
-    * @throws
+	    * @Title: close 
+	    * @Description: 关闭连接（放回到连接池） 
+	    * @param     设定文件 
+	    * @return void    返回类型 
+	    * @throws
      */
     public synchronized void close(Connection connection){
     	if(poolList.size() >= maxPoolSize){
@@ -67,6 +73,13 @@ public class DBConnectionPool {
     		poolList.add(connection);
     	}
     }
+    /**
+	    * @Title: getConnection 
+	    * @Description: 获取连接 
+	    * @param @return    设定文件 
+	    * @return Connection    返回类型 
+	    * @throws
+     */
     public synchronized Connection getConnection(){
         int pool_size = poolList.size()-1;
         if(pool_size < 0){

@@ -22,8 +22,18 @@ public class QueryFactory {
 			e.printStackTrace();
 		}
       }
+      /**
+       * 私有构造方法
+       */
       private QueryFactory(){
       }
+      /**
+      * @Title: createQuery 
+      * @Description: 创建查询类 
+      * @param @return    设定文件 
+      * @return Query    返回类型 
+      * @throws
+       */
       public static Query createQuery(){
     	  try {
 			return (Query) query.clone();

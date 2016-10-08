@@ -1,5 +1,11 @@
 package MYORM.orm.com.gt.sorm.bean;
-
+/**
+	* @ClassName: ColumnInfo 
+	* @Description: 列对应的javabean 
+	* @author gutao 
+	* @date 2016年10月8日 下午2:24:39 
+	*
+ */
 public class ColumnInfo {
 	// 字段名称
 	private String name;

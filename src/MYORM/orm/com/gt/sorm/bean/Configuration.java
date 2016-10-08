@@ -3,7 +3,6 @@ package MYORM.orm.com.gt.sorm.bean;
 /**
  * 
  * 描述：配置信息
- * 
  * @author gt
  * @created 2016年8月31日 下午11:17:11
  * @since

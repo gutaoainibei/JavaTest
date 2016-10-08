@@ -19,25 +19,23 @@ import MYORM.orm.com.gt.sorm.core.DBManager;
 import MYORM.orm.com.gt.sorm.core.MysqlTypeConvertor;
 import MYORM.orm.com.gt.sorm.core.TableContext;
 import MYORM.orm.com.gt.sorm.core.TypeConvertor;
-
 /**
- * 
- * 描述：封装了生成java文件(源代码)常用的操作
- * @author gt
- * @created 2016年8月30日 下午10:56:12
- * @since
+* @ClassName: JavaFileUtils 
+* @Description: 封装了生成java文件(源代码)常用的操作
+* @author gutao 
+* @date 2016年10月8日 下午2:20:16 
+*
  */
 public class JavaFileUtils {
 	private static Logger logger = Logger.getLogger(JavaFileUtils.class);
    /**
-    * 
-    * 描述：根据列信息生成对应的java属性和set、get方法的内容的字符串
-    * @author gt
-    * @created 2016年9月26日 下午3:08:30
-    * @since 
-    * @param columnInfo 列信息
-    * @param convertor 转换器
-    * @return
+	   * @Title: createFieldSetGetSRC 
+	   * @Description: 根据列信息生成对应的java属性和set、get方法的内容的字符串 
+	   * @param @param columnInfo
+	   * @param @param convertor
+	   * @param @return    设定文件 
+	   * @return JavaFieldGetSet    返回类型 
+	   * @throws
     */
 	public static JavaFieldGetSet createFieldSetGetSRC(ColumnInfo columnInfo,TypeConvertor convertor){
 		JavaFieldGetSet jfgs = new JavaFieldGetSet();

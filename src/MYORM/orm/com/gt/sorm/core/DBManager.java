@@ -9,6 +9,14 @@ import java.sql.Statement;
 import java.util.Properties;
 import MYORM.orm.com.gt.sorm.bean.Configuration;
 import MYORM.orm.com.gt.sorm.pool.DBConnectionPool;
+/**
+ * 
+* @ClassName: DBManager 
+* @Description: 数据库连接管理类 
+* @author gutao 
+* @date 2016年10月8日 下午1:12:07 
+*
+ */
 public class DBManager {
 	/**
 	 * 配置文件的bean
