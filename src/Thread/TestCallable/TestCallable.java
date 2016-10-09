@@ -18,11 +18,11 @@ import Thread.ThreadTest1;
 public class TestCallable implements Callable<Integer>{
 
 	public Integer call() throws Exception {
-		
+		System.out.println("gt");
 		return 100;
 	}
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-    	 	
+    	TestCallAble();
 	}
     /**
      * 
@@ -47,10 +47,11 @@ public class TestCallable implements Callable<Integer>{
 		//新建一个线程类
 		TestCallable t1 = new TestCallable();
 		//启动线程并返回值
-		Future<Integer> future = exesService.submit(t1);
+		//Future<Integer> future =
+				exesService.submit(t1);
 		//取回返回值
-		int result = future.get();
-		System.out.println(result);
+		//int result = future.get();
+		//System.out.println(result);
 		//停止服务
 		exesService.shutdown();
     }

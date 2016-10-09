@@ -1,6 +1,4 @@
 package Thread.JoinThread;
-
-
 /**
  * 
  * 描述：线程阻塞
