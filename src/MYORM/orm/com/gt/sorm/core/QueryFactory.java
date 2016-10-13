@@ -18,7 +18,7 @@ public class QueryFactory {
     	  try {
 			Class clazz = Class.forName(DBManager.getConfig().getQueryClass());
     	    query = (Query) clazz.newInstance();
-    	  } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+    	  } catch (Exception e) {
 			e.printStackTrace();
 		}
       }

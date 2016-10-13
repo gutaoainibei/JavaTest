@@ -21,7 +21,7 @@ public class MyClassLoader2 extends ClassLoader{
 	private String rootdir;
 	
 	public MyClassLoader2(String rootdir){
-		System.out.println("gg");
+		System.out.println("根路径："+rootdir);
 		this.rootdir = rootdir;
 	}
     public String getRootdir() {

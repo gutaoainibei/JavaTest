@@ -21,7 +21,7 @@ public class TestTimer {
 class TestTimerTask extends TimerTask{
 	@Override
 	public void run() {
-		System.out.println("顾涛爱倪贝");
+		System.out.println("gutao");
 	}
 	
 }

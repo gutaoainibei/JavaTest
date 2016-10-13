@@ -18,16 +18,16 @@ public class CurrentThreadCLassLoader {
         ClassLoader classLoader2 = Thread.currentThread().getContextClassLoader();
         System.out.println(classLoader2);
         System.out.println("------------------------");
-//        Thread.currentThread().setContextClassLoader(new MyClassLoader("F:/JavaIO"));
-//        System.out.println(Thread.currentThread().getContextClassLoader());
-//        Class<?> class1 = Thread.currentThread().getContextClassLoader().loadClass("ClassLoader.test1");
-//        System.out.println(class1);
-//        System.out.println(class1.getClassLoader());
+        Thread.currentThread().setContextClassLoader(new MyClassLoader2("F:/JavaIO"));
+        System.out.println(Thread.currentThread().getContextClassLoader());
+        Class<?> class1 = Thread.currentThread().getContextClassLoader().loadClass("ClassLoader.test1");
+        System.out.println(class1);
+        System.out.println(class1.getClassLoader());
         System.out.println("*********************************");
         Thread.currentThread().setContextClassLoader(new MyClassLoader2("F:/JavaIO/com/gt"));
-       MyClassLoader2 c1 = (MyClassLoader2) Thread.currentThread().getContextClassLoader();
+        MyClassLoader2 c1 = (MyClassLoader2) Thread.currentThread().getContextClassLoader();
         System.out.println("当前类加载器："+c1);
-        Class<?> class2 = c1.loadClass("Person");
+        Class<?> class2 = c1.loadClass("People");
         System.out.println(class2);
         System.out.println(class2.getClassLoader());
     }

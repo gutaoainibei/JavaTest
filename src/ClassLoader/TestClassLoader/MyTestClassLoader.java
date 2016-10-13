@@ -5,9 +5,9 @@ public class MyTestClassLoader {
 		MyClassLoader mycClassLoader1 = new MyClassLoader("F:/JavaIO");
 		MyClassLoader mycClassLoader2 = new MyClassLoader("F:/JavaIO");
 
-		Class<?> class1 = mycClassLoader1.loadClass("DynamicCompiler");
-		Class<?> class2 = mycClassLoader1.loadClass("DynamicCompiler");
-		Class<?> class3 = mycClassLoader2.loadClass("DynamicCompiler");
+		Class<?> class1 = mycClassLoader1.loadClass("DynamicCompiler1");
+		Class<?> class2 = mycClassLoader1.loadClass("DynamicCompiler1");
+		Class<?> class3 = mycClassLoader2.loadClass("DynamicCompiler1");
 		Class<?> class4 = mycClassLoader1.loadClass("java.lang.String");
 		System.out.println(class1.hashCode());
 		System.out.println(class2.hashCode());
