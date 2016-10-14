@@ -28,6 +28,14 @@ public class changePageToH5 {
 			String path = "D:/develop/workspace1/thinkive-sj1-YTG-web/src/main/webapp/m/ytg/views";
 		    listAllhtml(path);
 	    }
+		/**
+		 * 描述：获取模板html
+		 * @author gt
+		 * @created 2016年10月14日 下午2:06:16
+		 * @since 
+		 * @param modelPath
+		 * @return
+		 */
 	    public static String getModelHtml(String modelPath){
 	    	StringBuffer modelHtmlStr = new StringBuffer();
 	    	BufferedReader reader = null;
@@ -55,7 +63,14 @@ public class changePageToH5 {
 				}
 			}
 	    } 
-	    
+	    /**
+	     * 
+	     * 描述：遍历所有需要转换的原型页面
+	     * @author gt
+	     * @created 2016年10月14日 下午2:06:48
+	     * @since 
+	     * @param path
+	     */
 	    public static void listAllhtml(String path){
 	    	if(path == null || path.trim().length()<1){
 	    		return ;
@@ -73,7 +88,14 @@ public class changePageToH5 {
 	    		createFile(file);//创建h5的html文件,并指定要放到那个目录下
 	    	}
 	    }
-	    
+	    /**
+	     * 
+	     * 描述：创建需要的html页面
+	     * @author gt
+	     * @created 2016年10月14日 下午2:07:14
+	     * @since 
+	     * @param filehtml
+	     */
 	    public static void createFile(File filehtml){
 	    	String ablutePath = filehtml.getAbsolutePath().replace("\\", "/");
 	    	String htmlPath = ablutePath.substring(ablutePath.indexOf("m/")+2, ablutePath.lastIndexOf("/"))+"/"+filehtml.getName();
