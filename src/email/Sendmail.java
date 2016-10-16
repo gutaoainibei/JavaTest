@@ -5,7 +5,6 @@ import java.util.Properties;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -13,12 +12,12 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.NewsAddress;
 
 
-import javax.mail.internet.MimeMessage.RecipientType;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
+
+import com.sun.mail.util.MailSSLSocketFactory;
 
 
 
@@ -38,13 +37,14 @@ public class Sendmail {
 	    public static void main(String[] args) throws Exception {
 	         
 	         Properties prop = new Properties();
-	         prop.setProperty("mail.host", "smtp.qq.com");
+	         prop.setProperty("mail.host", "smtp.exmail.qq.com");
 	         prop.setProperty("mail.transport.protocol", "smtp");
 	         prop.setProperty("mail.smtp.auth", "true");
 	         prop.setProperty("mail.debug", "true");
-//	         MailSSLSocketFactory sf = new MailSSLSocketFactory();
-//	         prop.put("mail.smtp.ssl.enable", "true");
-//	         prop.put("mail.smtp.ssl.socketFactory", sf);
+	         //qq邮箱要以ssl加密发送
+	         MailSSLSocketFactory sf = new MailSSLSocketFactory();
+	         prop.put("mail.smtp.ssl.enable", "true");
+	         prop.put("mail.smtp.ssl.socketFactory", sf);
 	         //使用JavaMail发送邮件的5个步骤
 	         //1、创建session
 	         Session session = Session.getInstance(prop);
@@ -53,7 +53,8 @@ public class Sendmail {
 	         //2、通过session得到transport对象
 	         Transport ts = session.getTransport();
 	         //3、使用邮箱的用户名和密码连上邮件服务器，发送邮件时，发件人需要提交邮箱的用户名和密码给smtp服务器，用户名和密码都通过验证之后才能够正常发送邮件给收件人。
-	         ts.connect("smtp.qq.com", "gujt@thinkive.com", "Gutao1111");//crtyfvcqbfreheda，//icrgxgeskwigieec
+	         ts.connect("smtp.qq.com", "1093656744@qq.com", "icrgxgeskwigieec");//crtyfvcqbfreheda，//icrgxgeskwigieec
+//	         ts.connect("smtp.qq.com", "1093656744@qq.com", "icrgxgeskwigieec");//crtyfvcqbfreheda，//icrgxgeskwigieec
 	         //4、创建邮件
 	         Message message = getMessageIncludeImage(session);//createSimpleMail(session);
 	         //5、发送邮件
@@ -74,11 +75,11 @@ public class Sendmail {
 	        //创建邮件对象
 	         MimeMessage message = new MimeMessage(session);
 	        //指明邮件的发件人
-	        message.setFrom(new InternetAddress("gujt@thinkive.com"));
+	        message.setFrom(new InternetAddress("1093656744@qq.com"));
 	        //指明邮件的收件人，Message.RecipientType.TO
 	        message.setRecipient(Message.RecipientType.TO, new InternetAddress("1093656744@qq.com"));
 	        //Message.RecipientType.BCC：指明邮件秘密再发送给谁,//Message.RecipientType.CC,指明需要抄送的人，单个人addRecipients
-	        message.addRecipients(Message.RecipientType.CC, new Address[]{new InternetAddress("gujt@thinkive.com"),new InternetAddress("1093656744@qq.com")});
+//	        message.addRecipients(Message.RecipientType.CC, new Address[]{new InternetAddress("gujt@thinkive.com"),new InternetAddress("1093656744@qq.com")});
 	        //Message.RecipientType.BCC：指明邮件秘密再发送给谁
 //	        message.setRecipient(Message.RecipientType.BCC, new InternetAddress("gujt@thinkive.com"));
 	        //邮件的标题
@@ -95,7 +96,7 @@ public class Sendmail {
 	    	 MimeMessage message = new MimeMessage(session);
 	    	 //发送人
 	    	 try {
-				message.setFrom(new InternetAddress("gujt@thinkive.com"));
+				message.setFrom(new InternetAddress("1093656744@qq.com"));
 				message.setSubject("测试带有其他内容");
 				message.setRecipient(Message.RecipientType.TO, new InternetAddress("1093656744@qq.com"));
 				MimeBodyPart text = new MimeBodyPart();
@@ -105,7 +106,7 @@ public class Sendmail {
 			    DataHandler data = new DataHandler(new FileDataSource("F:/webjaeeWorkspace/JavaTest/config/520.jpg"));
 			    image.setDataHandler(data);
 			    image.setFileName(MimeUtility.encodeText(data.getName()));
-			   // image.setContentID("520.jpg");
+//			    image.setContentID("520.jpg");
 			    
 			    MimeMultipart mulPart = new MimeMultipart();
 			    mulPart.addBodyPart(text);
