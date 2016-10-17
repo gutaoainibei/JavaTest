@@ -45,9 +45,9 @@ public class Sendmail {
 	         prop.setProperty("mail.smtp.auth", "true");
 	         prop.setProperty("mail.debug", "true");
 	         //qq邮箱要以ssl加密发送
-	         MailSSLSocketFactory sf = new MailSSLSocketFactory();
-	         prop.put("mail.smtp.ssl.enable", "true");
-	         prop.put("mail.smtp.ssl.socketFactory", sf);
+//	         MailSSLSocketFactory sf = new MailSSLSocketFactory();
+//	         prop.put("mail.smtp.ssl.enable", "true");
+//	         prop.put("mail.smtp.ssl.socketFactory", sf);
 	         //使用JavaMail发送邮件的5个步骤
 	         //1、创建session
 	         Session session = Session.getInstance(prop);
@@ -56,10 +56,16 @@ public class Sendmail {
 	         //2、通过session得到transport对象
 	         Transport ts = session.getTransport();
 	         //3、使用邮箱的用户名和密码连上邮件服务器，发送邮件时，发件人需要提交邮箱的用户名和密码给smtp服务器，用户名和密码都通过验证之后才能够正常发送邮件给收件人。
-	         ts.connect("smtp.qq.com", "1093656744@qq.com", "icrgxgeskwigieec");//crtyfvcqbfreheda，//icrgxgeskwigieec
+	         ts.connect("smtp.qq.com", "gujt@thinkive.com", "Gutao1111");//crtyfvcqbfreheda，//icrgxgeskwigieec
 //	         ts.connect("smtp.qq.com", "1093656744@qq.com", "icrgxgeskwigieec");//crtyfvcqbfreheda，//icrgxgeskwigieec
 	         //4、创建邮件
 	         MessageModel messageModel = new MessageModel();
+	         messageModel.setSession(session);
+	         messageModel.setSubject("测试一下封装类");
+	         messageModel.setSendPerson("gujt@thinkive.com");
+	         messageModel.setContent("大家好这是我的java mail封装邮件测试类");
+	         messageModel.setReceivePerson(new String[]{"1093656744@qq.com","gujt@thinkive.com"});
+	         messageModel.setCopyreceivePerson(new String[]{"gujt@thinkive.com","1093656744@qq.com"});
 	         Message message = createSimpleMail(messageModel);//getMessageIncludeImage(session);
 	         //5、发送邮件
 	         ts.sendMessage(message, message.getAllRecipients());
@@ -81,18 +87,30 @@ public class Sendmail {
 	        //指明邮件的发件人
 	        message.setFrom(new InternetAddress(modelInfo.getSendPerson()));
 	        //指明邮件的收件人，Message.RecipientType.TO
-	        Address[] addresses = new Address[modelInfo.getReceivePerson().length];
-	        for (int i = 0; i < addresses.length ; i++) {
-	        	addresses[i] = new InternetAddress(modelInfo.getReceivePerson()[i]);
+	        Address[] addresses = null;
+	        if(modelInfo.getReceivePerson()!=null && modelInfo.getReceivePerson().length > 0){
+	          addresses = new Address[modelInfo.getReceivePerson().length];
+	          for (int i = 0; i < addresses.length ; i++) {
+	        	  addresses[i] = new InternetAddress(modelInfo.getReceivePerson()[i]);
+			  }
+	        }else{
+				throw new Exception("接受人地址不能为空");
 			}
-	        Address[] copyaddresses = new Address[modelInfo.getCopyreceivePerson().length];
-	        for (int i = 0; i < copyaddresses.length ; i++) {
-	        	copyaddresses[i] = new InternetAddress(modelInfo.getCopyreceivePerson()[i]);
-			}
-	        Address[] bccaddresses = new Address[modelInfo.getBccreceivePerson().length];
-	        for (int i = 0; i < copyaddresses.length ; i++) {
-	        	bccaddresses[i] = new InternetAddress(modelInfo.getBccreceivePerson()[i]);
-			}
+	        Address[] copyaddresses = null;
+	        if(modelInfo.getCopyreceivePerson()!=null && modelInfo.getCopyreceivePerson().length > 0){
+	            copyaddresses = new Address[modelInfo.getCopyreceivePerson().length];
+		        for (int i = 0; i < copyaddresses.length ; i++) {
+		        	copyaddresses[i] = new InternetAddress(modelInfo.getCopyreceivePerson()[i]);
+				}
+	        }
+	        Address[] bccaddresses = null;
+	        if(modelInfo.getBccreceivePerson()!=null && modelInfo.getBccreceivePerson().length > 0){
+	        	bccaddresses = new Address[modelInfo.getBccreceivePerson().length];
+		        for (int i = 0; i < copyaddresses.length ; i++) {
+		        	bccaddresses[i] = new InternetAddress(modelInfo.getBccreceivePerson()[i]);
+				}
+	        }
+	        
 	        //Message.RecipientType.TO,指明需要发送的人
 	        message.setRecipients(Message.RecipientType.TO, addresses);
 	        //Message.RecipientType.CC：指明需要抄送的人
@@ -100,7 +118,7 @@ public class Sendmail {
 	        //Message.RecipientType.BCC：指明邮件秘密再发送给谁
 	        message.setRecipients(Message.RecipientType.BCC, bccaddresses);
 	        //邮件的标题
-	         message.setSubject(modelInfo.getSubject());//
+	        message.setSubject(modelInfo.getSubject());//
 	         //设置要指向的答复地址
 //	         message.setReplyTo(new Address[]{new InternetAddress("1093656744@qq.com")});
 	         //邮件的文本内容
