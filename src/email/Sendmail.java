@@ -1,10 +1,13 @@
 package email;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -56,7 +59,8 @@ public class Sendmail {
 	         ts.connect("smtp.qq.com", "1093656744@qq.com", "icrgxgeskwigieec");//crtyfvcqbfreheda，//icrgxgeskwigieec
 //	         ts.connect("smtp.qq.com", "1093656744@qq.com", "icrgxgeskwigieec");//crtyfvcqbfreheda，//icrgxgeskwigieec
 	         //4、创建邮件
-	         Message message = getMessageIncludeImage(session);//createSimpleMail(session);
+	         MessageModel messageModel = new MessageModel();
+	         Message message = createSimpleMail(messageModel);//getMessageIncludeImage(session);
 	         //5、发送邮件
 	         ts.sendMessage(message, message.getAllRecipients());
 	         ts.close();
@@ -71,39 +75,51 @@ public class Sendmail {
 	   * @param session
 	   * @return
 	   */
-	     public static MimeMessage createSimpleMail(Session session) throws Exception {
+	     public static MimeMessage createSimpleMail(MessageModel modelInfo) throws Exception {
 	        //创建邮件对象
-	         MimeMessage message = new MimeMessage(session);
+	         MimeMessage message = new MimeMessage(modelInfo.getSession());
 	        //指明邮件的发件人
-	        message.setFrom(new InternetAddress("1093656744@qq.com"));
+	        message.setFrom(new InternetAddress(modelInfo.getSendPerson()));
 	        //指明邮件的收件人，Message.RecipientType.TO
-	        message.setRecipient(Message.RecipientType.TO, new InternetAddress("1093656744@qq.com"));
-	        //Message.RecipientType.BCC：指明邮件秘密再发送给谁,//Message.RecipientType.CC,指明需要抄送的人，单个人addRecipients
-//	        message.addRecipients(Message.RecipientType.CC, new Address[]{new InternetAddress("gujt@thinkive.com"),new InternetAddress("1093656744@qq.com")});
+	        Address[] addresses = new Address[modelInfo.getReceivePerson().length];
+	        for (int i = 0; i < addresses.length ; i++) {
+	        	addresses[i] = new InternetAddress(modelInfo.getReceivePerson()[i]);
+			}
+	        Address[] copyaddresses = new Address[modelInfo.getCopyreceivePerson().length];
+	        for (int i = 0; i < copyaddresses.length ; i++) {
+	        	copyaddresses[i] = new InternetAddress(modelInfo.getCopyreceivePerson()[i]);
+			}
+	        Address[] bccaddresses = new Address[modelInfo.getBccreceivePerson().length];
+	        for (int i = 0; i < copyaddresses.length ; i++) {
+	        	bccaddresses[i] = new InternetAddress(modelInfo.getBccreceivePerson()[i]);
+			}
+	        //Message.RecipientType.TO,指明需要发送的人
+	        message.setRecipients(Message.RecipientType.TO, addresses);
+	        //Message.RecipientType.CC：指明需要抄送的人
+	        message.setRecipients(Message.RecipientType.CC, copyaddresses);
 	        //Message.RecipientType.BCC：指明邮件秘密再发送给谁
-//	        message.setRecipient(Message.RecipientType.BCC, new InternetAddress("gujt@thinkive.com"));
+	        message.setRecipients(Message.RecipientType.BCC, bccaddresses);
 	        //邮件的标题
-	         message.setSubject("测试邮件服务");
+	         message.setSubject(modelInfo.getSubject());//
 	         //设置要指向的答复地址
 //	         message.setReplyTo(new Address[]{new InternetAddress("1093656744@qq.com")});
 	         //邮件的文本内容
-	        message.setContent("你好啊！我是顾涛，我在测试邮件提醒服务", "text/html;charset=UTF-8");
+	        message.setContent(modelInfo.getContent(), "text/html;charset=UTF-8");
 	         //返回创建好的邮件对象
 	         return message;
          }
-	     public static MimeMessage getMessageIncludeImage(Session session){//,String senderAddress,String receivePerson,String subject){
+	     public static MimeMessage getMessageIncludeImage(Session session,String subject,String senderAddress,String receivePerson,String pathFile){
 	    	 //需要发送信息实体类
 	    	 MimeMessage message = new MimeMessage(session);
 	    	 //发送人
 	    	 try {
-				message.setFrom(new InternetAddress("1093656744@qq.com"));
-				message.setSubject("测试带有其他内容");
-				message.setRecipient(Message.RecipientType.TO, new InternetAddress("1093656744@qq.com"));
+				message.setFrom(new InternetAddress(senderAddress));
+				message.setSubject(subject);
+				message.setRecipient(Message.RecipientType.TO, new InternetAddress(receivePerson));
 				MimeBodyPart text = new MimeBodyPart();
 				text.setContent("带有图片的文件","text/html;charset=UTF-8");
-				
 				MimeBodyPart image = new MimeBodyPart();
-			    DataHandler data = new DataHandler(new FileDataSource("F:/webjaeeWorkspace/JavaTest/config/520.jpg"));
+			    DataHandler data = new DataHandler(new FileDataSource(pathFile));//"F:/webjaeeWorkspace/JavaTest/config/520.jpg"
 			    image.setDataHandler(data);
 			    image.setFileName(MimeUtility.encodeText(data.getName()));
 //			    image.setContentID("520.jpg");
