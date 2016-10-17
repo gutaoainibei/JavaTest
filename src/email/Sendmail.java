@@ -40,14 +40,14 @@ public class Sendmail {
 	    public static void main(String[] args) throws Exception {
 	         
 	         Properties prop = new Properties();
-	         prop.setProperty("mail.host", "smtp.exmail.qq.com");
+	         prop.setProperty("mail.host", "smtp.126.com");
 	         prop.setProperty("mail.transport.protocol", "smtp");
 	         prop.setProperty("mail.smtp.auth", "true");
 	         prop.setProperty("mail.debug", "true");
 	         //qq邮箱要以ssl加密发送
-//	         MailSSLSocketFactory sf = new MailSSLSocketFactory();
-//	         prop.put("mail.smtp.ssl.enable", "true");
-//	         prop.put("mail.smtp.ssl.socketFactory", sf);
+	         MailSSLSocketFactory sf = new MailSSLSocketFactory();
+	         prop.put("mail.smtp.ssl.enable", "true");
+	         prop.put("mail.smtp.ssl.socketFactory", sf);
 	         //使用JavaMail发送邮件的5个步骤
 	         //1、创建session
 	         Session session = Session.getInstance(prop);
@@ -56,16 +56,15 @@ public class Sendmail {
 	         //2、通过session得到transport对象
 	         Transport ts = session.getTransport();
 	         //3、使用邮箱的用户名和密码连上邮件服务器，发送邮件时，发件人需要提交邮箱的用户名和密码给smtp服务器，用户名和密码都通过验证之后才能够正常发送邮件给收件人。
-	         ts.connect("smtp.qq.com", "gujt@thinkive.com", "Gutao1111");//crtyfvcqbfreheda，//icrgxgeskwigieec
-//	         ts.connect("smtp.qq.com", "1093656744@qq.com", "icrgxgeskwigieec");//crtyfvcqbfreheda，//icrgxgeskwigieec
+	         ts.connect("smtp.126.com", "username@126.com", "111111");//crtyfvcqbfreheda，//
 	         //4、创建邮件
 	         MessageModel messageModel = new MessageModel();
 	         messageModel.setSession(session);
 	         messageModel.setSubject("测试一下封装类");
-	         messageModel.setSendPerson("gujt@thinkive.com");
+	         messageModel.setSendPerson("ai@126.com");
 	         messageModel.setContent("大家好这是我的java mail封装邮件测试类");
-	         messageModel.setReceivePerson(new String[]{"1093656744@qq.com","gujt@thinkive.com"});
-	         messageModel.setCopyreceivePerson(new String[]{"gujt@thinkive.com","1093656744@qq.com"});
+	         messageModel.setReceivePerson(new String[]{"1093656744@qq.com"});
+	         messageModel.setCopyreceivePerson(new String[]{"gujt@thinkive.com"});
 	         Message message = createSimpleMail(messageModel);//getMessageIncludeImage(session);
 	         //5、发送邮件
 	         ts.sendMessage(message, message.getAllRecipients());
