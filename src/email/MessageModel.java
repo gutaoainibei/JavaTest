@@ -35,6 +35,30 @@ public class MessageModel {
 	 * 附件路径
 	 */
 	private String pathFile;
+	/**
+	 * 图片路径
+	 */
+    private String imagePath;
+    
+    
+	public MessageModel() {
+	}
+
+	public MessageModel(Session session, String subject, String content,
+			String sendPerson, String[] receivePerson,
+			String[] copyreceivePerson, String[] bccreceivePerson,
+			String pathFile, String imagePath) {
+		super();
+		this.session = session;
+		this.subject = subject;
+		this.content = content;
+		this.sendPerson = sendPerson;
+		this.receivePerson = receivePerson;
+		this.copyreceivePerson = copyreceivePerson;
+		this.bccreceivePerson = bccreceivePerson;
+		this.pathFile = pathFile;
+		this.imagePath = imagePath;
+	}
 
 	public Session getSession() {
 		return session;
@@ -100,4 +124,11 @@ public class MessageModel {
 		this.pathFile = pathFile;
 	}
 
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 }

@@ -104,6 +104,30 @@ public class commonUtils {
     	flag = matcher.matches();
     	return flag;
     }
+    /**
+     * 
+     * 描述：判断字符串是否为空
+     * @author gt
+     * @created 2016年10月18日 上午11:17:58
+     * @since 
+     * @param str
+     * @return
+     */
+    public static boolean isNotEmpty(String str){
+		return (str == null || str.trim().length()<1) ? false : true;
+	}
+	/**
+	 * 
+	 * 描述：判断数组是否为空
+	 * @author gt
+	 * @created 2016年10月18日 上午11:18:31
+	 * @since 
+	 * @param objs
+	 * @return
+	 */
+	public static boolean isNotEmpty(Object[] objs){
+		return (objs == null || objs.length < 1) ? false : true;
+	}
     public static void main(String[] args) {
 		System.out.println(isNumber("20160-914"));
 	}
