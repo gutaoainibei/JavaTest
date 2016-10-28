@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-
 /**
  * 
  * 描述：根据对应的html生成对应的js
@@ -17,17 +15,32 @@ import java.io.IOException;
  * @since
  */
 public class createJsByhtml {
-	//换行符
+	    /**
+	     * 换行符
+	     */
 		private static final String CRLF = "\r\n";
-		private static final int NEWTYPE = 0;//新版
-		private static final int OLDTYPE = 1;//老版
-		private static final String JSMODELPATH = "F:/modle/js/model.js";
-		private static final String JSMODELNEWPATH = "F:/modle/js/newModel.js";
+		/**
+		 * 模板js
+		 */
 		private static String modelJs = "";
-	    public static void main(String[] args) {
-	    	modelJs = getModelStr(JSMODELNEWPATH);
-			String path = "D:/develop/workspace1/thinkive-sj1-YTG-web/src/main/webapp/m/ytg/views";
-			getJsOfHtml(path,modelJs);
+		/**
+		 * js的保存路径
+		 */
+		private static String jsPath = "";
+		/**
+		 * 
+		 * 描述：创建页面答应的js
+		 * @author gt
+		 * @created 2016年10月26日 上午11:10:08
+		 * @since 
+		 * @param htmlPath  需要创建js的html路径
+		 * @param modelPath js模板路径
+		 */
+	    public static void createJs(String htmlPath,String modelPath) {
+	    	modelJs = getModelStr(modelPath);
+			jsPath = htmlPath.substring(0, htmlPath.indexOf("m/")+"m/".length());
+			System.out.println(jsPath);
+			getJsOfHtml(htmlPath,modelJs);
 			
 	    }
 	    /**
@@ -59,7 +72,6 @@ public class createJsByhtml {
 	    		return null;
 	    	}
 	    	File file = new File(path);
-	    	int count = 0;
 	    	if(file.isDirectory()){
 	    		System.out.println("文件夹路径："+file.getAbsolutePath());
 	    		System.out.println("文件夹名:"+file.getName());
@@ -68,7 +80,7 @@ public class createJsByhtml {
 	    			getJsOfHtml(file.getAbsolutePath()+"\\"+string,modelJs);
 				}
 	    	}else{
-	    		createFile(file,"F:/savePath",modelJs);//创建新的html文件,并指定要放到那个目录下
+	    		createFile(file,jsPath,modelJs);//创建新的html文件,并指定要放到那个目录下
 	    	}
 	    	return null;
 	    }
@@ -87,7 +99,7 @@ public class createJsByhtml {
 	    	String scriptPath = ablutePath.substring(ablutePath.indexOf("m/")+2, ablutePath.lastIndexOf("/"))+"/"+filehtml.getName();
 	    	String scriptDefPath = scriptPath.replace("views", "scripts").replace(".html", "");
 	    	String paageCode = scriptDefPath.substring(scriptDefPath.indexOf("scripts/")+"scripts/".length());
-	    	String newFolderPath = savaPath+"/"+scriptDefPath.substring(0, scriptDefPath.lastIndexOf("/"));
+	    	String newFolderPath = savaPath+scriptDefPath.substring(0, scriptDefPath.lastIndexOf("/"));
 	    	String jsStr = getJsConstant(modelStr, paageCode, scriptDefPath);
 	    	System.out.println(scriptDefPath);
 	    	System.out.println(newFolderPath);
@@ -105,6 +117,15 @@ public class createJsByhtml {
 				e.printStackTrace();
 			}
 	    } 
+	    /**
+	     * 
+	     * 描述：获取模板内容
+	     * @author gt
+	     * @created 2016年10月26日 上午11:04:40
+	     * @since 
+	     * @param pathString
+	     * @return
+	     */
 	    public static String getModelStr(String pathString){
 	    	BufferedReader reader = null;
 	    	StringBuffer stringBuffer  = new StringBuffer();

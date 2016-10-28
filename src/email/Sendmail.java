@@ -1,159 +1,135 @@
 package email;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.Address;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-
-
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
-import com.sun.mail.util.MailSSLSocketFactory;
-
-
-
+import common.commonUtils;
 
 /**
  * 
- * 描述：发邮件测试
+ * 描述：
  * @author gt
- * @created 2016年10月14日 下午3:17:11
+ * @created 2016年10月18日 下午3:17:37
  * @since
  */
 public class Sendmail {
-	      /**
-	      * @param args
-	      * @throws Exception 
-	      */
-	    public static void main(String[] args) throws Exception {
-	         
-	         Properties prop = new Properties();
-	         prop.setProperty("mail.host", "smtp.126.com");
+	    
+	    /**
+	     * 
+	     * 描述：发送邮件
+	     * @author gt
+	     * @created 2016年10月18日 下午3:30:42
+	     * @since 
+	     * @param messageModel
+	     * @throws Exception
+	     */
+	    public static void sendEmail(MessageModel messageModel) throws Exception {
+	    	 if(messageModel == null){
+	    		 return;
+	    	 }
+	    	 checkInput(messageModel);
+	    	 Properties prop = new Properties();
+	         prop.setProperty("mail.host", "smtp.qq.com");
 	         prop.setProperty("mail.transport.protocol", "smtp");
 	         prop.setProperty("mail.smtp.auth", "true");
 	         prop.setProperty("mail.debug", "true");
-	         //qq邮箱要以ssl加密发送
-	         MailSSLSocketFactory sf = new MailSSLSocketFactory();
-	         prop.put("mail.smtp.ssl.enable", "true");
-	         prop.put("mail.smtp.ssl.socketFactory", sf);
-	         //使用JavaMail发送邮件的5个步骤
-	         //1、创建session
 	         Session session = Session.getInstance(prop);
-	         //开启Session的debug模式，这样就可以查看到程序发送Email的运行状态
-	         session.setDebug(true);
-	         //2、通过session得到transport对象
 	         Transport ts = session.getTransport();
-	         //3、使用邮箱的用户名和密码连上邮件服务器，发送邮件时，发件人需要提交邮箱的用户名和密码给smtp服务器，用户名和密码都通过验证之后才能够正常发送邮件给收件人。
-	         ts.connect("smtp.126.com", "username@126.com", "111111");//crtyfvcqbfreheda，//
-	         //4、创建邮件
-	         MessageModel messageModel = new MessageModel();
-	         messageModel.setSession(session);
-	         messageModel.setSubject("测试一下封装类");
-	         messageModel.setSendPerson("ai@126.com");
-	         messageModel.setContent("大家好这是我的java mail封装邮件测试类");
-	         messageModel.setReceivePerson(new String[]{"1093656744@qq.com"});
-	         messageModel.setCopyreceivePerson(new String[]{"gujt@thinkive.com"});
-	         Message message = createSimpleMail(messageModel);//getMessageIncludeImage(session);
-	         //5、发送邮件
+	         ts.connect("smtp.qq.com", messageModel.getSendPerson(), messageModel.getPassword());
+	         Message message = createMail(messageModel);
 	         ts.sendMessage(message, message.getAllRecipients());
 	         ts.close();
-	     }
-	    
-	  /**
-	   * 
-	   * 描述：创建一封只包含文本的邮件
-	   * @author gt
-	   * @created 2016年10月14日 下午3:18:39
-	   * @since 
-	   * @param session
-	   * @return
-	   */
-	     public static MimeMessage createSimpleMail(MessageModel modelInfo) throws Exception {
-	        //创建邮件对象
-	         MimeMessage message = new MimeMessage(modelInfo.getSession());
-	        //指明邮件的发件人
+	    }
+		  /**
+		   * 
+		   * 描述：创建邮件
+		   * @author gt
+		   * @created 2016年10月18日 下午3:23:31
+		   * @since 
+		   * @param modelInfo
+		   * @return
+		   * @throws Exception
+		   */
+	     public static MimeMessage createMail(MessageModel modelInfo) throws Exception {
+	        MimeMessage message = new MimeMessage(modelInfo.getSession());
 	        message.setFrom(new InternetAddress(modelInfo.getSendPerson()));
-	        //指明邮件的收件人，Message.RecipientType.TO
 	        Address[] addresses = null;
 	        if(modelInfo.getReceivePerson()!=null && modelInfo.getReceivePerson().length > 0){
-	          addresses = new Address[modelInfo.getReceivePerson().length];
-	          for (int i = 0; i < addresses.length ; i++) {
-	        	  addresses[i] = new InternetAddress(modelInfo.getReceivePerson()[i]);
-			  }
+	          addresses = getNeedAddress(modelInfo.getReceivePerson());
+	          if(addresses == null){
+	        	  throw new Exception("接收人地址非法");
+	          }
 	        }else{
-				throw new Exception("接受人地址不能为空");
+				throw new Exception("邮件接收人不能为空");
 			}
-	        Address[] copyaddresses = null;
-	        if(modelInfo.getCopyreceivePerson()!=null && modelInfo.getCopyreceivePerson().length > 0){
-	            copyaddresses = new Address[modelInfo.getCopyreceivePerson().length];
-		        for (int i = 0; i < copyaddresses.length ; i++) {
-		        	copyaddresses[i] = new InternetAddress(modelInfo.getCopyreceivePerson()[i]);
-				}
-	        }
-	        Address[] bccaddresses = null;
-	        if(modelInfo.getBccreceivePerson()!=null && modelInfo.getBccreceivePerson().length > 0){
-	        	bccaddresses = new Address[modelInfo.getBccreceivePerson().length];
-		        for (int i = 0; i < copyaddresses.length ; i++) {
-		        	bccaddresses[i] = new InternetAddress(modelInfo.getBccreceivePerson()[i]);
-				}
-	        }
-	        
-	        //Message.RecipientType.TO,指明需要发送的人
 	        message.setRecipients(Message.RecipientType.TO, addresses);
-	        //Message.RecipientType.CC：指明需要抄送的人
-	        message.setRecipients(Message.RecipientType.CC, copyaddresses);
-	        //Message.RecipientType.BCC：指明邮件秘密再发送给谁
-	        message.setRecipients(Message.RecipientType.BCC, bccaddresses);
-	        //邮件的标题
-	        message.setSubject(modelInfo.getSubject());//
-	         //设置要指向的答复地址
-//	         message.setReplyTo(new Address[]{new InternetAddress("1093656744@qq.com")});
-	         //邮件的文本内容
-	        message.setContent(modelInfo.getContent(), "text/html;charset=UTF-8");
-	         //返回创建好的邮件对象
-	         return message;
+	        message.setSubject(modelInfo.getSubject());
+	        MimeMultipart mul = new MimeMultipart();
+	        if(commonUtils.isNotEmpty(modelInfo.getContent())){
+	        	MimeBodyPart text = new MimeBodyPart();
+	        	text.setContent(modelInfo.getContent(),"text/html;charset=UTF-8");
+	        	mul.addBodyPart(text);
+	        }else{
+	        	throw new Exception("邮件内容不得为空");
+	        }
+	        if(!commonUtils.isNotEmpty(modelInfo.getPathFile())){
+		        MimeBodyPart file = new MimeBodyPart();
+	        	DataHandler dataHandler = new DataHandler(new FileDataSource(modelInfo.getPathFile()));
+	            file.setDataHandler(dataHandler);
+	            file.setFileName(MimeUtility.encodeText(dataHandler.getName()));
+	            mul.setSubType("mixed");
+	            mul.addBodyPart(file);
+	        }
+	        message.setContent(mul);
+	        message.saveChanges();
+	        return message;
          }
-	     public static MimeMessage getMessageIncludeImage(Session session,String subject,String senderAddress,String receivePerson,String pathFile){
-	    	 //需要发送信息实体类
-	    	 MimeMessage message = new MimeMessage(session);
-	    	 //发送人
-	    	 try {
-				message.setFrom(new InternetAddress(senderAddress));
-				message.setSubject(subject);
-				message.setRecipient(Message.RecipientType.TO, new InternetAddress(receivePerson));
-				MimeBodyPart text = new MimeBodyPart();
-				text.setContent("带有图片的文件","text/html;charset=UTF-8");
-				MimeBodyPart image = new MimeBodyPart();
-			    DataHandler data = new DataHandler(new FileDataSource(pathFile));//"F:/webjaeeWorkspace/JavaTest/config/520.jpg"
-			    image.setDataHandler(data);
-			    image.setFileName(MimeUtility.encodeText(data.getName()));
-//			    image.setContentID("520.jpg");
-			    
-			    MimeMultipart mulPart = new MimeMultipart();
-			    mulPart.addBodyPart(text);
-			    mulPart.addBodyPart(image);
-			    mulPart.setSubType("related");
-			    message.setContent(mulPart);
-			    message.saveChanges();
-//				message.setSender(address);
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
+	     /**
+	      * 
+	      * 描述：格式化地址
+	      * @author gt
+	      * @created 2016年10月18日 下午3:30:59
+	      * @since 
+	      * @param needaddresses
+	      * @return
+	      * @throws AddressException
+	      */
+		public static Address[] getNeedAddress(String[] needaddresses)
+				throws AddressException {
+			Address[] addresses;
+			addresses = new Address[needaddresses.length];
+			int count = 0;
+			for (int i = 0; i < addresses.length; i++) {
+				if(commonUtils.isNotEmpty(needaddresses[i])){
+					addresses[i] = new InternetAddress(needaddresses[i]);
+				}else{
+					count++;
+				}
 			}
-	    	 return message;
-	     }
+			if(count == needaddresses.length){
+				return null;
+			}
+			return addresses;
+		}
+		public static void checkInput(MessageModel messageModel) throws Exception{
+			if(messageModel.getSendPerson() == null || !commonUtils.isNotEmpty(messageModel.getSendPerson())){
+	        	 throw new Exception("发送人不能为空！");
+	         }
+			if(messageModel.getPassword() == null || !commonUtils.isNotEmpty(messageModel.getPassword())){
+	        	 throw new Exception("发送人校验密码为空！");
+	         }
+		} 
 }
 

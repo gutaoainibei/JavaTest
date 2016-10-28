@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,22 +15,38 @@ import java.io.IOException;
  * @since
  */
 public class updateFile {
-	//换行符
+	/**
+	 * 换行符
+	 */
 	private static final String CRLF = "\r\n";
-	private static final String HTMLMODELPATH = "F:/modle/html/model.html";
+	/**
+	 * 模板内容
+	 */
 	static String modelStr = "";
-	static{
-		 modelStr = getModelHtml(HTMLMODELPATH);
-	}
-    public static void main(String[] args) {
-		String path = "D:/develop/workspace1/thinkive-sj1-YTG-web/src/main/webapp/m/ytg/views";
-		
+	/**
+	 * 
+	 * 描述：升级文件
+	 * @author gt
+	 * @created 2016年10月26日 上午10:51:23
+	 * @since 
+	 * @param path 需要升级的文件路径
+	 */
+    public static void updateHtml(String path,String modelPath) {
+    	 modelStr = getModelHtml(modelPath);
 	    listAllhtml(path);
     }
+    /**
+     * 
+     * 描述：获取模板的内容
+     * @author gt
+     * @created 2016年10月26日 上午10:52:25
+     * @since 
+     * @param modelPath 模板路径
+     * @return
+     */
     public static String getModelHtml(String modelPath){
     	StringBuffer modelHtmlStr = new StringBuffer();
     	BufferedReader reader = null;
-    	
     	try {
 			reader = new BufferedReader(new FileReader(modelPath));
 			String temp = "";
@@ -55,7 +70,14 @@ public class updateFile {
 			}
 		}
     } 
-    
+    /**
+     * 
+     * 描述：遍历所有需要升级的文件
+     * @author gt
+     * @created 2016年10月26日 上午10:52:53
+     * @since 
+     * @param path
+     */
     public static void listAllhtml(String path){
     	if(path == null || path.trim().length()<1){
     		return ;
@@ -73,7 +95,15 @@ public class updateFile {
     		createFile(file,"F:/savePath");//创建新的html文件,并指定要放到那个目录下
     	}
     }
-    
+    /**
+     * 
+     * 描述：创建文件
+     * @author gt
+     * @created 2016年10月26日 上午10:53:18
+     * @since 
+     * @param filehtml
+     * @param savaPath
+     */
     public static void createFile(File filehtml,String savaPath){
     	String ablutePath = filehtml.getAbsolutePath().replace("\\", "/");
     	String htmlPath = ablutePath.substring(ablutePath.indexOf("m/")+2, ablutePath.lastIndexOf("/"))+"/"+filehtml.getName();

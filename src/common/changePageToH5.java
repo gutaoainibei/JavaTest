@@ -10,23 +10,32 @@ import java.io.IOException;
 
 /**
  * 
- * 描述：把原型页面改成我们需要的很h5
+ * 描述：把原型页面改成我们需要的h5
  * @author gt
  * @created 2016年10月13日 下午3:17:19
  * @since
  */
 public class changePageToH5 {
-	//换行符
+	    /**
+	     * 换行符
+	     */
 		private static final String CRLF = "\r\n";
-		private static final String MODELPATH = "F:/modle/page/oldModel.html";
+		/**
+		 * 模板js
+		 */
 	    private static String modelStr = "";
-	    static{
-	    	modelStr = getModelHtml(MODELPATH);
-	    }
-		
-		public static void main(String[] args) {
-			String path = "D:/develop/workspace1/thinkive-sj1-YTG-web/src/main/webapp/m/ytg/views";
-		    listAllhtml(path);
+	    /**
+	     * 
+	     * 描述：创建js文件
+	     * @author gt
+	     * @created 2016年10月26日 上午11:13:43
+	     * @since 
+	     * @param htmlPath 需要创建js的html路径
+	     * @param modelPath
+	     */
+		public static void createJs(String htmlPath,String modelPath) {
+			modelStr = getModelHtml(modelPath);
+	        listAllhtml(htmlPath);
 	    }
 		/**
 		 * 描述：获取模板html
@@ -76,7 +85,6 @@ public class changePageToH5 {
 	    		return ;
 	    	}
 	    	File file = new File(path);
-	    	int count = 0;
 	    	if(file.isDirectory()){
 	    		System.out.println("文件夹路径："+file.getAbsolutePath());
 	    		System.out.println("文件夹名:"+file.getName());

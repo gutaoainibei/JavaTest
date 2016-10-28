@@ -4,7 +4,7 @@ import javax.mail.Session;
 
 public class MessageModel {
 	/**
-	 * 邮件会话
+	 * 会话信息
 	 */
 	private Session session;
 	/**
@@ -28,7 +28,7 @@ public class MessageModel {
 	 */
 	private String[] copyreceivePerson;
 	/**
-	 * 秘密发送
+	 * 秘密发送给谁
 	 */
 	private String[] bccreceivePerson;
 	/**
@@ -36,18 +36,22 @@ public class MessageModel {
 	 */
 	private String pathFile;
 	/**
-	 * 图片路径
+	 * 邮件内嵌图片路径
 	 */
     private String imagePath;
-    
-    
+    /**
+     * 密码
+     */
+    private String password;
 	public MessageModel() {
 	}
+
+	
 
 	public MessageModel(Session session, String subject, String content,
 			String sendPerson, String[] receivePerson,
 			String[] copyreceivePerson, String[] bccreceivePerson,
-			String pathFile, String imagePath) {
+			String pathFile, String imagePath, String password) {
 		super();
 		this.session = session;
 		this.subject = subject;
@@ -58,7 +62,10 @@ public class MessageModel {
 		this.bccreceivePerson = bccreceivePerson;
 		this.pathFile = pathFile;
 		this.imagePath = imagePath;
+		this.password = password;
 	}
+
+
 
 	public Session getSession() {
 		return session;
@@ -131,4 +138,13 @@ public class MessageModel {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 }
